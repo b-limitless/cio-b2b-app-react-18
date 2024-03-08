@@ -1,10 +1,13 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const path = require("path");
+
+const port = 8084;
 
 const deps = require("./package.json").dependencies;
 module.exports = {
   output: {
-    publicPath: "http://localhost:8081/",
+    publicPath: `http://localhost:${port}/`,
   },
 
   resolve: {
@@ -12,7 +15,7 @@ module.exports = {
   },
 
   devServer: {
-    port: 8081,
+    port: port,
     historyApiFallback: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -30,7 +33,7 @@ module.exports = {
       },
       {
         test: /\.(css|s[ac]ss)$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.(ts|tsx|js|jsx)$/,
@@ -39,6 +42,24 @@ module.exports = {
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.(woff2?|jpe?g|png|gif|ico)$/,
+        oneOf: [
+          {
+            include: path.resolve(__dirname, "../node_modules/"),
+            use: "svg-inline-loader",
+          },
+          {
+            exclude: path.resolve(__dirname, "../node_modules/"),
+            use: "url-loader",
+          },
+        ],
+      },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ["@svgr/webpack"],
+      }
     ],
   },
 

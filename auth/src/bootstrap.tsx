@@ -13,6 +13,8 @@ const mount = ({
   mountPoint: HTMLElement;
   initialPathname?: string;
   routingStrategy?: RoutingStrategy;
+  // globalDispatch?:any;
+  // actions:any;
 }) => {
   const router = createRouter({ strategy: routingStrategy, initialPathname });
   const root = createRoot(mountPoint);
