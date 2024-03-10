@@ -1,21 +1,13 @@
-import {
-  Button,
-  Checkbox,
-  Input,
-  InputAdornments,
-} from '@pasal/cio-component-library'
+import { camelCaseToNormal } from '@pasal/cio-component-library';
 import React, { useEffect, useReducer } from 'react';
-import BackLeftIcon from '../assets/svg/back-left-icon.svg';
 import Template from '../common/Template';
-import SignupFeature from './features/signup.feature';
-import VerifyFeature from './features/verify.feature';
 import { FormInterface, FormState } from '../interfaces/user/inde';
-import { camelCaseToNormal } from '@pasal/cio-component-library'
 import { userModel } from '../model/user';
+import SignupFeature from './features/signup.feature';
 
-import { APIS } from '../config/apis';
 import { useNavigate } from 'react-router-dom';
 import { onSubmitHandler } from '../../common/onSubmitHandler';
+import { APIS } from '../config/apis';
 
 import { request } from '../utils/request';
 

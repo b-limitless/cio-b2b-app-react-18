@@ -2,7 +2,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const path = require("path");
 
-const port = 8084;
+const port = 8085;
 
 const deps = require("./package.json").dependencies;
 module.exports = {
@@ -65,11 +65,11 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "auth",
+      name: "dashboard",
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
-        './auth': './src/bootstrap',
+        './dashboard': './src/bootstrap',
       },
       shared: {
         ...deps,
