@@ -1,6 +1,11 @@
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { matchRoutes, useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../routing/routes";
+import { Provider, useDispatch } from "react-redux";
+import { Store } from "../store";
+import Container from "./common/Container";
+import { menuEnum } from "../config/navMenu";
+import { authenticatedUser } from "../../reducers/authSlice";
 
 interface NavigationManagerProps {
   children: ReactElement;
@@ -9,6 +14,12 @@ interface NavigationManagerProps {
 export function NavigationManager({ children }: NavigationManagerProps) {
   const location = useLocation();
   const navigate = useNavigate();
+
+  const [selectedMenu, setSelectedMenu] = useState<menuEnum>(menuEnum.Auth_Signin);
+  const [showProfileSideModel, setShowProfileSideModel] = useState<boolean>(false);
+  const [showSettingModel, setShowSettingModel] = useState<boolean>(false);
+  // const dispatch = useDispatch();
+  
 
   useEffect(() => {
     function shellNavigationHandler(event: Event) {
@@ -32,5 +43,19 @@ export function NavigationManager({ children }: NavigationManagerProps) {
     );
   }, [location]);
 
-  return children;
+  return <Provider store={Store}>
+    <Container
+      setShowSettingModel={setShowSettingModel}
+      setShowProfileSideModel={setShowProfileSideModel}
+      showSettingModel={showSettingModel}
+      selectedMenu={selectedMenu}
+      setSelectedMenu={setSelectedMenu}
+      actions={{ authenticatedUser }}
+      globalDispatch={() => {}}
+    >
+    {children}
+    </Container>
+   
+  </Provider>
+
 }

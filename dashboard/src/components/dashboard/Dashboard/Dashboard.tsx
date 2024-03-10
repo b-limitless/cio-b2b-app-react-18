@@ -8,14 +8,8 @@ import { frontStoreLink } from "../../../config/apis";
 import './dashboard.scss';
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
+import { menuEnum } from "../../../config/navMenu";
 
-
-type Props = {
-  showProfileSideModel:boolean;
-  setShowProfileSideModel:Function;
-  setShowSettingModel:Function;
-  showSettingModel:boolean;
-}
 
 export const analyticsData = [
   {
@@ -53,8 +47,10 @@ export const analyticsData = [
 ]
 
 
-export default function Dashboard({setShowSettingModel, showSettingModel, showProfileSideModel, setShowProfileSideModel}: Props) {
+export default function Dashboard() {
   const {auth} = useSelector((state: RootState) => state.auth);
+  const [showProfileSideModel, setShowProfileSideModel] = useState<boolean>(false);
+  const [showSettingModel, setShowSettingModel] = useState<boolean>(false);
 
  
   return (

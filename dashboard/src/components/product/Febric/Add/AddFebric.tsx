@@ -7,16 +7,18 @@
 import { Message } from '@pasal/cio-component-library';
 import { firstLetterUpperCase } from '@pasal/common-functions';
 import axios from 'axios';
-import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { updateFebric as updateFebricAction } from '../../../../../reducers/productSlice';
 import { APIS } from '../../../../config/apis';
 import { svgCDNAssets } from '../../../../config/assets';
 import { febricTypes } from '../../../../config/febric';
 import { validBoolean, validDigit, validString, wordRegrex } from '../../../../config/regrex';
+import { handleMediaChange } from '../../../../functions/handleMediaChange';
 import { RootState } from '../../../../store';
 import { forStepType, formStepEnum, formStepType } from '../../../../types&Enums/febric';
+import { request } from '../../../../utils/request';
 import FormTemplate from '../../../common/FormTemplate/FormTemplate';
 import StepFive from './Steps/Five';
 import StepOne from './Steps/One';
@@ -25,8 +27,6 @@ import StepSix from './Steps/Six';
 import StepThree from './Steps/Three';
 import StepTwo from './Steps/Two';
 import { CompositionInterface } from './Steps/steps.interface';
-import { handleMediaChange } from '../../../../functions/handleMediaChange';
-import { request } from '../../../../utils/request';
 
 
 type Props = {}
@@ -181,7 +181,7 @@ export default function AddFebric({ }: Props) {
 
     const [availableComposition, setAvailableComposition] = useState<CompositionInterface[]>(febricTypes);
 
-    const history = useHistory();
+    const history = useNavigate();
     const dispatch = useDispatch();
 
     const nextStepHandler = (step: formStepEnum) => {
@@ -326,7 +326,7 @@ export default function AddFebric({ }: Props) {
     }
 
     const redirectToFebric = () => {
-        history.push('/products/febric')
+        history('/products/febric')
     }
 
     const backStageHandler = () => {

@@ -12,7 +12,7 @@ import { RootState } from '../../../store';
 import { APIS } from '../../../config/apis';
 import { affectedRowAction, fetchUsers, fetchedError, fetchingUsers, updateUser, addUser, addedUserAction } from '../../../../reducers/userSlice';
 import { userType } from '../../../../reducers/userSlice';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ConfirmationDialog from '../../common/Confimation/ConfirmationDialog';
 import { request } from '../../../utils/request';
 type Props = {}
@@ -81,7 +81,7 @@ export default function List({ }: Props) {
   const dispatch = useDispatch();
 
   const tableHeader = ['firstName', 'lastName', 'role', 'email', 'action'];
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleChange = () => {
 
@@ -90,7 +90,7 @@ export default function List({ }: Props) {
   const editUser = (id: string) => {
     dispatch(updateUser(id));
     // send user to add user field
-    history.push('/users/add')
+    navigate('/users/add')
   }
 
   const deleteUserHandler = (id:string) => {

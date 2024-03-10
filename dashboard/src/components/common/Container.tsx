@@ -4,8 +4,8 @@ import { menuIds } from "../../config/navMenu";
 import SideMenu from "./SideMenu";
 // import './loader.scss';
 
-import { useSelector } from "react-redux";
-import useSetAuthenticatedUser from "../../../hooks/useSetAuthenticatedUser";
+import { useDispatch, useSelector } from "react-redux";
+import useSetAuthenticatedUser from "../../hooks/useSetAuthenticatedUser";
 import { RootState } from "../../store";
 
 interface ContainerInterface {
@@ -18,12 +18,11 @@ interface ContainerInterface {
 
 }
 
-export default function Container({ setShowSettingModel, showSettingModel, children, setSelectedMenu, selectedMenu, setShowProfileSideModel, actions, globalDispatch }: ContainerInterface) {
+export default function Container({ setShowSettingModel, showSettingModel, children, setSelectedMenu, selectedMenu, setShowProfileSideModel }: ContainerInterface) {
 
     const [loading, setLoading] = useState(false);
     const { auth: { auth } } = useSelector((state: RootState) => state);
-
-
+    const dispatch = useDispatch();
 
     useSetAuthenticatedUser({ setLoading });
 
@@ -42,7 +41,6 @@ export default function Container({ setShowSettingModel, showSettingModel, child
         return (
             <>
 
-
                 <input type="radio" id="toggle-menu-checkbox" className="toggle-menu-checbox" name="toggle-menu-checkbox" />
                 <label htmlFor="toggle-menu-checkbox" >
                     <div className="toggal-menu">
@@ -57,8 +55,6 @@ export default function Container({ setShowSettingModel, showSettingModel, child
                             setShowProfileSideModel={setShowProfileSideModel}
                             setShowSettingModel={setShowSettingModel}
                             showSettingModel={showSettingModel}
-                            actions={actions}
-                            globalDispatch={globalDispatch}
                         />
                     </div>
                     <div className="right services">

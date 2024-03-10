@@ -2,7 +2,7 @@ import Skeleton from '@mui/material/Skeleton';
 import React, { useEffect, useMemo } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { INotification, addNotifications, updateSeenNotification } from '../../../reducers/notficiationSlice';
 import { fetchNotification } from '../../apis-requests/notification';
 import { updateNotification } from '../../apis-requests/notification/update';
@@ -28,8 +28,6 @@ interface SideMenuInterface {
   setShowProfileSideModel: Function,
   setShowSettingModel: Function,
   showSettingModel: boolean;
-  globalDispatch: Function;
-  actions: any;
 }
 
 enum sidebarNavClick {
@@ -55,7 +53,7 @@ interface INotificationRow {
 */
 
 
-export default function SideMenu({ setShowSettingModel, showSettingModel, setSelectedMenu, setShowProfileSideModel, globalDispatch, actions }: SideMenuInterface) {
+export default function SideMenu({ setShowSettingModel, showSettingModel, setSelectedMenu, setShowProfileSideModel }: SideMenuInterface) {
 
   const { auth } = useSelector((state: RootState) => state.auth);
   const { notifications } = useSelector((state: RootState) => state);
@@ -64,7 +62,7 @@ export default function SideMenu({ setShowSettingModel, showSettingModel, setSel
   const { mutate, error, isLoading: updatingNotification } = useMutation(updateNotification);
   const { data: getNotifications, isLoading: fetchingNotifications } = useQuery(queryKeys.fetchNotification, fetchNotification);
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const sideModelToggleHandler = (e:React.MouseEvent<HTMLButtonElement>, type: sidebarNavClicktype) => {
     e.stopPropagation();
     if (type == sidebarNavClick.profile) {
@@ -88,8 +86,8 @@ export default function SideMenu({ setShowSettingModel, showSettingModel, setSel
         method: 'post',
 
       });
-      globalDispatch(actions.authenticatedUser(null));
-      history.push('/auth/signin');
+      //globalDispatch(authenticatedUser(null));
+      navigate('/auth/signin');
 
     } catch (err) {
       console.error('Could not signout', err);
@@ -112,7 +110,7 @@ export default function SideMenu({ setShowSettingModel, showSettingModel, setSel
       // Updatae the selected menu
       setSelectedMenu(menuEnum.Orders);
       // Push to order route
-      history.push('/Orders');
+      navigate('/Orders');
 
       // Refetch the order 
       

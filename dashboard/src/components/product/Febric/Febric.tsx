@@ -63,7 +63,6 @@ export default function Febric() {
   const editFebricHandler = (febric: string) => {
     console.log('febric', febric);
     dispatch(updateFebric(febric));
-    // history.push('/products/febric/add');
   }
 
   const deleteFebricHandler = (id: string) => {

@@ -5,17 +5,15 @@ import FormTemplate from '../../common/FormTemplate/FormTemplate';
 import StepOne from './Steps/One';
 import StepTwo from './Steps/Two';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { addedUserAction, fetchUsers, updateUser as updateUserAction, userType } from '../../../../reducers/userSlice';
 import { APIS } from '../../../config/apis';
+import { RootState } from '../../../store';
+import { request } from '../../../utils/request';
+import { PermissionInterface } from '../types';
 import StepThree from './Steps/Three';
 import styles from './add.module.scss';
 import './style.scss';
-import { Authorization, PermissionInterface } from '../types';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store';
-import { addUser, addedUserAction, fetchUsers, updateUser as updateUserAction, userType } from '../../../../reducers/userSlice';
-import { Fragment } from 'react';
-import { useHistory } from 'react-router-dom';
-import { request } from '../../../utils/request';
 
 
 

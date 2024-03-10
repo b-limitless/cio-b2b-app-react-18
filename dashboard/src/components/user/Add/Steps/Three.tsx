@@ -1,14 +1,14 @@
 import React from 'react';
 import { Message } from '@pasal/cio-component-library';
 import { svgCDNAssets } from '@pasal/common-functions';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
     
 }
 
 export default function StepThree({ }: Props) {
-    const history = useHistory();
+    const history = useNavigate();
     return (
         <Message
             title='User added sucessfully'
@@ -17,7 +17,7 @@ export default function StepThree({ }: Props) {
             icon={svgCDNAssets.successCheck}
             redirectLink={'/users'}
             btnOnClickEvent={() => {
-                history.push('/users')
+                history('/users')
             }}
             
         />
