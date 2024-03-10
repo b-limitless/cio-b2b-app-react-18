@@ -1,6 +1,6 @@
 import { request } from '@pasal/cio-component-library';
 import { useEffect } from 'react';
-import { setCurrentUser } from '../reducers/currentUserSlice';
+import { setCurrentUser } from '../../reducers/currentUserSlice';
 import { useDispatch } from 'react-redux';
 
 export default function isUserAuthenticated() {

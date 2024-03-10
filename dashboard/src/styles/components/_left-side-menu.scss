@@ -1,0 +1,81 @@
+.side--navbar {
+  width: 100%;
+  z-index: 1;
+  @media only screen and (max-width: $bp-700) {
+    position: fixed;
+    left: -(pxToRem($left-menu-width));
+    transition: all 0.2s ease;
+  }
+}
+
+.notification-checkbox:checked ~ .notification-container{
+    display: flex;
+}
+
+
+
+.notification-container {
+  display: none;
+  position: absolute;
+  left: pxToRem(234);
+  top: -308px;
+  background-color: $light;
+//   display: flex;
+  width: pxToRem(380);
+  height: pxToRem(348);
+
+
+  @media only screen and (max-width: 75em) and (min-width: 51.25em) {
+    left: 63px
+  }
+ 
+  .items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-between;
+
+    .item {
+      display: flex;
+      justify-content: center;
+      opacity: 0.9;
+
+      .more {
+        font-size: 14px;
+        cursor: pointer;
+      }
+      &:hover {
+        opacity: 1;
+      }
+
+      padding: 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+
+      .description {
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+        .row {
+          font-family: $default-font-family;
+          font-size: 14px;
+        }
+
+        .note {
+          
+        }
+
+        .date {
+        
+          font-size: 10px;
+          color: #747474;
+        }
+      }
+    }
+  }
+}
+
+.notification-checkbox-label{
+    display: flex;
+    column-gap: 0.5rem;
+}
