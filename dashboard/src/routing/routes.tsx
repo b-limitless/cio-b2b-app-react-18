@@ -4,7 +4,7 @@ import { NavigationManager } from "../components/NavigationManager";
 import { Page1 } from "../pages/Page1";
 import { Page2 } from "../pages/Page2";
 import Dashboard from '../components/dashboard/Dashboard/Dashboard';
-
+import Febric from '../components/product/Febric/Febric';
 
 export const routes = [
   {
@@ -28,9 +28,14 @@ export const routes = [
         element: <Page2 />,
       },
       {
-        path:"dashboard",
+        path:"home",
         element: <Dashboard />
+      }, 
+      {
+        path:"/products/febric",
+        element: <Febric />
       }
+      
      
     ],
   },

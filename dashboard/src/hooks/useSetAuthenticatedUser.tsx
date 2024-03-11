@@ -1,7 +1,7 @@
 import { request } from '../utils/request';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { authenticatedUser } from '../../reducers/authSlice';
+import { authenticatedUser } from '../reducers/authSlice';
 import { APIS } from '../apis';
 import { RootState } from '../store';
 import { useNavigate } from 'react-router-dom';

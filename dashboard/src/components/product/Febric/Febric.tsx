@@ -4,7 +4,7 @@ import { request } from '../../../utils/request';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { affectedRowAction, fetchFebrics, fetchingFebrics, filterFebric, updateFebric } from '../../../../reducers/productSlice';
+import { affectedRowAction, fetchFebrics, fetchingFebrics, filterFebric, updateFebric } from '../../../reducers/productSlice';
 import { APIS } from '../../../config/apis';
 import { brightness, febricSeasons } from '../../../config/febric';
 import { ProductInterface } from '../../../interfaces/febric.interface';

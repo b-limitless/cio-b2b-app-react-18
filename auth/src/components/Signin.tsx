@@ -124,8 +124,8 @@ export default function Signin({actions, globalDispatch}: SignInInterface) {
           body: form
         });
   
-        globalDispatch(actions.authenticatedUser(response))
-        navigate('/dashboard');
+        //globalDispatch(actions.authenticatedUser(response))
+        navigate('/dashboard/home');
 
       } catch (err: any) {
         const { response: { data: { errors } } } = err;

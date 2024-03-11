@@ -22,20 +22,20 @@ export const routes = [
       //   index: true,
       //   element: <Page1 />,
       // },
-      // {
-      //   path: "page-1",
-      //   element: <Page1 />,
-      // },
+      {
+        path: "page-1",
+        element: <Page1 />,
+      },
       // {
       //   path: "page-2",
       //   element: <Page2 />,
       // },
       {
-        path: "/auth/signin",
+        path: "signin",
         element: <Signin actions={() => {}} globalDispatch={() => {}}/>,
       },
       {
-        path: "/auth/signup",
+        path: "signup",
         element: <Signup/>,
       },
       {

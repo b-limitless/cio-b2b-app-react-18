@@ -17,6 +17,7 @@ export const menuIcons = {
 }
 // /products/thread
 export enum menuEnum {
+    home='home',
     Dashboard = "Dashboard",
     Products_Febric = "Products_Febric",
     Product_Shirts = "Product_Shirts",
@@ -35,7 +36,7 @@ export type menuIds = typeof keys[number];
 
 export const sideNavConfig = [
     {
-        title: "Dashboard", icon: menuIcons.dashboard,
+        title: "home", icon: menuIcons.dashboard,
         children: [],
         component: <div></div>
     },

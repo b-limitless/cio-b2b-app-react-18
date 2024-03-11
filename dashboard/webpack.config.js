@@ -59,6 +59,11 @@ module.exports = {
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,
         use: ["@svgr/webpack"],
+      }, 
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+        type: 'javascript/auto',
       }
     ],
   },
@@ -69,7 +74,7 @@ module.exports = {
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
-        './dashboard': './src/bootstrap',
+        './DashboardApp': './src/bootstrap',
       },
       shared: {
         ...deps,

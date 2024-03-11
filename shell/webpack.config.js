@@ -1,13 +1,10 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const path = require("path");
-
-const port = 8084;
 
 const deps = require("./package.json").dependencies;
 module.exports = {
   output: {
-    publicPath: `http://localhost:${port}/`,
+    publicPath: "http://localhost:8086/",
   },
 
   resolve: {
@@ -15,7 +12,7 @@ module.exports = {
   },
 
   devServer: {
-    port: port,
+    port: 8086,
     historyApiFallback: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
@@ -33,7 +30,7 @@ module.exports = {
       },
       {
         test: /\.(css|s[ac]ss)$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
       {
         test: /\.(ts|tsx|js|jsx)$/,
@@ -42,35 +39,18 @@ module.exports = {
           loader: "babel-loader",
         },
       },
-      {
-        test: /\.(woff2?|jpe?g|png|gif|ico)$/,
-        oneOf: [
-          {
-            include: path.resolve(__dirname, "../node_modules/"),
-            use: "svg-inline-loader",
-          },
-          {
-            exclude: path.resolve(__dirname, "../node_modules/"),
-            use: "url-loader",
-          },
-        ],
-      },
-      {
-        test: /\.svg$/i,
-        issuer: /\.[jt]sx?$/,
-        use: ["@svgr/webpack"],
-      }
     ],
   },
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "auth",
+      name: "shell",
       filename: "remoteEntry.js",
-      remotes: {},
-      exposes: {
-        './AuthApp': './src/bootstrap',
+      remotes: {
+        auth: 'auth@http://localhost:8084/remoteEntry.js',
+        dashboard: 'dashboard@http://localhost:8085/remoteEntry.js',
       },
+      exposes: {},
       shared: {
         ...deps,
         react: {

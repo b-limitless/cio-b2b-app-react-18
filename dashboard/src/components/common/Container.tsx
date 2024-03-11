@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ArrowRight from "../../assets/svg/arrow-right.svg";
-import { menuIds } from "../../config/navMenu";
+import { menuEnum, menuIds } from "../../config/navMenu";
 import SideMenu from "./SideMenu";
 // import './loader.scss';
 
@@ -17,8 +17,8 @@ interface ContainerInterface {
     [x: string]: any;
 
 }
-
-export default function Container({ setShowSettingModel, showSettingModel, children, setSelectedMenu, selectedMenu, setShowProfileSideModel }: ContainerInterface) {
+//
+export default function Container({setShowSettingModel, showSettingModel, setSelectedMenu, selectedMenu, setShowProfileSideModel, children }: ContainerInterface) {
 
     const [loading, setLoading] = useState(false);
     const { auth: { auth } } = useSelector((state: RootState) => state);

@@ -10,8 +10,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { menuEnum } from "../../../config/navMenu";
 
-
-export const analyticsData = [
+const analyticsData = [
   {
     title: "89,935",
     titleText: "Total Revanue",
@@ -47,18 +46,21 @@ export const analyticsData = [
 ]
 
 
+
 export default function Dashboard() {
   const {auth} = useSelector((state: RootState) => state.auth);
   const [showProfileSideModel, setShowProfileSideModel] = useState<boolean>(false);
   const [showSettingModel, setShowSettingModel] = useState<boolean>(false);
+
+  
 
  
   return (
     <>
 
      <Seetings showModel ={showSettingModel} setShowModel = {setShowSettingModel}/>
-      <Profile showModel={showProfileSideModel} setShowModel={setShowProfileSideModel}/>
-      { showProfileSideModel === true}
+     <Profile showModel={showProfileSideModel} setShowModel={setShowProfileSideModel}/>
+      
       <div className="ci--dashboard">
         <div className="ci--dashboard__title">
           Welcome Back, Hello World
@@ -79,6 +81,7 @@ export default function Dashboard() {
         </div>
 
       </div>
+      <div>Dashboard</div>
       
 
     </>

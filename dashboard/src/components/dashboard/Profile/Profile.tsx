@@ -18,12 +18,13 @@ import { hasError } from '../../../functions/hasError';
 import { useMemo } from 'react';
 import { request } from '../../../utils/request';
 
+
 type Props = {
   showModel: boolean;
   setShowModel: Function;
 }
 
-const getLanguagesInArray = languages.map((language) => language.title);
+
 
 enum tabsEnum {
   peronalInfo = 'peronalInfo',
@@ -144,6 +145,8 @@ function uploadMediaReducer(state: UploadMedia, action: any) {
 
 
 export default function Profile({ showModel, setShowModel }: Props) {
+  const getLanguagesInArray = languages.map((language) => language.title);
+  
   type changeEvent = React.ChangeEvent<HTMLInputElement>;
   
   const [activeTab, setActiveTab] = useState<tabsType>(tabsEnum.peronalInfo);
@@ -203,7 +206,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
   const updateProfileHandler = useCallback(async () => {
 
     if(hasError(errors)) {
-      console.log("can not submit the file");
+      console.log('can not submit the file');
       return;
     }
     dispatch({ type: UPDATING_PROFILE, payload: true });
@@ -227,7 +230,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
 
 
   const handleProfileImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log("running handleProfileImageUpload")
+    console.log('running handleProfileImageUpload')
     handleMediaChange(event, setProfileImageError, setProfileImage);
 
     // Need to display the selected file to dom 
@@ -251,7 +254,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
         fileInputRef.current.value = '';
       }
     } else {
-      console.log("no currnet")
+      console.log('no currnet')
     }
   }
 
@@ -347,6 +350,8 @@ export default function Profile({ showModel, setShowModel }: Props) {
 
   }, [updatedProfile, success]);
 
+  console.log('showModel', showModel)
+
   return (
 
     <SideModel showModel={showModel} setShowModel={setShowModel}>
@@ -359,12 +364,12 @@ export default function Profile({ showModel, setShowModel }: Props) {
       <div className={styles.profile__container}>
         <div className={styles.avatar__actions}>
           <div className={styles.avatar}>
-            {/* <AvatarPNG/> */}
+           
             <input
-              type="file"
-              name=""
-              id="profile-image"
-              accept="image/*"
+              type='file'
+              name=''
+              id='profile-image'
+              accept='image/*'
               onChange={handleProfileImageUpload}
               hidden
               ref={fileInputRef}
@@ -372,7 +377,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
                 e.currentTarget.value = '';
               }}
             />
-            <label htmlFor="profile-image">
+            <label htmlFor='profile-image'>
               <img
                 ref={imageRef}
                 src={userDetails?.originalImageUrl ?? defaultProfileImage } alt='' />
@@ -384,6 +389,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
             <Button variant='light' text='Delete' onClick={onDeleteProfileImageHandler} />
           </div>
         </div>
+        
         <div className={styles.personal__security}>
           <div className={styles.tab__container}>
 
@@ -395,10 +401,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
               onChange={(e: any) => setActiveTab(e.target.checked ? tabsEnum.peronalInfo : tabsEnum.security)}
               className={styles.tab__option__input} />
 
-            {/* <label htmlFor='personal-info' className={styles.tab__label}>
-              <span className={styles.item}>PERSONAL INFO</span>
-            </label> */}
-
+           
 
             <input checked={activeTab === tabsEnum.security ? true : false}
               hidden data-name='security'
@@ -413,45 +416,41 @@ export default function Profile({ showModel, setShowModel }: Props) {
               <span className={styles.item}>SECURITY</span>
             </label>
 
-            {/* Dispaly this tab content if personal infor tab is active */}
+          
             <div className={styles.tab__contents}>
               <div className={styles.item} id='content-personal-info' data-name='personal-info'>
 
                 <div className={styles.form__row}>
                   <Input
-                    label="First Name"
-                    id="first-name"
-                    value={userDetails?.firstName || ""}
-                    type="text"
-                    name="firstName"
+                    label='First Name'
+                    id='first-name'
+                    value={userDetails?.firstName || ''}
+                    type='text'
+                    name='firstName'
                     onChange={(e: changeEvent) => onChangeEventLocal(e)}
-                  // error={errors.deliveryTime ? true : false}
-                  // helperText={errors.deliveryTime ? errors.deliveryTime : false} 
+                 
                   />
 
                   <Input
-                    label="Last Name"
-                    id="last-name"
-                    value={userDetails?.lastName || ""}
-                    type="text"
-                    name="lastName"
+                    label='Last Name'
+                    id='last-name'
+                    value={userDetails?.lastName || ''}
+                    type='text'
+                    name='lastName'
                     onChange={(e: changeEvent) => onChangeEventLocal(e)}
 
-                  //  error={true}
-                  // helperText="Incorrect entry."
                   />
                 </div>
 
                 <div className={styles.form__row}>
                   <Input
-                    label="Email Address"
-                    id="email-address"
-                    value={userDetails?.email || ""}
-                    type="text"
-                    name="email"
+                    label='Email Address'
+                    id='email-address'
+                    value={userDetails?.email || ''}
+                    type='text'
+                    name='email'
                     disabled={true}
-                  //  error={true}
-                  // helperText="Incorrect entry."
+                  
                   />
 
 
@@ -460,31 +459,31 @@ export default function Profile({ showModel, setShowModel }: Props) {
                 <div className={styles.form__row}>
                   <Select options={countries}
 
-                    value={userDetails?.country ?? ""}
-                    label={"Countries"}
+                    value={userDetails?.country ?? ''}
+                    label={'Countries'}
                     onChange={(e: changeEvent) => onChangeEventLocal(e)}
-                    id={"countries"}
-                    name="country"
+                    id={'countries'}
+                    name='country'
                   />
                 </div>
                 <div className={styles.form__row}>
-                  <MultipleSelect size="large"
+                  <MultipleSelect size='large'
                     options={getLanguagesInArray}
                     handleChange={languageChangeHandler}
-                    label={"Langugaes"}
-                    id="languages"
+                    label={'Langugaes'}
+                    id='languages'
                     value={userDetails?.spokenLanguage ?? []}
-                    name="spokenLanguage"
+                    name='spokenLanguage'
                   />
 
                 </div>
 
                 <TextArea
                   rows={6}
-                  name="about"
+                  name='about'
                   setter={onChangeEventLocal}
-                  getter={userDetails?.about ?? ""}
-                  placeholder="About you"
+                  getter={userDetails?.about ?? ''}
+                  placeholder='About you'
 
                 />
 
@@ -492,10 +491,10 @@ export default function Profile({ showModel, setShowModel }: Props) {
               <div className={styles.item} id='content-security' data-name='security'>
                 <div className={styles.form__row}>
                   <InputAdornments
-                    label="New password"
-                    id="password"
-                    value={userDetails?.password || ""}
-                    name="password"
+                    label='New password'
+                    id='password'
+                    value={userDetails?.password || ''}
+                    name='password'
                     onChange={(e: changeEvent) => onChangeEventLocal(e)}
                      error={errors?.password}
                   helperText={errors?.password}
@@ -504,10 +503,10 @@ export default function Profile({ showModel, setShowModel }: Props) {
 
                 <div className={styles.form__row}>
                   <InputAdornments
-                    label="Confirm password"
-                    id="confirmPassword"
-                    value={userDetails?.confirmPassword || ""}
-                    name="confirmPassword"
+                    label='Confirm password'
+                    id='confirmPassword'
+                    value={userDetails?.confirmPassword || ''}
+                    name='confirmPassword'
                     onChange={(e: changeEvent) => onChangeEventLocal(e)}
                     error={errors?.confirmPassword}
                     helperText={errors?.confirmPassword}

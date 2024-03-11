@@ -1,11 +1,13 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import { matchRoutes, useLocation, useNavigate } from "react-router-dom";
-import { routes } from "../routing/routes";
-import { Provider, useDispatch } from "react-redux";
-import { Store } from "../store";
-import Container from "./common/Container";
-import { menuEnum } from "../config/navMenu";
-import { authenticatedUser } from "../../reducers/authSlice";
+import React, { ReactElement, useEffect, useState } from 'react';
+import { matchRoutes, useLocation, useNavigate } from 'react-router-dom';
+import { routes } from '../routing/routes';
+import { Provider, useDispatch } from 'react-redux';
+import { Store } from '../store';
+import Container from './common/Container';
+import { menuEnum } from '../config/navMenu';
+import { authenticatedUser } from '../reducers/authSlice';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import '../styles/main.scss';
 
 interface NavigationManagerProps {
   children: ReactElement;
@@ -19,7 +21,9 @@ export function NavigationManager({ children }: NavigationManagerProps) {
   const [showProfileSideModel, setShowProfileSideModel] = useState<boolean>(false);
   const [showSettingModel, setShowSettingModel] = useState<boolean>(false);
   // const dispatch = useDispatch();
-  
+
+  console.log('selected menu', selectedMenu, 'showSettingModel', showSettingModel, 'showProfileSideMode', showProfileSideModel)
+
 
   useEffect(() => {
     function shellNavigationHandler(event: Event) {
@@ -30,32 +34,36 @@ export function NavigationManager({ children }: NavigationManagerProps) {
       navigate(pathname);
     }
 
-    window.addEventListener("[shell] navigated", shellNavigationHandler);
+    window.addEventListener('[shell] navigated', shellNavigationHandler);
 
     return () => {
-      window.removeEventListener("[shell] navigated", shellNavigationHandler);
+      window.removeEventListener('[shell] navigated', shellNavigationHandler);
     };
   }, [location]);
 
   useEffect(() => {
     window.dispatchEvent(
-      new CustomEvent("[app1] navigated", { detail: location.pathname })
+      new CustomEvent('[app1] navigated', { detail: location.pathname })
     );
   }, [location]);
 
+  const queryClint = new QueryClient();
+
   return <Provider store={Store}>
-    <Container
-      setShowSettingModel={setShowSettingModel}
-      setShowProfileSideModel={setShowProfileSideModel}
-      showSettingModel={showSettingModel}
-      selectedMenu={selectedMenu}
-      setSelectedMenu={setSelectedMenu}
-      actions={{ authenticatedUser }}
-      globalDispatch={() => {}}
-    >
-    {children}
-    </Container>
-   
+    <QueryClientProvider client={queryClint}>
+      <Container
+        setShowSettingModel={setShowSettingModel}
+        setShowProfileSideModel={setShowProfileSideModel}
+        showSettingModel={showSettingModel}
+        selectedMenu={selectedMenu}
+        setSelectedMenu={setSelectedMenu}
+      
+      >
+        {children}
+      </Container>
+    </QueryClientProvider>
+
+
   </Provider>
 
 }

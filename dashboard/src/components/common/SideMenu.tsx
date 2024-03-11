@@ -3,7 +3,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { INotification, addNotifications, updateSeenNotification } from '../../../reducers/notficiationSlice';
+import { INotification, addNotifications, updateSeenNotification } from '../../reducers/notficiationSlice';
 import { fetchNotification } from '../../apis-requests/notification';
 import { updateNotification } from '../../apis-requests/notification/update';
 import avatar from '../../assets/img/avatar.png';
@@ -63,8 +63,10 @@ export default function SideMenu({ setShowSettingModel, showSettingModel, setSel
   const { data: getNotifications, isLoading: fetchingNotifications } = useQuery(queryKeys.fetchNotification, fetchNotification);
 
   const navigate = useNavigate();
+  
   const sideModelToggleHandler = (e:React.MouseEvent<HTMLButtonElement>, type: sidebarNavClicktype) => {
     e.stopPropagation();
+
     if (type == sidebarNavClick.profile) {
       setShowSettingModel(false);
       setShowProfileSideModel((prevState: boolean) => !prevState);
@@ -128,7 +130,7 @@ export default function SideMenu({ setShowSettingModel, showSettingModel, setSel
   }, [fetchNotification, fetchingNotifications]);
 
 
-  
+ 
 
   return (
     <div className='left-menu'>
