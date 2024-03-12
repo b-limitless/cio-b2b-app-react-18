@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState } from 'react';
 import { mount } from "auth/AuthApp";
-import { app1RoutingPrefix } from "../routing/constants";
+import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useNavigationFromShell } from "../shared-states/useNavigationFromShell";
+import { app1RoutingPrefix } from "../routing/constants";
 
 const app1Basename = `/${app1RoutingPrefix}`;
 
@@ -10,6 +10,14 @@ export default () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [auth, setAuth] = useState(false);
+
+  useEffect(() => {
+    if(auth) {
+      navigate('/dashboard/home');
+    }
+  }, [auth]); 
 
   // Listen to navigation events dispatched inside app1 mfe.
   useEffect(() => {
@@ -59,11 +67,11 @@ export default () => {
           app1Basename,
           ''
         ),
-        useNavigationFromShell
+        setAuth
       });
       isFirstRunRef.current = false;
     },
-    [location],
+    [location, setAuth],
   );
 
   useEffect(() => unmountRef.current, []);

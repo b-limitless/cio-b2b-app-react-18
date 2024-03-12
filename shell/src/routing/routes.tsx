@@ -3,8 +3,8 @@ import { Navigate, RouteObject } from "react-router-dom";
 import { Layout } from "../components/Layout";
 import { app1RoutingPrefix, app2RoutingPrefix } from "./constants";
 
-const App1Lazy = lazy(() => import("../components/Auth"));
-const App2Lazy = lazy(() => import("../components/Dashboard"));
+const AuthApp = lazy(() => import("../components/Auth"));
+const DashboardApp = lazy(() => import("../components/Dashboard"));
 
 export const routes: RouteObject[] = [
   {
@@ -17,11 +17,11 @@ export const routes: RouteObject[] = [
       // },
       {
         path: `/${app1RoutingPrefix}/*`,
-        element: <Suspense fallback="Loading App1..."><App1Lazy /></Suspense>,
+        element: <Suspense fallback="Loading App1..."><AuthApp /></Suspense>,
       },
       {
         path: `/${app2RoutingPrefix}/*`,
-        element: <Suspense fallback="Loading App2..."><App2Lazy /></Suspense>,
+        element: <Suspense fallback="Loading App2..."><DashboardApp /></Suspense>,
       },
     ],
   }

@@ -1,6 +1,5 @@
 import { Button, Input, camelCaseToNormal } from "@pasal/cio-component-library";
 import React, { useEffect, useReducer } from "react";
-import { useNavigate } from "react-router-dom";
 import { onChangeHandler } from "../../common/onChangeHandler";
 import { onSubmitHandler } from "../../common/onSubmitHandler";
 import BackLeftIcon from "../assets/svg/back-left-icon.svg";
@@ -97,9 +96,14 @@ interface SignInInterface {
   globalDispatch:any;
 }
 
-export default function Signin() {
-  const navigate = useNavigate();
-  const [{form, formError, formHasError, formSubmitted}, dispatch] = useReducer(signInProcessReducer, signinInitialState);
+
+interface ISignin {
+  setAuth: Function;
+}
+
+export default function Signin({setAuth}: ISignin) {
+  
+  const [{form, formError, formHasError, formSubmitted}, dispatch] = useReducer(signInProcessReducer, signinInitialState);  
 
   const onMouseLeaveEventHandler = (name: keyof SigninForm, value: string) => {
     if (!signInModel[name]?.test(value)) {
@@ -123,10 +127,13 @@ export default function Signin() {
           method: 'post',
           body: form
         });
-  
+        
+        
         //globalDispatch(actions.authenticatedUser(response))
         //navigate('/dashboard/home');
-        window.location.href = '/dashboard/home';
+        // window.location.href = '/dashboard/home';
+        setAuth(true)
+        
 
       } catch (err: any) {
         const { response: { data: { errors } } } = err;

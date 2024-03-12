@@ -4,16 +4,17 @@ import { routes } from "../routing/routes";
 
 interface NavigationManagerProps {
   children: ReactElement;
+  setAuth:Function;
 }
 
-export function NavigationManager({ children }: NavigationManagerProps) {
+export function NavigationManager({setAuth, children }: NavigationManagerProps) {
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     function shellNavigationHandler(event: Event) {
       const pathname = (event as CustomEvent<string>).detail;
-      if (location.pathname === pathname || !matchRoutes(routes, { pathname })) {
+      if (location.pathname === pathname || !matchRoutes(routes({setAuth}), { pathname })) {
         return;
       }
       navigate(pathname);

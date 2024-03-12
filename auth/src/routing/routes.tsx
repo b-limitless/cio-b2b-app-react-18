@@ -9,43 +9,50 @@ import ForgotPassword from '../components/ForgotPassword';
 import CreateANewPassword from '../components/CreateANewPassword';
 import VerifyRegisteredAccount from '../components/VerifyRegisteredAccount';
 
-export const routes = [
-  {
-    path: "/",
-    element: (
-      <NavigationManager>
-        <Outlet />
-      </NavigationManager>
-    ),
-    children: [
-      // {
-      //   index: true,
-      //   element: <Page1 />,
-      // },
-      {
-        path: "page-1",
-        element: <Page1 />,
-      },
-      // {
-      //   path: "page-2",
-      //   element: <Page2 />,
-      // },
-      {
-        path: "signin",
-        element: <Signin/>,
-      },
-      {
-        path: "signup",
-        element: <Signup/>,
-      },
-      {
-        path: "/auth/forgot-password",
-        element: <ForgotPassword/>,
-      },
-      {
-        path: "/auth/verify",
-        element: <VerifyRegisteredAccount/>,
-      }
-    ],
-  },
-];
+interface IRoute {
+ setAuth: Function;
+ 
+}
+export const routes =  ({setAuth}: IRoute) => {
+  return [
+    {
+      path: "/",
+      element: (
+        <NavigationManager setAuth={setAuth}>
+          <Outlet />
+        </NavigationManager>
+      ),
+      children: [
+        // {
+        //   index: true,
+        //   element: <Page1 />,
+        // },
+        {
+          path: "page-1",
+          element: <Page1 />,
+        },
+        // {
+        //   path: "page-2",
+        //   element: <Page2 />,
+        // },
+        {
+          path: "signin",
+          element: <Signin setAuth={setAuth}/>,
+        },
+        {
+          path: "signup",
+          element: <Signup/>,
+        },
+        {
+          path: "/auth/forgot-password",
+          element: <ForgotPassword/>,
+        },
+        {
+          path: "/auth/verify",
+          element: <VerifyRegisteredAccount/>,
+        }
+      ],
+    },
+  ];
+  
+}

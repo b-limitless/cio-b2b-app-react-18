@@ -10,6 +10,10 @@ export default () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const navigateToSignInPage = () => {
+    navigate('/auth/signin');
+  }
+
   // Listen to navigation events dispatched inside app1 mfe.
   useEffect(() => {
     const app1NavigationEventHandler = (event: Event) => {
@@ -58,6 +62,7 @@ export default () => {
           app1Basename,
           ''
         ),
+        navigateToSignInPage
       });
       isFirstRunRef.current = false;
     },

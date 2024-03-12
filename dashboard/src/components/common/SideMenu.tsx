@@ -26,6 +26,7 @@ import { EMenu, updateMenuSettings } from '../../reducers/menuSlices';
 
 interface SideMenuInterface {
   setSelectedMenu: Function
+  navigateToSignInPage:Function;
 }
 
 enum sidebarNavClick {
@@ -51,7 +52,7 @@ interface INotificationRow {
 */
 
 
-export default function SideMenu({setSelectedMenu }: SideMenuInterface) {
+export default function SideMenu({navigateToSignInPage, setSelectedMenu }: SideMenuInterface) {
 
   const { auth } = useSelector((state: RootState) => state.auth);
   const { notifications } = useSelector((state: RootState) => state);
@@ -87,7 +88,9 @@ export default function SideMenu({setSelectedMenu }: SideMenuInterface) {
 
       });
       //globalDispatch(authenticatedUser(null));
-      navigate('/auth/signin');
+      // navigate('/auth/signin');
+      //window.location.href = '/auth/signin';
+      navigateToSignInPage();
 
     } catch (err) {
       console.error('Could not signout', err);

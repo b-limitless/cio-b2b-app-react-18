@@ -12,12 +12,11 @@ const menuSlice = createSlice({
   name: "navigation",
   initialState,
   reducers: {
-    updateMenuSettings: (state: IMenu, action: PayloadAction<any>) => {
-      const { key, value } = action.payload;
-      return { ...state, [key]: value };
+    updateNavigation: (state: IMenu, action: PayloadAction<any>) => {
+      return { ...state, useNavigationFromShell:action.payload};
     },
   },
 });
 
-export const { updateMenuSettings } = menuSlice.actions;
+export const { updateNavigation } = menuSlice.actions;
 export default menuSlice.reducer;

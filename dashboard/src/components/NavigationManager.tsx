@@ -11,9 +11,10 @@ import '../styles/main.scss';
 
 interface NavigationManagerProps {
   children: ReactElement;
+  navigateToSignInPage:Function;
 }
 
-export function NavigationManager({ children }: NavigationManagerProps) {
+export function NavigationManager({navigateToSignInPage, children }: NavigationManagerProps) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -22,13 +23,12 @@ export function NavigationManager({ children }: NavigationManagerProps) {
   const [showSettingModel, setShowSettingModel] = useState<boolean>(false);
   // const dispatch = useDispatch();
 
-  console.log('selected menu', selectedMenu, 'showSettingModel', showSettingModel, 'showProfileSideMode', showProfileSideModel)
-
+ 
 
   useEffect(() => {
     function shellNavigationHandler(event: Event) {
       const pathname = (event as CustomEvent<string>).detail;
-      if (location.pathname === pathname || !matchRoutes(routes, { pathname })) {
+      if (location.pathname === pathname || !matchRoutes(routes({navigateToSignInPage}), { pathname })) {
         return;
       }
       navigate(pathname);
@@ -57,6 +57,7 @@ export function NavigationManager({ children }: NavigationManagerProps) {
         showSettingModel={showSettingModel}
         selectedMenu={selectedMenu}
         setSelectedMenu={setSelectedMenu}
+        navigateToSignInPage={navigateToSignInPage}
       
       >
         {children}

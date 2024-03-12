@@ -18,7 +18,7 @@ interface ContainerInterface {
 
 }
 //
-export default function Container({setShowSettingModel, showSettingModel, setSelectedMenu, selectedMenu, setShowProfileSideModel, children }: ContainerInterface) {
+export default function Container({navigateToSignInPage, setShowSettingModel, showSettingModel, setSelectedMenu, selectedMenu, setShowProfileSideModel, children }: ContainerInterface) {
 
     const [loading, setLoading] = useState(false);
     const { auth: { auth } } = useSelector((state: RootState) => state);
@@ -52,9 +52,7 @@ export default function Container({setShowSettingModel, showSettingModel, setSel
                     <div className="left side--navbar hide">
                         <SideMenu
                             setSelectedMenu={setSelectedMenu}
-                            setShowProfileSideModel={setShowProfileSideModel}
-                            setShowSettingModel={setShowSettingModel}
-                            showSettingModel={showSettingModel}
+                            navigateToSignInPage={navigateToSignInPage}
                         />
                     </div>
                     <div className="right services">
