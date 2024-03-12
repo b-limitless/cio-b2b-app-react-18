@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { mount } from "auth/AuthApp";
 import { app1RoutingPrefix } from "../routing/constants";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigationFromShell } from "../shared-states/useNavigationFromShell";
 
 const app1Basename = `/${app1RoutingPrefix}`;
 
@@ -58,6 +59,7 @@ export default () => {
           app1Basename,
           ''
         ),
+        useNavigationFromShell
       });
       isFirstRunRef.current = false;
     },

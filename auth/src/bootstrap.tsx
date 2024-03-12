@@ -9,16 +9,18 @@ const mount = ({
   mountPoint,
   initialPathname,
   routingStrategy,
+  useNavigationFromShell
 }: {
   mountPoint: HTMLElement;
   initialPathname?: string;
   routingStrategy?: RoutingStrategy;
-  // globalDispatch?:any;
-  // actions:any;
+  useNavigationFromShell:{[x:string]:Function}
 }) => {
   const router = createRouter({ strategy: routingStrategy, initialPathname });
   const root = createRoot(mountPoint);
   root.render(<RouterProvider router={router} />);
+
+  console.log('useNavigationFromShell', useNavigationFromShell);
 
   return () => queueMicrotask(() => root.unmount());
 };

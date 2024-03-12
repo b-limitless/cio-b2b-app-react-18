@@ -1,14 +1,14 @@
-import React, {useState} from "react"
-import PriceSVG from "../../../assets/svg/price.svg";
+import React from 'react';
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import PositiveGrowth from "../../../assets/svg/positive-growth.svg";
-import AnalyticCard from "../common/AnalyticCard";
+import PriceSVG from "../../../assets/svg/price.svg";
+import { frontStoreLink } from "../../../config/apis";
+import { RootState } from "../../../store";
 import Profile from "../Profile";
 import Seetings from "../Settings/Setting";
-import { frontStoreLink } from "../../../config/apis";
+import AnalyticCard from "../common/AnalyticCard";
 import './dashboard.scss';
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
-import { menuEnum } from "../../../config/navMenu";
 
 const analyticsData = [
   {
@@ -48,19 +48,13 @@ const analyticsData = [
 
 
 export default function Dashboard() {
-  const {auth} = useSelector((state: RootState) => state.auth);
-  const [showProfileSideModel, setShowProfileSideModel] = useState<boolean>(false);
-  const [showSettingModel, setShowSettingModel] = useState<boolean>(false);
+  const { auth } = useSelector((state: RootState) => state.auth);
 
-  
-
- 
   return (
     <>
+      <Seetings />
+      <Profile />
 
-     <Seetings showModel ={showSettingModel} setShowModel = {setShowSettingModel}/>
-     <Profile showModel={showProfileSideModel} setShowModel={setShowProfileSideModel}/>
-      
       <div className="ci--dashboard">
         <div className="ci--dashboard__title">
           Welcome Back, Hello World
@@ -82,7 +76,7 @@ export default function Dashboard() {
 
       </div>
       <div>Dashboard</div>
-      
+
 
     </>
   )

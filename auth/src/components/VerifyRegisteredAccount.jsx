@@ -4,7 +4,7 @@ import Template from '../common/Template';
 import BackLeftIcon from '../assets/svg/back-left-icon.svg';
 
 
-export default function VerifyRegisteredAccount({actions, globalDispatch}) {
+export default function VerifyRegisteredAccount() {
   
   return (
     <Template>

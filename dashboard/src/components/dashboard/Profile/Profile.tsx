@@ -1,7 +1,7 @@
 import { Button, Input, InputAdornments, MultipleSelect, Select, TextArea } from '@pasal/cio-component-library';
 import axios from 'axios';
 import React, { ChangeEvent, useCallback, useEffect, useReducer, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userType } from '../../../../reducers/userSlice';
 import { APIS } from '../../../config/apis';
 import { languages } from '../../../config/languages';
@@ -17,6 +17,7 @@ import { passwordRegex } from '@pasal/cio-component-library';
 import { hasError } from '../../../functions/hasError';
 import { useMemo } from 'react';
 import { request } from '../../../utils/request';
+import { EMenu, updateMenuSettings } from '../../../reducers/menuSlices';
 
 
 type Props = {
@@ -35,7 +36,7 @@ type tabsType = `${tabsEnum}`
 interface UserDetailsInterface {
   userDetails: userType | null
   loading: boolean,
-  errors: {[x:string]:string} | null,
+  errors: { [x: string]: string } | null,
   updatingProfile: boolean
   updatedProfile: boolean
 }
@@ -110,7 +111,7 @@ function userDetailsReducer(state: UserDetailsInterface, action: any) {
     }
     case UPDATED_PROFILE:
       return { ...state, updatedProfile: action.payload }
-    
+
 
     case FETCHING_USER_DETAILS:
       return { ...state, loading: action.payload };
@@ -136,7 +137,7 @@ function uploadMediaReducer(state: UploadMedia, action: any) {
     case MEDIA_UPLOAD_ERROR:
       return { ...state, uploadError: action.payload }
     case SUCCESS:
-      return {...state, success: action.payload}
+      return { ...state, success: action.payload }
     default:
       return state;
   }
@@ -144,11 +145,11 @@ function uploadMediaReducer(state: UploadMedia, action: any) {
 
 
 
-export default function Profile({ showModel, setShowModel }: Props) {
+export default function Profile() {
   const getLanguagesInArray = languages.map((language) => language.title);
-  
+
   type changeEvent = React.ChangeEvent<HTMLInputElement>;
-  
+
   const [activeTab, setActiveTab] = useState<tabsType>(tabsEnum.peronalInfo);
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [profileImageError, setProfileImageError] = useState<null | string>(null);
@@ -157,40 +158,43 @@ export default function Profile({ showModel, setShowModel }: Props) {
   const [{ userDetails, loading, errors, updatingProfile, updatedProfile }, dispatch] = useReducer(userDetailsReducer, userDetailsIntialState);
   const [{ mediaUploaded, uploading, uploadError, success }, dispatchMedia] = useReducer(uploadMediaReducer, uploadMediaInitialState);
 
+  const { showProfileModel } = useSelector((state: RootState) => state.menu);
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
+  const globalDispatch = useDispatch();
 
-  const validatePassword = (e:changeEvent) => {
-    const {value} = e.target;
+  const validatePassword = (e: changeEvent) => {
+    const { value } = e.target;
 
-    if( value.length > 0
-    && !passwordRegex.test(value.trim())) {
-        dispatch({type: UPDATE_ERROR, payload: {name: 'password', value: 'Invalid password'}});
+    if (value.length > 0
+      && !passwordRegex.test(value.trim())) {
+      dispatch({ type: UPDATE_ERROR, payload: { name: 'password', value: 'Invalid password' } });
     } else {
-      dispatch({type: UPDATE_ERROR, payload: {name: 'password', value: null}});
+      dispatch({ type: UPDATE_ERROR, payload: { name: 'password', value: null } });
     }
   }
 
-  const validateConfirmPassword = (e:changeEvent) => {
-    const {value} = e.target;
-    if(value.length > 0 && userDetails.password !== value) {
-      dispatch({type: UPDATE_ERROR, payload: {name: 'confirmPassword', value: 'Both password did not matched'}});
+  const validateConfirmPassword = (e: changeEvent) => {
+    const { value } = e.target;
+    if (value.length > 0 && userDetails.password !== value) {
+      dispatch({ type: UPDATE_ERROR, payload: { name: 'confirmPassword', value: 'Both password did not matched' } });
     } else {
-      dispatch({type: UPDATE_ERROR, payload: {name: 'confirmPassword', value: null}});
+      dispatch({ type: UPDATE_ERROR, payload: { name: 'confirmPassword', value: null } });
     }
   }
 
 
 
   const onChangeEventLocal = (e: changeEvent) => {
-   if(e.target.name === 'password') {
+    if (e.target.name === 'password') {
       validatePassword(e);
-   } 
-    
-    if(e.target.name === 'confirmPassword') {
+    }
+
+    if (e.target.name === 'confirmPassword') {
       validateConfirmPassword(e);
-    } 
-    
+    }
+
     onChangeHandler(e, dispatch, UPDATE_PROFILE)
   }
 
@@ -202,10 +206,10 @@ export default function Profile({ showModel, setShowModel }: Props) {
     dispatch({ type: UPDATE_PROFILE, payload: { name: 'spokenLanguage', value: typeof value === 'string' ? value.split(',') : value } })
   }
 
-  
+
   const updateProfileHandler = useCallback(async () => {
 
-    if(hasError(errors)) {
+    if (hasError(errors)) {
       console.log('can not submit the file');
       return;
     }
@@ -219,7 +223,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
         body
       });
       dispatch({ type: UPDATED_PROFILE, payload: true });
-      setShowModel(false);
+      // setShowModel(false);
     } catch (err: any) {
       throw new Error(err);
     }
@@ -230,7 +234,6 @@ export default function Profile({ showModel, setShowModel }: Props) {
 
 
   const handleProfileImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log('running handleProfileImageUpload')
     handleMediaChange(event, setProfileImageError, setProfileImage);
 
     // Need to display the selected file to dom 
@@ -281,7 +284,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
       dispatchMedia({ type: SUCCESS, payload: true });
       dispatch({ type: UPDATE_PROFILE, payload: { name: 'originalImageUrl', value: originalImageUrl } });
       dispatch({ type: UPDATE_PROFILE, payload: { name: 'thumbnailImageUrl', value: thumbnailImageUrl } });
-      
+
     } catch (err) {
       dispatchMedia({ type: MEDIA_UPLOAD_ERROR, payload: err });
     }
@@ -326,14 +329,14 @@ export default function Profile({ showModel, setShowModel }: Props) {
     fetchUserProfile();
   }, [auth?.id]);
 
-  
+
   const getMessage = useMemo(() => {
     let message = '';
 
-    if(updatedProfile) {
+    if (updatedProfile) {
       message = 'Profile is updated successfully'
     }
-    if(success) {
+    if (success) {
       message = 'Profile picture uploaded successfully'
     }
     return message;
@@ -342,7 +345,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
 
   const openSnackBar = useMemo(() => {
 
-    if(updatedProfile || success) {
+    if (updatedProfile || success) {
       return true;
     }
 
@@ -350,11 +353,14 @@ export default function Profile({ showModel, setShowModel }: Props) {
 
   }, [updatedProfile, success]);
 
-  console.log('showModel', showModel)
+
+  const closeModel = () => {
+    globalDispatch(updateMenuSettings({ key: EMenu.showProfileModel, value: false }));
+  }
 
   return (
 
-    <SideModel showModel={showModel} setShowModel={setShowModel}>
+    <SideModel showModel={showProfileModel} setShowModel={closeModel}>
       <TransitionsSnackbar
         open={openSnackBar}
         handleCloseAlert={handleCloseAlert}
@@ -364,7 +370,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
       <div className={styles.profile__container}>
         <div className={styles.avatar__actions}>
           <div className={styles.avatar}>
-           
+
             <input
               type='file'
               name=''
@@ -380,7 +386,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
             <label htmlFor='profile-image'>
               <img
                 ref={imageRef}
-                src={userDetails?.originalImageUrl ?? defaultProfileImage } alt='' />
+                src={userDetails?.originalImageUrl ?? defaultProfileImage} alt='' />
             </label>
 
           </div>
@@ -389,7 +395,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
             <Button variant='light' text='Delete' onClick={onDeleteProfileImageHandler} />
           </div>
         </div>
-        
+
         <div className={styles.personal__security}>
           <div className={styles.tab__container}>
 
@@ -401,7 +407,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
               onChange={(e: any) => setActiveTab(e.target.checked ? tabsEnum.peronalInfo : tabsEnum.security)}
               className={styles.tab__option__input} />
 
-           
+
 
             <input checked={activeTab === tabsEnum.security ? true : false}
               hidden data-name='security'
@@ -416,7 +422,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
               <span className={styles.item}>SECURITY</span>
             </label>
 
-          
+
             <div className={styles.tab__contents}>
               <div className={styles.item} id='content-personal-info' data-name='personal-info'>
 
@@ -428,7 +434,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
                     type='text'
                     name='firstName'
                     onChange={(e: changeEvent) => onChangeEventLocal(e)}
-                 
+
                   />
 
                   <Input
@@ -450,7 +456,7 @@ export default function Profile({ showModel, setShowModel }: Props) {
                     type='text'
                     name='email'
                     disabled={true}
-                  
+
                   />
 
 
@@ -496,8 +502,8 @@ export default function Profile({ showModel, setShowModel }: Props) {
                     value={userDetails?.password || ''}
                     name='password'
                     onChange={(e: changeEvent) => onChangeEventLocal(e)}
-                     error={errors?.password}
-                  helperText={errors?.password}
+                    error={errors?.password}
+                    helperText={errors?.password}
                   />
                 </div>
 
@@ -512,8 +518,6 @@ export default function Profile({ showModel, setShowModel }: Props) {
                     helperText={errors?.confirmPassword}
                   />
                 </div>
-
-
               </div>
             </div>
 

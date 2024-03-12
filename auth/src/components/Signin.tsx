@@ -97,7 +97,7 @@ interface SignInInterface {
   globalDispatch:any;
 }
 
-export default function Signin({actions, globalDispatch}: SignInInterface) {
+export default function Signin() {
   const navigate = useNavigate();
   const [{form, formError, formHasError, formSubmitted}, dispatch] = useReducer(signInProcessReducer, signinInitialState);
 
@@ -125,7 +125,8 @@ export default function Signin({actions, globalDispatch}: SignInInterface) {
         });
   
         //globalDispatch(actions.authenticatedUser(response))
-        navigate('/dashboard/home');
+        //navigate('/dashboard/home');
+        window.location.href = '/dashboard/home';
 
       } catch (err: any) {
         const { response: { data: { errors } } } = err;

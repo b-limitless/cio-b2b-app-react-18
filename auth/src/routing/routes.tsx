@@ -32,7 +32,7 @@ export const routes = [
       // },
       {
         path: "signin",
-        element: <Signin actions={() => {}} globalDispatch={() => {}}/>,
+        element: <Signin/>,
       },
       {
         path: "signup",
@@ -44,7 +44,7 @@ export const routes = [
       },
       {
         path: "/auth/verify",
-        element: <VerifyRegisteredAccount actions={() => {}} globalDispatch={() => {}}/>,
+        element: <VerifyRegisteredAccount/>,
       }
     ],
   },

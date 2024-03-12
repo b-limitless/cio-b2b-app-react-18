@@ -5,6 +5,9 @@ import { paypalModel } from '../../../model/paypal';
 import { request } from '../../../utils/request';
 import TransitionsSnackbar from '../../common/SnackBar';
 import TabSettings from './Tabs/Tabs';
+import { EMenu, updateMenuSettings } from '../../../reducers/menuSlices';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 // import OrderTabs from '../Tab';
 
@@ -175,9 +178,13 @@ function settingReducer(state: ISettings, action: IActionPayload) {
   }
 }
 
-export default function Seetings({ showModel, setShowModel }: OrderSideModel) {
+export default function Seetings() {
 
   const [{ paypal, aws }, dispatch] = useReducer(settingReducer, initialState);
+  const globaDispatch = useDispatch();
+  
+  const {showSettingModel} = useSelector((state: RootState) => state.menu);
+
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>, key: keyof ISettings) => {
     // We are updating data props
@@ -199,7 +206,7 @@ export default function Seetings({ showModel, setShowModel }: OrderSideModel) {
       if (response) {
         //dispatch({ type: UPDATE_PARTIAL_DATA, payload: { payload: response, key: ESettings.paypal } });
         dispatch({type: UPDATE_SUCCESSED, payload: {key: ESettings.paypal, value: true}});
-        setShowModel(false);
+        // setShowModel(false);
       }
     } catch (err) {
       console.error()
@@ -287,6 +294,10 @@ export default function Seetings({ showModel, setShowModel }: OrderSideModel) {
     dispatch({type: UPDATE_SUCCESSED, payload: {key: ESettings.paypal, value: false}});
   }
 
+  const closeModel = () => {
+    globaDispatch(updateMenuSettings({key: EMenu.showSettingModel, value: false}));
+  }
+
   return (
     <>
     <TransitionsSnackbar
@@ -296,8 +307,8 @@ export default function Seetings({ showModel, setShowModel }: OrderSideModel) {
         message={'Configuration updated successfully.'}
       />
       <SideModel
-      showModel={showModel}
-      setShowModel={setShowModel}
+      showModel={showSettingModel}
+      setShowModel={closeModel}
     >
        
       <TabSettings

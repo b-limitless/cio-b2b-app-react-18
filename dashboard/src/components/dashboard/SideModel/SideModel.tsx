@@ -19,7 +19,7 @@ export default function SideModel({ children, showModel, setShowModel, style }: 
     <div style={style} className={`${styles.model} ${[-1, false].indexOf(showModel) === -1 ? styles.show : styles.hide}`}>
       <div className={styles.model__side}>
         <div className={styles.close}>
-          <CloseSVG onClick={() => setShowModel(-1)}/>
+          <CloseSVG onClick={() => setShowModel()}/>
         </div>
         {children}
       </div>

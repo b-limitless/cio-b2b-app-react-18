@@ -22,12 +22,10 @@ import { request } from '../../utils/request';
 import NotificationRow from '../notification/NotificationRow';
 import { NotificationsRowSkeleton } from '../skleton/NotificationSkleton';
 import NavList from './NavList';
+import { EMenu, updateMenuSettings } from '../../reducers/menuSlices';
 
 interface SideMenuInterface {
   setSelectedMenu: Function
-  setShowProfileSideModel: Function,
-  setShowSettingModel: Function,
-  showSettingModel: boolean;
 }
 
 enum sidebarNavClick {
@@ -53,7 +51,7 @@ interface INotificationRow {
 */
 
 
-export default function SideMenu({ setShowSettingModel, showSettingModel, setSelectedMenu, setShowProfileSideModel }: SideMenuInterface) {
+export default function SideMenu({setSelectedMenu }: SideMenuInterface) {
 
   const { auth } = useSelector((state: RootState) => state.auth);
   const { notifications } = useSelector((state: RootState) => state);
@@ -68,20 +66,20 @@ export default function SideMenu({ setShowSettingModel, showSettingModel, setSel
     e.stopPropagation();
 
     if (type == sidebarNavClick.profile) {
-      setShowSettingModel(false);
-      setShowProfileSideModel((prevState: boolean) => !prevState);
+      dispatch(updateMenuSettings({key: EMenu.showSettingModel, value: false}));
+      dispatch(updateMenuSettings({key: EMenu.showProfileModel, value: true}));
       return;
     }
 
     if (type === sidebarNavClick.settings) {
-      setShowProfileSideModel(false);
-      setShowSettingModel((prevState: boolean) => !prevState);
+      dispatch(updateMenuSettings({key: EMenu.showProfileModel, value: false}));
+      dispatch(updateMenuSettings({key: EMenu.showSettingModel, value: true}));
       return;
     }
   }
 
   const singOutHandler = async () => {
-    console.log('signin out user')
+    
     try {
       await request({
         url: APIS.auth.signout,
