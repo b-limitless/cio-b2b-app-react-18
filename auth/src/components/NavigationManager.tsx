@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect } from "react";
 import { matchRoutes, useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../routing/routes";
+import useUserIsAuthenticated from "../hooks/useUserIsAuthenticated";
 
 interface NavigationManagerProps {
   children: ReactElement;
@@ -10,6 +11,8 @@ interface NavigationManagerProps {
 export function NavigationManager({setAuth, children }: NavigationManagerProps) {
   const location = useLocation();
   const navigate = useNavigate();
+
+  useUserIsAuthenticated({setAuth});
 
   useEffect(() => {
     function shellNavigationHandler(event: Event) {

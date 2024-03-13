@@ -2,9 +2,11 @@ import React, { lazy, Suspense } from "react";
 import { Navigate, RouteObject } from "react-router-dom";
 import { Layout } from "../components/Layout";
 import { app1RoutingPrefix, app2RoutingPrefix } from "./constants";
+import PleaseWait from "../components/Loader/PleaseWait";
 
 const AuthApp = lazy(() => import("../components/Auth"));
 const DashboardApp = lazy(() => import("../components/Dashboard"));
+
 
 export const routes: RouteObject[] = [
   {
@@ -17,11 +19,11 @@ export const routes: RouteObject[] = [
       // },
       {
         path: `/${app1RoutingPrefix}/*`,
-        element: <Suspense fallback="Loading App1..."><AuthApp /></Suspense>,
+        element: <Suspense fallback={<PleaseWait/>}><AuthApp /></Suspense>,
       },
       {
         path: `/${app2RoutingPrefix}/*`,
-        element: <Suspense fallback="Loading App2..."><DashboardApp /></Suspense>,
+        element: <Suspense fallback={<PleaseWait/>}><DashboardApp /></Suspense>,
       },
     ],
   }

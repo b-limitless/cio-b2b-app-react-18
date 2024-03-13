@@ -3,8 +3,10 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { APIS } from "../config/apis";
 
-export default function useUserIsAuthenticated() {
-  const navigate = useNavigate();
+interface IuseUserIsAuthenticated {
+  setAuth: Function;
+}
+export default function useUserIsAuthenticated({setAuth}:IuseUserIsAuthenticated) {
 
   useEffect(() => {
     const userIsAuthenticated = async () => {
@@ -14,8 +16,8 @@ export default function useUserIsAuthenticated() {
           method: "get",
           unauthrizedRedirect: false,
         });
-        console.log("user is already logged in");
-        navigate("/dashboard");
+        setAuth(true);
+        
       } catch (err: any) {
         throw new Error(err);
       }

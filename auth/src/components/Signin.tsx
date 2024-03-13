@@ -195,7 +195,7 @@ export default function Signin({setAuth}: ISignin) {
                 name="email"
                 value={form.email}
                 type="email"
-                error={formError.email}
+                error={!!formError.email}
                 helperText={formError.email ? formError.email : ''}
                 onChange={(e:any) => onChangeHandler(e, dispatch)}
                 onBlur={() => onMouseLeaveEventHandler('email', form.email)}
@@ -206,7 +206,7 @@ export default function Signin({setAuth}: ISignin) {
                 name="password"
                 value={form.password}
                 type="text"
-                error={formError.password}
+                error={!!formError.password}
                 helperText={formError.password ? formError.password : ''}
                 onChange={(e:any) => onChangeHandler(e, dispatch)}
                 onBlur={() => onMouseLeaveEventHandler('password', form.password)}

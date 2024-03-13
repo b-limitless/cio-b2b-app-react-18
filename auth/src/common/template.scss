@@ -61,20 +61,24 @@ $header-margin: 3rem;
       place-items: center;
       height: calc(100vh - (26.5px + 81px));
       .row.registration {
-        .title {
+        .title, .purpose {
+          font-family: $default-font-family;
           font-style: normal;
+        }
+        .title {
+          
           font-weight: 700;
           font-size: 30px;
           line-height: 38px;
           /* identical to box height */
-
           display: flex;
           align-items: center;
-
           color: #000000;
+          
         }
         .purpose {
-          font-style: normal;
+        
+        
           font-weight: 400;
           font-size: 18px;
           line-height: 28px;
