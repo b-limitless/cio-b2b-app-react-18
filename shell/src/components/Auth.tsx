@@ -3,6 +3,9 @@ import { mount } from "auth/AuthApp";
 import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { app1RoutingPrefix } from "../routing/constants";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store';
+import { authenticatedUser } from '../reducers/authSlice';
 
 const app1Basename = `/${app1RoutingPrefix}`;
 
@@ -10,8 +13,16 @@ export default () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
-  const [auth, setAuth] = useState(false);
+  const {auth} = useSelector((state:RootState) => state.auth);
+
+  console.log('auth', auth)
+
+  // const [auth, setAuth] = useState(false);
+  const setAuth = (body:any) => {
+    dispatch(authenticatedUser(body));
+  }
 
   useEffect(() => {
     if(auth) {
