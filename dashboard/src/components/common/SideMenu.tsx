@@ -2,7 +2,7 @@ import Skeleton from '@mui/material/Skeleton';
 import React, { useEffect, useMemo } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { INotification, addNotifications, updateSeenNotification } from '../../reducers/notficiationSlice';
 import { fetchNotification } from '../../apis-requests/notification';
 import { updateNotification } from '../../apis-requests/notification/update';
@@ -87,9 +87,7 @@ export default function SideMenu({navigateToSignInPage, setSelectedMenu }: SideM
         method: 'post',
 
       });
-      //globalDispatch(authenticatedUser(null));
-      // navigate('/auth/signin');
-      //window.location.href = '/auth/signin';
+
       navigateToSignInPage();
 
     } catch (err) {
@@ -114,9 +112,6 @@ export default function SideMenu({navigateToSignInPage, setSelectedMenu }: SideM
       setSelectedMenu(menuEnum.Orders);
       // Push to order route
       navigate('/Orders');
-
-      // Refetch the order 
-      
     }
 
     if(type === EEvents.newCallReceived) {
@@ -124,14 +119,11 @@ export default function SideMenu({navigateToSignInPage, setSelectedMenu }: SideM
     }
   }
 
-  
-
   useEffect(() => {
     if (!fetchingNotifications) dispatch(addNotifications(getNotifications));
   }, [fetchNotification, fetchingNotifications]);
 
 
- 
 
   return (
     <div className='left-menu'>
@@ -223,6 +215,14 @@ export default function SideMenu({navigateToSignInPage, setSelectedMenu }: SideM
               </label>
               <div className='text settings'>FAQ</div>
             </div> */}
+
+            <div className="test">
+              <input type="radio" name="test" id="test" />
+              <label htmlFor="test">
+                Orde
+              </label>
+
+            </div>
 
 
           </div>

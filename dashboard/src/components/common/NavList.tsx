@@ -1,6 +1,6 @@
 import React, { Fragment, ReactNode } from "react";
 import ArrowDown from "../../assets/svg/arrow-down.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { splitTitleToUrl } from "../../pure-functions/splitTitleToUrl";
 interface NavListInterface {
     row: any;
@@ -23,16 +23,18 @@ const LinkMenu = ({ title, childrens, children }: LinkMenuInterface) => {
     </Link>
 }
 export default function NavList({ row, i, setSelectedMenu }: NavListInterface) {
+    const navigate = useNavigate();
+
+    const navigateTo = () => {
+        navigate(`/${row.title}`)
+    }
     return (
         <>
             <li className="item base-list" key={i} onClick={() => row.children.length === 0 ? setSelectedMenu(row.title) : null}>
                 <input type="radio" name="ci-root-menu" id={`cio-product-li-${i}`} className="major-list" />
 
                 <label className="title-icon" htmlFor={`cio-product-li-${i}`}>
-                    {/* {row.children.length === 0 && <LinkMenu title={row.title}>
-
-                    </LinkMenu>>} */}
-                    {row.children.length === 0 && <Link to={`/${row.title}`}>
+                    {row.children.length === 0 && <span className="label-link" onClick={() => navigateTo()}>
                         <span className="icon">
                             {row.icon}
                         </span>
@@ -43,7 +45,7 @@ export default function NavList({ row, i, setSelectedMenu }: NavListInterface) {
                             </span>
 
                         }
-                    </Link>}
+                    </span>}
 
                     {row.children.length > 0 && <>
                         <span className="icon">

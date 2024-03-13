@@ -18,13 +18,12 @@ interface ContainerInterface {
 
 }
 //
-export default function Container({navigateToSignInPage, setShowSettingModel, showSettingModel, setSelectedMenu, selectedMenu, setShowProfileSideModel, children }: ContainerInterface) {
+export default function Container({ navigateToSignInPage, setSelectedMenu, children }: ContainerInterface) {
 
     const [loading, setLoading] = useState(false);
     const { auth: { auth } } = useSelector((state: RootState) => state);
-    const dispatch = useDispatch();
 
-    useSetAuthenticatedUser({ setLoading });
+    useSetAuthenticatedUser({ setLoading, navigateToSignInPage });
 
     if (loading) {
         return <div className="loading">
@@ -33,7 +32,7 @@ export default function Container({navigateToSignInPage, setShowSettingModel, sh
     }
 
     if (!auth && !loading) {
-        return <div>Un Authorized</div>
+        return null;
     }
 
 

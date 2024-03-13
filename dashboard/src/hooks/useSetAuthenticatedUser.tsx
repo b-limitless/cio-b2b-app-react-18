@@ -8,8 +8,9 @@ import { useNavigate } from 'react-router-dom';
 
 interface AuthenticatedUserInterface {
     setLoading: Function;
+    navigateToSignInPage:Function;
 }
-export default function useSetAuthenticatedUser({ setLoading }: AuthenticatedUserInterface) {
+export default function useSetAuthenticatedUser({ setLoading, navigateToSignInPage }: AuthenticatedUserInterface) {
 
     const { auth: { auth } } = useSelector((state: RootState) => state);
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ export default function useSetAuthenticatedUser({ setLoading }: AuthenticatedUse
                 
             } catch (err) {
                 console.error('Count not fetch current user', err);
-                // return history('/auth/signin');
+                navigateToSignInPage();
                 
             }
             setLoading(false);

@@ -5,6 +5,8 @@ import { Page1 } from "../pages/Page1";
 import { Page2 } from "../pages/Page2";
 import Dashboard from '../components/dashboard/Dashboard/Dashboard';
 import Febric from '../components/product/Febric/Febric';
+import AddFebric from '../components/product/Febric/Add';
+import ListOrder from '../components/order/order/List';
 
 interface IRoutes {
   navigateToSignInPage:Function;
@@ -38,7 +40,16 @@ export const routes = ({navigateToSignInPage}: IRoutes) => {
         {
           path:"/products/febric",
           element: <Febric />
-        }
+        }, 
+        {
+          path:"/products/febric/add",
+          element: <AddFebric />
+        }, 
+        {
+          path:"/orders",
+          element: <ListOrder />
+        }, 
+
         
        
       ],

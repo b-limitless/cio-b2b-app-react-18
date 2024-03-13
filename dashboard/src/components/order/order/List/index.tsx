@@ -8,7 +8,7 @@ import OrderSideModel from "../../SideModel";
 import styles from "./list.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../store";
-import { filterOrders } from "../../../../../reducers/orderSlice";
+import { filterOrders } from "../../../../reducers/orderSlice";
 
 type Props = {}
 

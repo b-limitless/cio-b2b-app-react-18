@@ -4,13 +4,14 @@
  * model as been renamed from febricSeason to season
  * 
 */
+import React from 'react';
 import { Message } from '@pasal/cio-component-library';
 import { firstLetterUpperCase } from '@pasal/common-functions';
 import axios from 'axios';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { updateFebric as updateFebricAction } from '../../../../../reducers/productSlice';
+import { updateFebric as updateFebricAction } from '../../../../reducers/productSlice';
 import { APIS } from '../../../../config/apis';
 import { svgCDNAssets } from '../../../../config/assets';
 import { febricTypes } from '../../../../config/febric';
