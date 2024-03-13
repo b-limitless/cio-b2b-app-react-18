@@ -95,7 +95,7 @@
               }
             }
             .major-list {
-              // display: none;
+              display: none;
             }
             .major-list:checked + .title-icon svg {
               opacity: 1;
@@ -349,9 +349,6 @@
 }
 
 .label-link {
-  display: inline-block !important;
-  padding: 0; /* Remove default padding */
-  margin: 0; /* Remove default margin */
-  /* Add any additional styles to make it resemble a label */
-  /* For example, you can set font-weight, text-decoration, color, etc. */
+  display: flex;
+  align-items: center;
 }

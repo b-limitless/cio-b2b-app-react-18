@@ -216,13 +216,7 @@ export default function SideMenu({navigateToSignInPage, setSelectedMenu }: SideM
               <div className='text settings'>FAQ</div>
             </div> */}
 
-            <div className="test">
-              <input type="radio" name="test" id="test" />
-              <label htmlFor="test">
-                Orde
-              </label>
-
-            </div>
+           
 
 
           </div>

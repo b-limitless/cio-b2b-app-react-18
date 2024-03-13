@@ -2,6 +2,7 @@ import React, { Fragment, ReactNode } from "react";
 import ArrowDown from "../../assets/svg/arrow-down.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { splitTitleToUrl } from "../../pure-functions/splitTitleToUrl";
+
 interface NavListInterface {
     row: any;
     i: number;
@@ -13,15 +14,7 @@ interface LinkMenuInterface {
     childrens: any[];
     title: string;
 }
-const LinkMenu = ({ title, childrens, children }: LinkMenuInterface) => {
 
-    if (childrens.length > 0) {
-        return childrens;
-    }
-    return <Link to={`/${title}`}>
-        {children}
-    </Link>
-}
 export default function NavList({ row, i, setSelectedMenu }: NavListInterface) {
     const navigate = useNavigate();
 
