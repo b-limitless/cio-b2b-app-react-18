@@ -11,10 +11,12 @@ interface IAuthApp extends IAuth {
   
 }
 
-export default ({auth, setAuth}: IAuthApp) => {
+export default ({}: IAuth) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+   const [auth, setAuth] = useState(null);
 
 
   useEffect(() => {

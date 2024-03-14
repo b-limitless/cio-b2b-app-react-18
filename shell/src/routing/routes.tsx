@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { Navigate, RouteObject } from "react-router-dom";
+import {RouteObject } from "react-router-dom";
 import { Layout } from "../components/Layout";
 import { app1RoutingPrefix, app2RoutingPrefix } from "./constants";
 import PleaseWait from "../components/Loader/PleaseWait";
