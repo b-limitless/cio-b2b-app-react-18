@@ -88,7 +88,7 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
 
       });
 
-      navigateFromCell();
+      navigateFromCell('/auth/signin');
 
     } catch (err) {
       console.error('Could not signout', err);

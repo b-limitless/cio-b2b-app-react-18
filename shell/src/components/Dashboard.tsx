@@ -10,8 +10,8 @@ export default () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const navigateFromCell = () => {
-    navigate('/auth/signin');
+  const navigateFromCell = (url:string) => {
+    navigate(url ?? '/auth/signin');
   }
 
   // Listen to navigation events dispatched inside app1 mfe.

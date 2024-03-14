@@ -3,9 +3,6 @@ import { mount } from "auth/AuthApp";
 import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { app1RoutingPrefix } from "../routing/constants";
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store';
-import { authenticatedUser } from '../reducers/authSlice';
 
 const app1Basename = `/${app1RoutingPrefix}`;
 
@@ -13,25 +10,15 @@ export default () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch();
 
-  
-
-  // const {shellAuth} = useSelector((state:RootState) => state.shellAuth); 
-  // const setAuth = (body:any) => {
-  //   dispatch(authenticatedUser(body));
-  // }
 
   const [auth, setAuth] = useState(null);
 
-  console.log('auth', auth)
-
-  
   useEffect(() => {
-    if(auth) {
+    if (auth) {
       navigate('/dashboard/home');
     }
-  }, [auth]); 
+  }, [auth]);
 
   // Listen to navigation events dispatched inside app1 mfe.
   useEffect(() => {
@@ -68,7 +55,7 @@ export default () => {
   );
 
   const isFirstRunRef = useRef(true);
-  const unmountRef = useRef(() => {});
+  const unmountRef = useRef(() => { });
   // Mount app1 MFE
   useEffect(
     () => {
