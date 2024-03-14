@@ -164,7 +164,7 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
               <div className='text settings title'>Settings</div>
             </div>
 
-            {/* <div className='row item'>
+            <div className='row item'>
               {notifications.length > 0 && <input type='checkbox'
                 name='notification-checkbox'
                 id='notification-checkbox'
@@ -200,7 +200,7 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
 
 
 
-            </div> */}
+            </div> 
 
             {/* <div className='row item'>
               <input type='radio'
