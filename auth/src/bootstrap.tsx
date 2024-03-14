@@ -29,7 +29,7 @@ const mount = ({
   initialPathname?: string;
   routingStrategy?: RoutingStrategy;
   setAuth:Function;
-  navigateToSignInPage:Function;
+  navigateFromCell:Function;
 }) => {
   
   const router = createRouter({ 

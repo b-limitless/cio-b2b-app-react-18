@@ -26,7 +26,7 @@ import { EMenu, updateMenuSettings } from '../../reducers/menuSlices';
 
 interface SideMenuInterface {
   setSelectedMenu: Function
-  navigateToSignInPage:Function;
+  navigateFromCell:Function;
 }
 
 enum sidebarNavClick {
@@ -52,7 +52,7 @@ interface INotificationRow {
 */
 
 
-export default function SideMenu({navigateToSignInPage, setSelectedMenu }: SideMenuInterface) {
+export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuInterface) {
 
   const { auth } = useSelector((state: RootState) => state.auth);
   const { notifications } = useSelector((state: RootState) => state);
@@ -88,7 +88,7 @@ export default function SideMenu({navigateToSignInPage, setSelectedMenu }: SideM
 
       });
 
-      navigateToSignInPage();
+      navigateFromCell();
 
     } catch (err) {
       console.error('Could not signout', err);
@@ -164,7 +164,7 @@ export default function SideMenu({navigateToSignInPage, setSelectedMenu }: SideM
               <div className='text settings title'>Settings</div>
             </div>
 
-            <div className='row item'>
+            {/* <div className='row item'>
               {notifications.length > 0 && <input type='checkbox'
                 name='notification-checkbox'
                 id='notification-checkbox'
@@ -200,7 +200,7 @@ export default function SideMenu({navigateToSignInPage, setSelectedMenu }: SideM
 
 
 
-            </div>
+            </div> */}
 
             {/* <div className='row item'>
               <input type='radio'

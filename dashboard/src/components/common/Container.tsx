@@ -18,12 +18,12 @@ interface ContainerInterface {
 
 }
 //
-export default function Container({ navigateToSignInPage, setSelectedMenu, children }: ContainerInterface) {
+export default function Container({ navigateFromCell, setSelectedMenu, children }: ContainerInterface) {
 
     const [loading, setLoading] = useState(false);
-    const { auth: { auth } } = useSelector((state: RootState) => state);
+    const { auth: { auth } } = useSelector((state: RootState) => state) || {auth: null};
 
-    useSetAuthenticatedUser({ setLoading, navigateToSignInPage });
+    useSetAuthenticatedUser({ setLoading, navigateFromCell });
 
     if (loading) {
         return <div className="loading">
@@ -51,7 +51,7 @@ export default function Container({ navigateToSignInPage, setSelectedMenu, child
                     <div className="left side--navbar hide">
                         <SideMenu
                             setSelectedMenu={setSelectedMenu}
-                            navigateToSignInPage={navigateToSignInPage}
+                            navigateFromCell={navigateFromCell}
                         />
                     </div>
                     <div className="right services">

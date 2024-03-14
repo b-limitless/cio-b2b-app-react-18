@@ -11,10 +11,10 @@ import '../styles/main.scss';
 
 interface NavigationManagerProps {
   children: ReactElement;
-  navigateToSignInPage:Function;
+  navigateFromCell:Function;
 }
 
-export function NavigationManager({navigateToSignInPage, children }: NavigationManagerProps) {
+export function NavigationManager({navigateFromCell, children }: NavigationManagerProps) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ export function NavigationManager({navigateToSignInPage, children }: NavigationM
   useEffect(() => {
     function shellNavigationHandler(event: Event) {
       const pathname = (event as CustomEvent<string>).detail;
-      if (location.pathname === pathname || !matchRoutes(routes({navigateToSignInPage}), { pathname })) {
+      if (location.pathname === pathname || !matchRoutes(routes({navigateFromCell}), { pathname })) {
         return;
       }
       navigate(pathname);
@@ -57,7 +57,7 @@ export function NavigationManager({navigateToSignInPage, children }: NavigationM
         showSettingModel={showSettingModel}
         selectedMenu={selectedMenu}
         setSelectedMenu={setSelectedMenu}
-        navigateToSignInPage={navigateToSignInPage}
+        navigateFromCell={navigateFromCell}
       
       >
         {children}

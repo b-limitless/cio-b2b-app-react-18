@@ -8,13 +8,13 @@ import { useNavigate } from 'react-router-dom';
 
 interface AuthenticatedUserInterface {
     setLoading: Function;
-    navigateToSignInPage:Function;
+    navigateFromCell:Function;
 }
-export default function useSetAuthenticatedUser({ setLoading, navigateToSignInPage }: AuthenticatedUserInterface) {
+export default function useSetAuthenticatedUser({ setLoading, navigateFromCell }: AuthenticatedUserInterface) {
 
     const { auth: { auth } } = useSelector((state: RootState) => state);
     const dispatch = useDispatch();
-    const history = useNavigate();
+
     useEffect(() => {
         const fetchCurrentUser = async () => {
             try {
@@ -26,7 +26,7 @@ export default function useSetAuthenticatedUser({ setLoading, navigateToSignInPa
                 
             } catch (err) {
                 console.error('Count not fetch current user', err);
-                navigateToSignInPage();
+                navigateFromCell();
                 
             }
             setLoading(false);

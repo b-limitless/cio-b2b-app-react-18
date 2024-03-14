@@ -9,14 +9,14 @@ import AddFebric from '../components/product/Febric/Add';
 import ListOrder from '../components/order/order/List';
 
 interface IRoutes {
-  navigateToSignInPage:Function;
+  navigateFromCell:Function;
 }
-export const routes = ({navigateToSignInPage}: IRoutes) => {
+export const routes = ({navigateFromCell}: IRoutes) => {
   return [
     {
       path: "/",
       element: (
-        <NavigationManager navigateToSignInPage={navigateToSignInPage}>
+        <NavigationManager navigateFromCell={navigateFromCell}>
           <Outlet />
         </NavigationManager>
       ),

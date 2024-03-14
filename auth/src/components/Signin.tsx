@@ -127,14 +127,9 @@ export default function Signin({setAuth}: ISignin) {
           method: 'post',
           body: form
         });
+      
+        setAuth(response);
         
-        
-        //globalDispatch(actions.authenticatedUser(response))
-        //navigate('/dashboard/home');
-        // window.location.href = '/dashboard/home';
-        setAuth(true)
-        
-
       } catch (err: any) {
         const { response: { data: { errors } } } = err;
         errors.forEach((error: any, i: number) => {

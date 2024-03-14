@@ -6,7 +6,7 @@ import('./bootstrap').then(
       mountPoint: localRoot!,
       routingStrategy: 'browser',
       setAuth: () => {},
-      navigateToSignInPage: () => {}
+      navigateFromCell: () => {}
     });
   }
 );

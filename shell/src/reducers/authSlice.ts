@@ -22,15 +22,15 @@ export const verifyResponse = {
 export type verifyType = typeof verifyResponse;
 
 export interface VerifyReponseInterface {
-  auth: verifyType | null;
+  shellAuth: verifyType | null;
 }
 
 export const initialState: VerifyReponseInterface = {
-  auth: null,
+  shellAuth: null,
 };
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: "shellAuth",
   initialState,
   reducers: {
     authenticatedUser: (
@@ -39,7 +39,7 @@ export const authSlice = createSlice({
     ) => {
       return {
         ...state,
-        auth: action.payload,
+        shellAuth: action.payload,
       };
     },
   },

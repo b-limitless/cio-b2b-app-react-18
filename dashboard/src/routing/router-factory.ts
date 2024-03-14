@@ -5,14 +5,14 @@ import { RoutingStrategy } from "./types";
 interface CreateRouterProps {
   strategy?: RoutingStrategy;
   initialPathname?: string;
-  navigateToSignInPage:Function;
+  navigateFromCell:Function;
 }
 
-export function createRouter({ strategy, initialPathname, navigateToSignInPage }: CreateRouterProps) {
+export function createRouter({ strategy, initialPathname, navigateFromCell }: CreateRouterProps) {
   if (strategy === 'browser') {
-    return createBrowserRouter(routes({navigateToSignInPage}));
+    return createBrowserRouter(routes({navigateFromCell}));
   }
 
   const initialEntries = [initialPathname || "/"];
-  return createMemoryRouter(routes({navigateToSignInPage}), { initialEntries: initialEntries });
+  return createMemoryRouter(routes({navigateFromCell}), { initialEntries: initialEntries });
 }

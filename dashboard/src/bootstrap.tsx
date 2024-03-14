@@ -9,14 +9,14 @@ const mount = ({
   mountPoint,
   initialPathname,
   routingStrategy,
-  navigateToSignInPage
+  navigateFromCell
 }: {
   mountPoint: HTMLElement;
   initialPathname?: string;
   routingStrategy?: RoutingStrategy;
-  navigateToSignInPage:Function;
+  navigateFromCell:Function;
 }) => {
-  const router = createRouter({ strategy: routingStrategy, initialPathname, navigateToSignInPage });
+  const router = createRouter({ strategy: routingStrategy, initialPathname, navigateFromCell });
   const root = createRoot(mountPoint);
   root.render(<RouterProvider router={router} />);
 

@@ -3,8 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { app1RoutingPrefix, app2RoutingPrefix } from '../routing/constants';
 
 export function Layout() {
-  const [auth, setAuth] = useState(false);
-
+ 
   return (
     <>
       {/* <nav style={{ marginBottom: "3rem" }}>

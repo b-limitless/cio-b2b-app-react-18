@@ -10,7 +10,7 @@ export default () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const navigateToSignInPage = () => {
+  const navigateFromCell = () => {
     navigate('/auth/signin');
   }
 
@@ -62,7 +62,7 @@ export default () => {
           app1Basename,
           ''
         ),
-        navigateToSignInPage
+        navigateFromCell
       });
       isFirstRunRef.current = false;
     },
