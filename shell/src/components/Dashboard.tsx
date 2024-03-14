@@ -2,10 +2,15 @@ import React, { useEffect, useRef } from "react";
 import { mount } from "dashboard/DashboardApp";
 import { app2RoutingPrefix } from "../routing/constants";
 import { useLocation, useNavigate } from "react-router-dom";
+import { IAuth } from "../interfaces/auth.interface";
 
 const app1Basename = `/${app2RoutingPrefix}`;
 
-export default () => {
+interface IDashboardApp extends IAuth {
+
+}
+
+export default ({auth, setAuth}: IDashboardApp) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
