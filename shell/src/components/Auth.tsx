@@ -3,7 +3,7 @@ import { mount } from "auth/AuthApp";
 import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { app1RoutingPrefix } from "../routing/constants";
-import { IAuth } from '../interfaces/auth.interface';
+
 
 const app1Basename = `/${app1RoutingPrefix}`;
 

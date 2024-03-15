@@ -5,7 +5,7 @@ import { FormInterface, FormState } from '../interfaces/user/inde';
 import { userModel } from '../model/user';
 import SignupFeature from './features/signup.feature';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { onSubmitHandler } from '../../common/onSubmitHandler';
 import { APIS } from '../config/apis';
 

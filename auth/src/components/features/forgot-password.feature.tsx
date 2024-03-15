@@ -1,9 +1,6 @@
-import React from 'react'
 import {
     Button,
-    Checkbox,
-    Input,
-    InputAdornments,
+    Input
 } from "@pasal/cio-component-library"
 
 type Props = {}

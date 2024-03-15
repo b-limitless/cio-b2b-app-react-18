@@ -1,30 +1,15 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Button,
-  Checkbox,
-  Input,
-  InputAdornments,
-} from "@pasal/cio-component-library"
+  Input
+} from "@pasal/cio-component-library";
+import React, { useCallback, useRef, useState } from 'react';
 import { APIS } from '../../config/apis';
-
-import { colors } from '@pasal/cio-component-library';
-import { Link, useNavigate } from 'react-router-dom';
-import { request } from '../../utils/request';
-import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import FormErrorMessage from '../../common/FormErrorMessage';
+import { request } from '../../utils/request';
 type Props = {
   navigateFromCell:Function;
 }
-
-const validLength = {
-  inputProps: {
-    maxLength: 1,
-    minLength: 1,
-    pattern: /[0-9]{1}/,
-  }
-}
-
-
 
 export default function VerifyFeature({navigateFromCell}: Props) {
   const [verifying, setVerifying] = useState(false);

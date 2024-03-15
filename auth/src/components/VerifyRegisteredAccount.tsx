@@ -26,9 +26,6 @@ export default function VerifyRegisteredAccount({navigateFromCell}: IVerifyRegis
             </span>
           </div>
         </div>
-        
-      
-
         <VerifyFeature navigateFromCell={navigateFromCell}/>
       </div>
     </Template>

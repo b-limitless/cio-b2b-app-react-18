@@ -2,7 +2,6 @@ import { Button, Input, camelCaseToNormal } from "@pasal/cio-component-library";
 import React, { useEffect, useReducer } from "react";
 import { onChangeHandler } from "../../common/onChangeHandler";
 import { onSubmitHandler } from "../../common/onSubmitHandler";
-import BackLeftIcon from "../assets/svg/back-left-icon.svg";
 import Template from "../common/Template";
 import { APIS } from "../config/apis";
 import { SigninForm } from "../interfaces/user/inde";

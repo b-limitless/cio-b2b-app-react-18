@@ -1,8 +1,5 @@
-import React from "react";
-import Template from "../common/Template";
-import { Select, Button, Input, Checkbox, InputWithIcon, InputAdornments } from "@pasal/cio-component-library"
 import BackLeftIcon from "../assets/svg/back-left-icon.svg";
-import ForgotPasswordFeature from "./features/forgot-password.feature";
+import Template from "../common/Template";
 import ForgotPasswordSuccess from "./features/forgot-password-success";
 
 export default function ForgotPassword() {
