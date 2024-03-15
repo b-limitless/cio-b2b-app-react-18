@@ -13,6 +13,7 @@ const mount = ({
   initialPathname,
   routingStrategy,
   setAuth,
+  navigateFromCell
 }: {
   mountPoint: HTMLElement;
   initialPathname?: string;
@@ -24,7 +25,8 @@ const mount = ({
   const router = createRouter({
     strategy: routingStrategy,
     initialPathname,
-    setAuth
+    setAuth, 
+    navigateFromCell
   }
   );
   const root = createRoot(mountPoint);
@@ -35,8 +37,6 @@ const mount = ({
       <RouterProvider router={router} />
     </Provider>
   );
-
-  // console.log('useNavigationFromShell', useNavigationFromShell);
 
   return () => queueMicrotask(() => root.unmount());
 };

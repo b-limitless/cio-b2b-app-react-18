@@ -4,7 +4,10 @@ import Template from '../common/Template';
 import BackLeftIcon from '../assets/svg/back-left-icon.svg';
 
 
-export default function VerifyRegisteredAccount() {
+interface IVerifyRegisteredAccount {
+  navigateFromCell:Function;
+}
+export default function VerifyRegisteredAccount({navigateFromCell}: IVerifyRegisteredAccount) {
   
   return (
     <Template>
@@ -26,7 +29,7 @@ export default function VerifyRegisteredAccount() {
         
       
 
-        <VerifyFeature actions={actions} globalDispatch={globalDispatch}/>
+        <VerifyFeature navigateFromCell={navigateFromCell}/>
       </div>
     </Template>
   )

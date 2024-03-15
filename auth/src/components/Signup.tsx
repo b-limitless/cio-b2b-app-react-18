@@ -135,7 +135,7 @@ export default function Signup() {
     
         const { verificationCode, user } = response; 
         dispatch({ type: 'USER_REGISTRATION_SUCCESS' });
-        navigate('/auth/verify');
+        navigate('/verify');
 
       } catch (err: any) {
         const { response: { data: { errors } } } = err;

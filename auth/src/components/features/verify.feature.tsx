@@ -8,13 +8,12 @@ import {
 import { APIS } from '../../config/apis';
 
 import { colors } from '@pasal/cio-component-library';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { request } from '../../utils/request';
 import { useDispatch } from 'react-redux';
 import FormErrorMessage from '../../common/FormErrorMessage';
 type Props = {
-  actions:any;
-  globalDispatch:any
+  navigateFromCell:Function;
 }
 
 const validLength = {
@@ -27,7 +26,7 @@ const validLength = {
 
 
 
-export default function VerifyFeature({actions, globalDispatch}: Props) {
+export default function VerifyFeature({navigateFromCell}: Props) {
   const [verifying, setVerifying] = useState(false);
   const [userVerificationError, setUserVerificationError] = useState<null | string>(null);
   const [userVerified, setUserVerified] = useState(false);
@@ -38,6 +37,7 @@ export default function VerifyFeature({actions, globalDispatch}: Props) {
     useRef(null),
     useRef(null),
   ];
+  const navigate = useNavigate();
   
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
@@ -104,7 +104,8 @@ export default function VerifyFeature({actions, globalDispatch}: Props) {
       });
 
       if(response.verified) {
-        globalDispatch(actions.authenticatedUser(response))
+        // navigateFromCell('/dashboard/home')
+        // navigate('/verify')
         setUserVerified(true);
       
       }
@@ -113,6 +114,10 @@ export default function VerifyFeature({actions, globalDispatch}: Props) {
       setUserVerificationError(index.message);
     }
     setVerifying(false);
+  }
+
+  const navigateToDahsbard = () => {
+    navigateFromCell('/dashboard/home');
   }
 
   const getTitle = useCallback(() => {
@@ -148,12 +153,12 @@ export default function VerifyFeature({actions, globalDispatch}: Props) {
     }
 
     if(userVerified) {
-      return <Link to={'/dashboard'}>
+      return <div onClick={() => navigateToDahsbard()}>
       <Button 
           variant="primary" 
           text={'Go to dahsboard'} 
           onClick={null}></Button>;
-      </Link>
+      </div>
     }
 
     return null;

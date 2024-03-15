@@ -7,17 +7,18 @@ import { IAuth } from '../interfaces/auth.interface';
 
 const app1Basename = `/${app1RoutingPrefix}`;
 
-interface IAuthApp extends IAuth {
-  
-}
 
-export default ({}: IAuth) => {
+
+export default () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
-   const [auth, setAuth] = useState(null);
-
+  const [auth, setAuth] = useState(null);
+  
+  const navigateFromCell = (url: string) => {
+    navigate(url ?? '/auth/signin');
+  }
 
   useEffect(() => {
     if (auth) {
@@ -73,7 +74,8 @@ export default ({}: IAuth) => {
           app1Basename,
           ''
         ),
-        setAuth
+        setAuth, 
+        navigateFromCell
       });
       isFirstRunRef.current = false;
     },

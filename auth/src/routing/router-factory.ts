@@ -6,13 +6,14 @@ interface CreateRouterProps {
   strategy?: RoutingStrategy;
   initialPathname?: string;
   setAuth:Function;
+  navigateFromCell:Function;
 }
 
-export function createRouter({ strategy, initialPathname, setAuth }: CreateRouterProps) {
+export function createRouter({ strategy, initialPathname, setAuth, navigateFromCell }: CreateRouterProps) {
   if (strategy === 'browser') {
-    return createBrowserRouter(routes({setAuth}));
+    return createBrowserRouter(routes({setAuth, navigateFromCell}));
   }
 
   const initialEntries = [initialPathname || "/"];
-  return createMemoryRouter(routes({setAuth}), { initialEntries: initialEntries });
+  return createMemoryRouter(routes({setAuth, navigateFromCell}), { initialEntries: initialEntries });
 }

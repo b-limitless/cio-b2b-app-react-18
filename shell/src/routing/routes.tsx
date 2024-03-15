@@ -21,7 +21,7 @@ export const routes = ({auth, setAuth}: IAuth): RouteObject[] => {
         // },
         {
           path: `/${app1RoutingPrefix}/*`,
-          element: <Suspense fallback={<PleaseWait />}><AuthApp auth={auth} setAuth={setAuth}/></Suspense>,
+          element: <Suspense fallback={<PleaseWait />}><AuthApp/></Suspense>,
         },
         {
           path: `/${app2RoutingPrefix}/*`,

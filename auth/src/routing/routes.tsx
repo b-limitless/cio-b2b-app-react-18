@@ -11,9 +11,10 @@ import VerifyRegisteredAccount from '../components/VerifyRegisteredAccount';
 
 interface IRoute {
  setAuth: Function;
+ navigateFromCell:Function;
  
 }
-export const routes =  ({setAuth}: IRoute) => {
+export const routes =  ({setAuth, navigateFromCell}: IRoute) => {
   return [
     {
       path: "/",
@@ -44,12 +45,12 @@ export const routes =  ({setAuth}: IRoute) => {
           element: <Signup/>,
         },
         {
-          path: "/auth/forgot-password",
+          path: "forgot-password",
           element: <ForgotPassword/>,
         },
         {
-          path: "/auth/verify",
-          element: <VerifyRegisteredAccount/>,
+          path: "verify",
+          element: <VerifyRegisteredAccount navigateFromCell={navigateFromCell}/>,
         }
       ],
     },
