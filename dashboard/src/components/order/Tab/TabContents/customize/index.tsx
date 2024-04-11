@@ -5,6 +5,7 @@ import { firstLetterUpperCase } from "@pasal/common-functions"
 import './order-details.scss';
 import ArrowDown from '../../../../../assets/svg/arrow-down.svg';
 import styles from "./customize.module.scss";
+import OrderDetailSkeleton from './OrderDetailsSkleton';
 type Props = {}
 const febricLink = 'https://img.freepik.com/free-vector/grunge-dusty-texture-background_1048-9793.jpg?t=st=1712759758~exp=1712763358~hmac=335676b47d5f074d2176e9d59a79fdfec3fb93aa2c2c5600f9b640c3e306a416';
 const cart: any =
@@ -201,104 +202,109 @@ export default function Customize({ }: Props) {
             <span>{measurement[key]}</span>
         </div>)
     }
-    
+
     const showMeTexture = (url: string) => {
         window.open(url, '_blank', 'noopener norefereer')
     }
+
+    const loading = true;
+
+
     return (
-        <div className={styles.customize}>
-            <div className="product__section">
-                <h3>Style</h3>
-                <ul id="more__details">
-                    {getStyleKeys().map((key, i) => <li key={`model-${i}`}>
-                        <span className={`shirt-icon ${cart.model[key].iconClass}`}></span>
-                        <span className="label">
-                            {cart?.model[key]?.label}
-                        </span>
-                    </li>)}
-                </ul>
-            </div>
-            <div className="product__section">
-                <h3>Accent</h3>
-                <ul id="accent-details">
-                    {getAccentKeys().map((key, i) => <li key={`model-${i}`}>
-                        <span className='group' onClick={() => showMeTexture(cart?.accent[key]?.febric)}>
-                            <span className={`shirt-icon ${cart?.accent[key]?.iconClass}`}></span>
-                            <span className='key'>{camelCaseToNormal(key).slice(0, 13)}</span>
-                            <span className="label">
-                                {cart?.accent[key]?.label}
-                            </span>
-                        </span>
-                    </li>)}
-                </ul>
-            </div>
-            <div className="product__section">
-                <h3 className="undersqure">
-                    <span>
-                        <a href={cart?.febric?.originalImageUrl} target='_blank'>Fabric</a>
-                    </span></h3>
-            </div>
-            <div className="product__section">
-                <h3 className="undersqure">
-                    <span>
-                        <a href={cart?.originalImageUrl} target='_blank'>Custimzed Image</a>
-                    </span>
-                </h3>
-            </div>
-            <div className="product__section">
-                <input className="tab__checkbox" type="checkbox" name="" id="customer" hidden />
-                <h3 className="undersqure">
-                    <label className='label' htmlFor='customer'>
-                        <span>
-                            Measurement
-                        </span>
-                        <span className='tab__icon'>
-                            <ArrowDown />
-                        </span>
-                    </label>
-                </h3>
-                <div className='tab__slidedown'>
-                    <div className="content">
-                        {getMeasurement()}
-                    </div>
-                </div>
-            </div>
-            <div className="product__section">
-                <input  className="tab__checkbox" type="checkbox" name="" id="shipping" hidden />
-                <h3 className="undersqure">
-                    <label className='label' htmlFor='shipping'>
-                        <span>
-                            Shipping
-                        </span>
-                        <span className='tab__icon'>
-                            <ArrowDown />
-                        </span>
-                    </label>
-                </h3>
-                <div className='tab__slidedown'>
-                    <div className="content">
-                        <div className="row">
-                            <div className="sub_row">
-                                <div className="col">
-                                    {shipping?.firstName} {shipping?.lastName}
-                                </div>
-                                <div className="col">
-                                    <span className="phone_number">
-                                        {shipping?.countryCode} {shipping?.phoneNumber}
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="sub_row">
-                                <div className="col">
-                                    <span className="shpping_address">
-                                        {shipping.addressLine1} {shipping.addressLine2} {shipping?.city} {shipping?.state} {shipping?.country} {shipping?.postalCode}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>              
-                    </div>
-                </div>
-            </div>
-        </div>
+        // <div className={styles.customize}>
+        //     <div className="product__section">
+        //         <h3>Style</h3>
+        //         <ul id="more__details">
+        //             {getStyleKeys().map((key, i) => <li key={`model-${i}`}>
+        //                 <span className={`shirt-icon ${cart.model[key].iconClass}`}></span>
+        //                 <span className="label">
+        //                     {cart?.model[key]?.label}
+        //                 </span>
+        //             </li>)}
+        //         </ul>
+        //     </div>
+        //     <div className="product__section">
+        //         <h3>Accent</h3>
+        //         <ul id="accent-details">
+        //             {getAccentKeys().map((key, i) => <li key={`model-${i}`}>
+        //                 <span className='group' onClick={() => showMeTexture(cart?.accent[key]?.febric)}>
+        //                     <span className={`shirt-icon ${cart?.accent[key]?.iconClass}`}></span>
+        //                     <span className='key'>{camelCaseToNormal(key).slice(0, 13)}</span>
+        //                     <span className="label">
+        //                         {cart?.accent[key]?.label}
+        //                     </span>
+        //                 </span>
+        //             </li>)}
+        //         </ul>
+        //     </div>
+        //     <div className="product__section">
+        //         <h3 className="undersqure">
+        //             <span>
+        //                 <a href={cart?.febric?.originalImageUrl} target='_blank'>Fabric</a>
+        //             </span></h3>
+        //     </div>
+        //     <div className="product__section">
+        //         <h3 className="undersqure">
+        //             <span>
+        //                 <a href={cart?.originalImageUrl} target='_blank'>Custimzed Image</a>
+        //             </span>
+        //         </h3>
+        //     </div>
+        //     <div className="product__section">
+        //         <input className="tab__checkbox" type="checkbox" name="" id="customer" hidden />
+        //         <h3 className="undersqure">
+        //             <label className='label' htmlFor='customer'>
+        //                 <span>
+        //                     Measurement
+        //                 </span>
+        //                 <span className='tab__icon'>
+        //                     <ArrowDown />
+        //                 </span>
+        //             </label>
+        //         </h3>
+        //         <div className='tab__slidedown'>
+        //             <div className="content">
+        //                 {getMeasurement()}
+        //             </div>
+        //         </div>
+        //     </div>
+        //     <div className="product__section">
+        //         <input  className="tab__checkbox" type="checkbox" name="" id="shipping" hidden />
+        //         <h3 className="undersqure">
+        //             <label className='label' htmlFor='shipping'>
+        //                 <span>
+        //                     Shipping
+        //                 </span>
+        //                 <span className='tab__icon'>
+        //                     <ArrowDown />
+        //                 </span>
+        //             </label>
+        //         </h3>
+        //         <div className='tab__slidedown'>
+        //             <div className="content">
+        //                 <div className="row">
+        //                     <div className="sub_row">
+        //                         <div className="col">
+        //                             {shipping?.firstName} {shipping?.lastName}
+        //                         </div>
+        //                         <div className="col">
+        //                             <span className="phone_number">
+        //                                 {shipping?.countryCode} {shipping?.phoneNumber}
+        //                             </span>
+        //                         </div>
+        //                     </div>
+        //                     <div className="sub_row">
+        //                         <div className="col">
+        //                             <span className="shpping_address">
+        //                                 {shipping.addressLine1} {shipping.addressLine2} {shipping?.city} {shipping?.state} {shipping?.country} {shipping?.postalCode}
+        //                             </span>
+        //                         </div>
+        //                     </div>
+        //                 </div>              
+        //             </div>
+        //         </div>
+        //     </div>
+        // </div>
+        <OrderDetailSkeleton/>
     )
 }

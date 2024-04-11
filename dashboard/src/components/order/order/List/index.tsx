@@ -58,7 +58,7 @@ export default function ListOrder({ }: Props) {
   return (
     <>
        <OrderSideModel
-        showModel={showModel}
+        showModel={true}
         setShowModel={setShowModel}
       /> 
       <div className={styles.dataTableContainer}>
