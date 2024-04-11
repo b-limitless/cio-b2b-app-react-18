@@ -1,54 +1,11 @@
 import React, { Fragment } from 'react';
 import FebricItem from './FebricItem';
-import styles from "./customize.module.scss";
 import { svgCDNAssets, pngCDNAssetsURIs, camelCaseToNormal } from "@pasal/cio-component-library";
 import { firstLetterUpperCase } from "@pasal/common-functions"
 import './order-details.scss';
 import ArrowDown from '../../../../../assets/svg/arrow-down.svg';
-
-
+import styles from "./customize.module.scss";
 type Props = {}
-
-// Data Structure for this could be
-// const customize = [{
-//     title: "febric",
-//     children: [{
-//         price: 24,
-//         name: "Mayfiled",
-//         type: "Cotton",
-//         feature: "Essential",
-//         mediaUrl: pngCDNAssetsURIs.febric1
-//     }]
-// }, {
-//     title: "styled",
-//     children: [{
-//         title: "collor",
-//         mediaUrl: svgCDNAssets.collor
-//     }, {
-//         title: "Sleev",
-//         mediaUrl: svgCDNAssets.cuff
-
-//     }]
-// },
-// {
-//     title: "Sleev",
-//     children: [{
-//         title: "Something",
-//         mediaUrl: svgCDNAssets.cuff
-//     }]
-// },
-// {
-//     title: "pocket",
-//     children: [
-//         {
-//             title: "Tucket",
-//             mediaUrl: svgCDNAssets.cuff
-//         }
-//     ]
-// }];
-// Different kind of product type will have model, accent & febric 
-// such as Shirt, Pants, Suits etc
-// There therefore there is no issue in statically fetching the model, accent & febric 
 const febricLink = 'https://img.freepik.com/free-vector/grunge-dusty-texture-background_1048-9793.jpg?t=st=1712759758~exp=1712763358~hmac=335676b47d5f074d2176e9d59a79fdfec3fb93aa2c2c5600f9b640c3e306a416';
 const cart: any =
 {
@@ -159,14 +116,6 @@ const cart: any =
             "iconClass": "icon-52",
             label: 'all'
         },
-        // "chestpocket": {
-        //     "id": 12,
-        //     "febric": "/img/texture/texture-1.jpg?timestamp=1712663521626?timestamp=1712663527430",
-        //     "meshName": [],
-        //     "updatedFrom": "febrics",
-        //     "price": 10,
-        //     "iconClass": "icon-57"
-        // }
     },
     "febric": {
         "id": "65b25738d8db760157740560",
@@ -193,8 +142,6 @@ const cart: any =
     "cartId": "59d3b7de-ec81-4312-a8c4-55ba9387bf06",
     "id": "66152c040008174758410993"
 }
-
-
 const measurement: any = {
     verified: false,
     firstName: 'Bharat',
@@ -218,7 +165,6 @@ const measurement: any = {
     wrist: 12,
     neck: 12
 };
-
 const shipping = {
     firstName: 'Bharat',
     lastName: 'Shah',
@@ -232,9 +178,6 @@ const shipping = {
     countryCode: '374',
     email: 'bharatrose1@gmail.com',
 }
-
-
-
 export default function Customize({ }: Props) {
 
     const getStyleKeys = () => {
@@ -252,20 +195,16 @@ export default function Customize({ }: Props) {
     const getMeasurement = () => {
         let keys: any = Object.keys(measurement);
         const excludeKeys = ['firstName', 'lastName', 'email', 'verified', 'createdAt', 'updatedAt', 'id'];
-
         keys = keys.filter((key: string) => !excludeKeys.includes(key));
-
         return keys.map((key: string, i: number) => <div key={`measurement-${i}`} className="row">
-            <label >{camelCaseToNormal(key)}</label>
+            <label>{camelCaseToNormal(key)}</label>
             <span>{measurement[key]}</span>
         </div>)
     }
-
-
+    
     const showMeTexture = (url: string) => {
         window.open(url, '_blank', 'noopener norefereer')
     }
-
     return (
         <div className={styles.customize}>
             <div className="product__section">
@@ -276,7 +215,6 @@ export default function Customize({ }: Props) {
                         <span className="label">
                             {cart?.model[key]?.label}
                         </span>
-
                     </li>)}
                 </ul>
             </div>
@@ -291,14 +229,7 @@ export default function Customize({ }: Props) {
                                 {cart?.accent[key]?.label}
                             </span>
                         </span>
-
-
-
-
                     </li>)}
-                    {/* <li>Collar</li>
-                    <li>Cuff</li>
-                    <li>Chest Pocket</li> */}
                 </ul>
             </div>
             <div className="product__section">
@@ -306,26 +237,14 @@ export default function Customize({ }: Props) {
                     <span>
                         <a href={cart?.febric?.originalImageUrl} target='_blank'>Fabric</a>
                     </span></h3>
-
             </div>
-            {/* <div className="product__section">
-                <h3>Product Information</h3>
-                <ul id="product-info">
-                    <li><strong>Status:</strong> Completed</li>
-                    <li><strong>Quantity:</strong> 1</li>
-                    <li><strong>Subtotal:</strong> $1285.45</li>
-                </ul>
-            </div> */}
-
             <div className="product__section">
                 <h3 className="undersqure">
                     <span>
                         <a href={cart?.originalImageUrl} target='_blank'>Custimzed Image</a>
-
                     </span>
                 </h3>
             </div>
-
             <div className="product__section">
                 <input className="tab__checkbox" type="checkbox" name="" id="customer" hidden />
                 <h3 className="undersqure">
@@ -341,20 +260,11 @@ export default function Customize({ }: Props) {
                 <div className='tab__slidedown'>
                     <div className="content">
                         {getMeasurement()}
-                        {/* <div className="row">
-                            <label >Height</label>
-                            <span>175 CM</span>
-                        </div>
-                        <div className="row">
-                            <label >Height</label>
-                            <span>175 CM</span>
-                        </div> */}
                     </div>
                 </div>
             </div>
-
             <div className="product__section">
-                <input checked={true} className="tab__checkbox" type="checkbox" name="" id="shipping" hidden />
+                <input  className="tab__checkbox" type="checkbox" name="" id="shipping" hidden />
                 <h3 className="undersqure">
                     <label className='label' htmlFor='shipping'>
                         <span>
@@ -385,34 +295,10 @@ export default function Customize({ }: Props) {
                                     </span>
                                 </div>
                             </div>
-                        </div>               {/* <div className="row">
-                            <label >Height</label>
-                            <span>175 CM</span>
-                        </div>
-                        <div className="row">
-                            <label >Height</label>
-                            <span>175 CM</span>
-                        </div> */}
+                        </div>              
                     </div>
                 </div>
             </div>
-
-            {/* <div className="product__section">
-                <h3 className="undersqure">
-                    <span>
-                        Shipping
-                    </span>
-
-                </h3>
-
-
-            </div> */}
-
-
-
         </div>
-
-
-
     )
 }

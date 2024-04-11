@@ -2,14 +2,7 @@
 @import "../../../../../styles/base/base";
 @import "../../../../../styles/base/functions";
 
-// Define variables
 
-
-
-$product-section-heading-color: #333;
-$product-item-font-size: 16px;
-$product-item-color: #666;
-$product-item-strong-color: #000;
 
 .product__section {
   margin-bottom: 20px;
@@ -30,15 +23,18 @@ $product-item-strong-color: #000;
     gap: 1rem;
     li {
       margin-bottom: 5px;
-      font-size: $product-item-font-size;
-      color: $product-item-color;
-      // border-bottom: 1px solid $product-item-color;
+      font-size: 1rem;
+      color: $gray;
       cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       font-family: $default-font-family;
+
+      .label {
+        font-size: 14px;
+      }
 
       .group {
         display: flex;
@@ -61,7 +57,7 @@ $product-item-strong-color: #000;
 
       strong {
         font-weight: bold;
-        color: $product-item-strong-color;
+        color: $light-gray2;
         font-family: $default-font-family;
       }
     }
@@ -97,12 +93,6 @@ $product-item-strong-color: #000;
           column-gap: 8px;
           font-family: $default-font-family;
           font-size: 14px;
-
-          .col {
-            .shpping_address {
-              // color:$gray;
-            }
-          }
         }
       }
     }
@@ -115,12 +105,9 @@ $product-item-strong-color: #000;
   justify-content: space-between;
   span {
     a {
-      color: $product-item-strong-color;
+      color: $light-gray2;
     }
-    a:visited,
-    a:active {
-      color: $product-item-strong-color;
-    }
+    
     cursor: pointer;
   }
 
