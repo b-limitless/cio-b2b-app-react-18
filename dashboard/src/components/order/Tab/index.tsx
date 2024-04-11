@@ -31,9 +31,8 @@ export default function OrderTabs() {
           scrollButtons="auto">
           
           <TabICO  label="customize" {...a11yProps(0)} />
-          <TabICO  label="measurement" {...a11yProps(1)} />
-          <TabICO  label="shipping" {...a11yProps(2)} />
-          <TabICO  label="Assignment" {...a11yProps(3)} />
+          
+          <TabICO  label="Assignment" {...a11yProps(1)} />
         </Tabs>
       </Box>
 
@@ -43,13 +42,8 @@ export default function OrderTabs() {
         <Customize/>
         
       </TabPanel>
+      
       <TabPanel value={value} index={1}>
-        <Measurement/>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <Shipping/>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
         <Assignment/>
       </TabPanel>
     
