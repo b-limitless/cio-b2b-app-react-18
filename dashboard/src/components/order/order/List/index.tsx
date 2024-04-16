@@ -1,5 +1,5 @@
 import { DataTable, camelCaseToNormal } from "@pasal/cio-component-library";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import orderMockData from "../../../../mock/order.json";
 import { OrderStatus } from "./status.type";
 import { SelectChangeEvent } from '@mui/material/Select';
@@ -9,12 +9,32 @@ import styles from "./list.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 import { filterOrders } from "../../../../reducers/orderSlice";
+import { useQuery } from "react-query";
+import { fetchOrders } from "../../../../apis-requests/order";
+import { fetchOrderDetails } from "../../../../apis-requests/order/orderDetails";
 
 type Props = {}
 
 
 
 export default function ListOrder({ }: Props) {
+  const [showModel, setShowModel] = useState<string | null>(null);
+  const [cartId, setCartId] = useState<null | string>(null);
+
+  const {filters, page} = useSelector((state:RootState) => state.orders);
+  const [testing, setTesting] = useState('intially')
+
+  const queryParams = {
+    filters: JSON.stringify(filters),
+    page
+  };
+
+
+  const { data, isLoading, error } = useQuery(['fetchOrders', queryParams], () => fetchOrders(queryParams));
+  // const {data: orderDetails, isLoading: orderDetailsLoading} = useQuery('fetchOrderDetails',  () => fetchOrderDetails(cartId));
+  
+  // console.log('orderDetails', orderDetails);
+  
   const filterData = [
     {
       label: "Order Status",
@@ -27,19 +47,22 @@ export default function ListOrder({ }: Props) {
       id: "paymentStatus"
     },
   ];
-  const count = 8;
-  const {filters} = useSelector((state:RootState) => state.orders)
+  // const count = 8;
+  
 
-  const [showModel, setShowModel] = useState<boolean>(false);
+ 
+  
   // const [filters, setFilters] = React.useState<any>({ orderStatus: [], paymentStatus: [] });
-  const [page, setPage] = useState<number>(1);
+
   const dispatch = useDispatch();
  
-  const tableHeader = ["orderId", "customerId", "orderData", "price", "orderStatus", "paymentStatus", "action"];
+  const tableHeader = ["status", "paymentStatus", "modelType", "subTotal", "qty", "createdAt", "action"];
 
   // normalizeDataForVisual(orderMockData, "orderStatus", colorsForTableFields);
   // normalizeDataForVisual(orderMockData, "paymentStatus", colorsForPaymentStatus);
 
+  const setPage = () => {
+  }
  
   const handleChange = (event: SelectChangeEvent<typeof filters>, name: string) => {
 
@@ -54,18 +77,41 @@ export default function ListOrder({ }: Props) {
     dispatch(filterOrders(newFiltersState));
 
   };
-  
+
+
+  const count = useMemo(() => {
+    return Math.ceil(data?.affectedRows / data?.limit) ?? 0;
+  }, [data])
+
+  // // Fetching the order details when user clicked
+  // useEffect(() => {
+  //   if(showModel !== false && typeof showModel === 'number') {
+  //     const {cartId} = data.orders[showModel];
+  //     // sed set he id to send the request
+  //     setCartId(cartId);
+  //   } 
+
+  //   if(showModel === false) {
+  //     setCartId(null);
+  //   }
+  // }, [showModel, data]);
+
+  console.log('showMOde', showModel)
+
   return (
     <>
+    <div onClick={() => setTesting('local component')}>{testing}</div>
        <OrderSideModel
-        showModel={true}
+        showModel={showModel !== false}
         setShowModel={setShowModel}
       /> 
+      {error && <div className="error">{error.toString()}</div>}
       <div className={styles.dataTableContainer}>
+        {/* {!isLoading && data.orders.length > 0 } */}
         <DataTable
           setShowModel={setShowModel}
           tableHeader={tableHeader}
-          tableData={orderMockData.slice(0, 8)}
+          tableData={data?.orders ?? []} //orderMockData.slice(0, 8)
           showFebricModels={false}
           detailsComponents={null}
           showDetailReactNode={"Edit"}
@@ -79,8 +125,9 @@ export default function ListOrder({ }: Props) {
           page={page}
           setPage={setPage}
           count={count}
-          loading={false}
+          loading={isLoading}
           handleFiltersOnChange={handleChange}
+          primaryKey={'cartId'}
         />
       </div>
       {/* <Button text="sdf" variant="primary"/> */}

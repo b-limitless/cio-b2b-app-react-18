@@ -37,7 +37,6 @@ export default function OrderTabs() {
       </Box>
 
       <TabPanel value={value} index={0}>
-
        
         <Customize/>
         
