@@ -93,7 +93,11 @@ module.exports = {
         "react-router-dom" : {
           singleton: true,
           requiredVersion: deps["react-router-dom"],
-        }
+        }, 
+        "@tanstack/react-query" : {
+          singleton: true,
+          requiredVersion: deps["@tanstack/react-query"],
+        }, 
       },
     }),
     new HtmlWebPackPlugin({

@@ -3,7 +3,7 @@ import React from 'react';
 import OrderTabs from '../Tab';
 
 export interface OrderSideModel {
-  showModel: boolean;
+  showModel: string | null;
   setShowModel: Function;
 }
 
@@ -11,10 +11,10 @@ export default function OrderSideModel({ showModel, setShowModel }: OrderSideMod
 
   return (
     <SideModel
-      showModel={showModel}
+      showModel={!!showModel}
       setShowModel={setShowModel}
     >
-      <OrderTabs/>
+      <OrderTabs showModel={showModel}/>
     </SideModel>
   )
 }

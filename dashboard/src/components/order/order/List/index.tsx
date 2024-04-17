@@ -9,7 +9,7 @@ import styles from "./list.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 import { filterOrders } from "../../../../reducers/orderSlice";
-import { useQuery } from "react-query";
+import { QueryCache, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchOrders } from "../../../../apis-requests/order";
 import { fetchOrderDetails } from "../../../../apis-requests/order/orderDetails";
 
@@ -30,10 +30,49 @@ export default function ListOrder({ }: Props) {
   };
 
 
-  const { data, isLoading, error } = useQuery(['fetchOrders', queryParams], () => fetchOrders(queryParams));
-  // const {data: orderDetails, isLoading: orderDetailsLoading} = useQuery('fetchOrderDetails',  () => fetchOrderDetails(cartId));
+  // const queryCache = new QueryCache({
+  //   onError: (error) => {
+  //     console.log(error)
+  //   },
+  //   onSuccess: (data) => {
+  //     console.log(data)
+  //   },
+  //   onSettled: (data, error) => {
+  //     console.log(data, error)
+  //   },
+  // })
+
+  // const queryClient = useQueryClient();
+
+  // useEffect(() => {
+  //   // Get the query cache
+  //   const queryCache = queryClient.getQueryCache();
   
-  // console.log('orderDetails', orderDetails);
+  //   // Get all cached queries
+  //   const cachedQueries = queryCache.getAll();
+
+  
+  //   // Iterate over all keys in the query cache
+  //   Object.keys(cachedQueries).forEach((queryKey) => {
+  //     const queryData = queryCache.get(queryKey);
+  //     console.log('Query key:', queryKey);
+  //     console.log('Query data:', queryData);
+  //   });
+  // }, [queryClient, showModel]); // Empty dependency array ensures this effect runs only once, after component mount
+  const queryClient = useQueryClient()
+  const queryCache = queryClient.getQueryCache();
+  const query = queryCache.find({ queryKey: ['posts'] });
+
+
+  // const { data, isLoading, error } = useQuery(['fetchOrders', queryParams], () => fetchOrders(queryParams));
+  
+  // const {data, isLoading, error} = useQuery({ queryKey: ['fetchOrders'], queryFn: () => fetchOrders(queryParams) })
+
+  // const { data: orderDetails, isLoading: orderDetailsLoading } = useQuery(
+  //   ['fetchOrderDetails', showModel], // Pass showModel as a dependency
+  //   () => fetchOrderDetails(showModel)
+  // );
+  
   
   const filterData = [
     {
@@ -79,39 +118,25 @@ export default function ListOrder({ }: Props) {
   };
 
 
-  const count = useMemo(() => {
-    return Math.ceil(data?.affectedRows / data?.limit) ?? 0;
-  }, [data])
+  // const count = useMemo(() => {
+  //   return Math.ceil(data?.affectedRows / data?.limit) ?? 0;
+  // }, [data])
 
-  // // Fetching the order details when user clicked
-  // useEffect(() => {
-  //   if(showModel !== false && typeof showModel === 'number') {
-  //     const {cartId} = data.orders[showModel];
-  //     // sed set he id to send the request
-  //     setCartId(cartId);
-  //   } 
-
-  //   if(showModel === false) {
-  //     setCartId(null);
-  //   }
-  // }, [showModel, data]);
-
-  console.log('showMOde', showModel)
 
   return (
     <>
     <div onClick={() => setTesting('local component')}>{testing}</div>
        <OrderSideModel
-        showModel={showModel !== false}
+        showModel={showModel}
         setShowModel={setShowModel}
       /> 
-      {error && <div className="error">{error.toString()}</div>}
+      {/* {error && <div className="error">{error.toString()}</div>}
       <div className={styles.dataTableContainer}>
-        {/* {!isLoading && data.orders.length > 0 } */}
+        
         <DataTable
           setShowModel={setShowModel}
           tableHeader={tableHeader}
-          tableData={data?.orders ?? []} //orderMockData.slice(0, 8)
+          tableData={data?.orders ?? []} 
           showFebricModels={false}
           detailsComponents={null}
           showDetailReactNode={"Edit"}
@@ -120,7 +145,6 @@ export default function ListOrder({ }: Props) {
           setShowSelectRowId={() => { }}
           filterData={filterData}
           filters={filters} 
-          // setFilters={setFilters}
           paginate={true}
           page={page}
           setPage={setPage}
@@ -129,10 +153,8 @@ export default function ListOrder({ }: Props) {
           handleFiltersOnChange={handleChange}
           primaryKey={'cartId'}
         />
-      </div>
-      {/* <Button text="sdf" variant="primary"/> */}
-      {/* <Button text="all" variant="secondary"/>
-    */}
+      </div> */}
+     
     </>
 
 

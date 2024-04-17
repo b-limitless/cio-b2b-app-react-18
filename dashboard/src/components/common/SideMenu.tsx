@@ -1,6 +1,6 @@
 import Skeleton from '@mui/material/Skeleton';
 import React, { useEffect, useMemo } from 'react';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { INotification, addNotifications, updateSeenNotification } from '../../reducers/notficiationSlice';
@@ -58,8 +58,13 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
   const { notifications } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
-  const { mutate, error, isLoading: updatingNotification } = useMutation(updateNotification);
-  const { data: getNotifications, isLoading: fetchingNotifications } = useQuery(queryKeys.fetchNotification, fetchNotification);
+  const { mutate, error, status: updatingNotification } = useMutation({mutationFn: updateNotification});
+  
+
+  console.log('updatingNotification', updatingNotification);
+  //const {data, isLoading, error} = useQuery({ queryKey: ['fetchOrders'], queryFn: () => fetchOrders(queryParams) })
+  
+  const { data: getNotifications, isLoading: fetchingNotifications } = useQuery({queryKey: [queryKeys.fetchNotification], queryFn: fetchNotification});
 
   const navigate = useNavigate();
   
@@ -187,13 +192,13 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
               {notifications.length > 0 && <div className='notification-container'>
 
                 <div className='items'>
-                  {updatingNotification && <NotificationsRowSkeleton />}
-                  {!updatingNotification && notifications.slice(0, 3).map((notification, i) => <NotificationRow type={notification.type} loading={true} key={`notification-row-${i}`} notification={notification} seenHandler={seenHandler} />)}
+                  {updatingNotification === 'pending' && <NotificationsRowSkeleton />}
+                  {updatingNotification !== 'pending' && notifications.slice(0, 3).map((notification, i) => <NotificationRow type={notification.type} loading={true} key={`notification-row-${i}`} notification={notification} seenHandler={seenHandler} />)}
 
 
                   {notifications.length > 3 && <div className='item'>
-                    {updatingNotification && <Skeleton variant="rectangular" width={210} />}
-                    {!updatingNotification && <span className='more'>Show more</span>}
+                    {updatingNotification === 'pending'  && <Skeleton variant="rectangular" width={210} />}
+                    {updatingNotification !== 'pending' && <span className='more'>Show more</span>}
                   </div>}
                 </div>
               </div>}

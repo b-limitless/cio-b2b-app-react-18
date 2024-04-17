@@ -6,7 +6,7 @@ import { Store } from '../store';
 import Container from './common/Container';
 import { menuEnum } from '../config/navMenu';
 import { authenticatedUser } from '../reducers/authSlice';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import '../styles/main.scss';
 
 interface NavigationManagerProps {

@@ -6,9 +6,32 @@ import Shipping from './TabContents/Shipping';
 import Assignment from './TabContents/assignment';
 import Customize from './TabContents/customize';
 import Measurement from './TabContents/measurement';
+import { useQueryClient } from '@tanstack/react-query';
 
+interface IOrderTabs {
+  showModel: null | string;
+}
 
-export default function OrderTabs() {
+export default function OrderTabs({showModel}: IOrderTabs) {
+  const queryClient = useQueryClient();
+
+   // Get the query cache
+  //  const queryCache = queryClient.getQueryCache();
+
+  //  // Get all cached queries
+  //  const cachedQueries = queryCache.getAll();
+ 
+  //  // Iterate over all keys in the query cache
+  //  Object.keys(cachedQueries).forEach((queryKey) => {
+  //    const queryData = queryCache.get(queryKey);
+  //    console.log('Query key:', queryKey);
+  //    console.log('Query data:', queryData);
+  //  });
+
+  const orderDetails = queryClient.getQueryData(['fetchOrderDetails', showModel]);
+
+  // console.log('orderDetails from child', orderDetails);
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
