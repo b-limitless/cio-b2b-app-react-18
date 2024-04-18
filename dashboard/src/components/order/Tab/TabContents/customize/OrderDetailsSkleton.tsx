@@ -4,7 +4,6 @@ import styles from "./customize.module.scss";
 import orderStyles from './order-details.module.scss';
 type Props = {}
 
-
 const cart: any =
 {
 
