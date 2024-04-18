@@ -8,7 +8,7 @@ import OrderSideModel from "../../SideModel";
 import styles from "./list.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../store";
-import { filterOrders } from "../../../../reducers/orderSlice";
+import { filterOrders, paginateFebric } from "../../../../reducers/orderSlice";
 import { QueryCache, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchOrders } from "../../../../apis-requests/order";
 import { fetchOrderDetails } from "../../../../apis-requests/order/orderDetails";
@@ -23,14 +23,13 @@ export default function ListOrder({ }: Props) {
   const [cartId, setCartId] = useState<null | string>(null);
 
   const {filters, page} = useSelector((state:RootState) => state.orders);
-  const [testing, setTesting] = useState('intially')
-
+  
   const queryParams = {
     filters: JSON.stringify(filters),
     page
   };
   
-  const {data, isLoading, error} = useQuery({ queryKey: [queryKeys.fetchOrders], queryFn: () => fetchOrders(queryParams) })
+  const {data, isLoading, error} = useQuery({ queryKey: [queryKeys.fetchOrders, queryParams], queryFn: () => fetchOrders(queryParams) })
 
   useQuery(
     {
@@ -58,15 +57,11 @@ export default function ListOrder({ }: Props) {
  
   const tableHeader = ["status", "paymentStatus", "modelType", "subTotal", "qty", "createdAt", "action"];
 
-  // normalizeDataForVisual(orderMockData, "orderStatus", colorsForTableFields);
-  // normalizeDataForVisual(orderMockData, "paymentStatus", colorsForPaymentStatus);
-
   const setPage = () => {
+   dispatch(paginateFebric(page));
   }
  
   const handleChange = (event: SelectChangeEvent<typeof filters>, name: string) => {
-
-    // if (!setFilters) return;
 
     const {
       target: { value },
@@ -86,7 +81,6 @@ export default function ListOrder({ }: Props) {
 
   return (
     <>
-    <div onClick={() => setTesting('local component')}>{testing}</div>
        <OrderSideModel
         showModel={showModel}
         setShowModel={setShowModel}

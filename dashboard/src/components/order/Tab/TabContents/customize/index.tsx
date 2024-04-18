@@ -7,7 +7,7 @@ import ArrowDown from '../../../../../assets/svg/arrow-down.svg';
 import { queryKeys } from '../../../../../config/queryKeys';
 import OrderDetailSkeleton from './OrderDetailsSkleton';
 import styles from "./customize.module.scss";
-import './order-details.scss';
+import orderStyles from './order-details.module.scss';
 type Props = {
     showModel: string | null;
 }
@@ -118,7 +118,7 @@ export default function Customize({ showModel }: Props) {
             const excludeKeys = ['createdAt', 'updatedAt', 'customerId', 'id'];
             keys = keys.filter((key: string) => !excludeKeys.includes(key));
 
-            return keys.map((key: string, i: number) => <div key={`measurement-${i}`} className="row">
+            return keys.map((key: string, i: number) => <div key={`measurement-${i}`} className={orderStyles.row}>
                 <label>{camelCaseToNormal(key)}</label>
                 <span>{measurement[key]}</span>
             </div>)
@@ -137,91 +137,113 @@ export default function Customize({ showModel }: Props) {
     return (
         <>
             {!isFethingOrderDetails && orderDetails && <div className={styles.customize}>
-                <div className="product__section">
+                <div className={orderStyles.product__section}>
                     <h3>Style</h3>
                     <ul id="more__details">
                         {getStyleKeys().map((key, i) => <li key={`model-${i}`}>
                             <span className={`shirt-icon ${orderDetails?.model[key].iconClass}`}></span>
-                            <span className="label">
+                            <span className={orderStyles.label}>
                                 {orderDetails?.model[key]?.label}
                             </span>
                         </li>)}
                     </ul>
                 </div>
-                <div className="product__section">
+                <div className={orderStyles.product__section}>
                     <h3>Accent</h3>
                     <ul id="accent-details">
                         {getAccentKeys().map((key, i) => <li key={`model-${i}`}>
-                            <span className='group' onClick={() => showMeTexture(orderDetails?.accent[key]?.febric)}>
+                            <span className={orderStyles.group} onClick={() => showMeTexture(orderDetails?.accent[key]?.febric)}>
                                 <span className={`shirt-icon ${orderDetails?.accent[key]?.iconClass}`}></span>
-                                <span className='key'>{camelCaseToNormal(key).slice(0, 13)}</span>
-                                <span className="label">
+                                <span className={orderStyles.key}>{camelCaseToNormal(key).slice(0, 13)}</span>
+                                <span className={orderStyles.label}>
                                     {orderDetails?.accent[key]?.label}
                                 </span>
                             </span>
                         </li>)}
                     </ul>
                 </div>
-                <div className="product__section">
-                    <h3 className="undersqure">
+                <div className={orderStyles.product__section}>
+                    <h3 className={orderStyles.undersqure}>
                         <span>
                             <a href={orderDetails?.febric?.originalImageUrl} target='_blank'>Fabric</a>
                         </span></h3>
                 </div>
-                <div className="product__section">
-                    <h3 className="undersqure">
+                <div className={orderStyles.product__section}>
+                    <h3 className={orderStyles.undersqure}>
                         <span>
                             <a href={orderDetails?.originalImageUrl} target='_blank'>Custimzed Image</a>
                         </span>
                     </h3>
                 </div>
-                <div className="product__section">
-                    <input className="tab__checkbox" type="checkbox" name="" id="customer" hidden />
-                    <h3 className="undersqure">
-                        <label className='label' htmlFor='customer' onClick={() => setShouldFetchMeasurement(true)}>
+
+                {/* <div className={orderStyles.product__section}>
+                    <input className={orderStyles.tab__checkbox} type="checkbox" name="" id="customer" hidden />
+                    <h3 className={orderStyles.undersqure}>
+                        <label className={orderDetails.label} htmlFor='customer' onClick={() => setShouldFetchMeasurement(true)}>
                             <span>
                                 Measurement
                             </span>
-                            <span className='tab__icon'>
+                            <span className={orderStyles.tab__icon}>
                                 <ArrowDown />
                             </span>
                         </label>
                     </h3>
-                    <div className='tab__slidedown'>
-                        <div className="content">
+                    <div className={orderStyles.tab__slidedown}>
+                        <div className={orderStyles.content}>
+                            {getMeasurement()}
+                        </div>
+                    </div>
+                </div> */}
+
+                <div className={orderStyles.product__section}>
+                <input className={orderStyles.tab__checkbox} type="checkbox" name="" id="customer" hidden />
+                    <h3 className={orderStyles.undersqure}>
+                        <label className={orderStyles.label} htmlFor='customer' onClick={() => setShouldFetchMeasurement(true)}>
+                            <span>
+                                Measurement
+                            </span>
+                            <span className={orderStyles.tab__icon}>
+                                <ArrowDown />
+                            </span>
+                        </label>
+                    </h3>
+                    <div className={orderStyles.tab__slidedown}>
+                    <div className={orderStyles.content}>
                             {getMeasurement()}
                         </div>
                     </div>
                 </div>
-                <div className="product__section">
-                    <input className="tab__checkbox" type="checkbox" name="" id="shipping" hidden />
-                    <h3 className="undersqure">
-                        <label className='label' htmlFor='shipping' onClick={() => setShouldFetchShippng(true)}>
+
+
+                <div className={orderStyles.product__section}>
+                    <input className={orderStyles.tab__checkbox} type="checkbox" name="" id="shipping" hidden />
+                    <h3 className={orderStyles.undersqure}>
+                        <label className={orderStyles.label} htmlFor='shipping' onClick={() => setShouldFetchShippng(true)}>
                             <span>
                                 Shipping
                             </span>
-                            <span className='tab__icon'>
+                            <span className={orderStyles.tab__icon}>
                                 <ArrowDown />
                             </span>
                         </label>
                     </h3>
-                    <div className='tab__slidedown'>
-                        <div className="content">
+                    <div className={orderStyles.tab__slidedown}>
+                        <div className={orderStyles.content}>
                             {isLoadingShipping && <div>Please wait...</div>}
-                            {!isLoadingShipping && <div className="row">
-                                <div className="sub_row">
-                                    <div className="col">
+                            {!isLoadingShipping && <div className={orderStyles.row}>
+                                <div className={orderStyles.sub_row}>
+                                    <div className={orderStyles.col}>
                                         {shippingAddress?.firstName} {shippingAddress?.lastName}
                                     </div>
-                                    <div className="col">
-                                        <span className="phone_number">
+                                    <div className={orderStyles.col}>
+                                        <span className={orderStyles.phone_number}>
                                             {shippingAddress?.countryCode} {shippingAddress?.phoneNumber}
                                         </span>
                                     </div>
                                 </div>
-                                <div className="sub_row">
-                                    <div className="col">
-                                        <span className="shpping_address">
+                                <div className={orderStyles.sub_row}>
+                                    <div className={orderStyles.col}>
+                                        <span className={orderStyles.shpping_address}>
                                             {shippingAddress?.addressLine1} {shippingAddress?.addressLine2} {shippingAddress?.city} {shippingAddress?.state} {shippingAddress?.country} {shippingAddress?.postalCode}
                                         </span>
                                     </div>
@@ -230,10 +252,9 @@ export default function Customize({ showModel }: Props) {
                         </div>
                     </div>
                 </div>
-            </div>} 
+            </div>}
             {isFethingOrderDetails === 1 && <OrderDetailSkeleton />}
         </>
-
 
     )
 }
