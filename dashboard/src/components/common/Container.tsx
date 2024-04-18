@@ -21,7 +21,7 @@ interface ContainerInterface {
 export default function Container({ navigateFromCell, setSelectedMenu, children }: ContainerInterface) {
 
     const [loading, setLoading] = useState(false);
-    const { auth: { auth } } = useSelector((state: RootState) => state) || {auth: null};
+    const { auth } = useSelector((state: RootState) => state.auth) || {auth: null};
 
     useSetAuthenticatedUser({ setLoading, navigateFromCell });
 

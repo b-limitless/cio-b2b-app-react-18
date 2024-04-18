@@ -55,7 +55,7 @@ interface INotificationRow {
 export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuInterface) {
 
   const { auth } = useSelector((state: RootState) => state.auth);
-  const { notifications } = useSelector((state: RootState) => state);
+  const notifications = useSelector((state: RootState) => state.notifications);
   const dispatch = useDispatch();
 
   const { mutate, error, status: updatingNotification } = useMutation({mutationFn: updateNotification});

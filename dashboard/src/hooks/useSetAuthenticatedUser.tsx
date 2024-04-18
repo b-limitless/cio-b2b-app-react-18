@@ -12,7 +12,7 @@ interface AuthenticatedUserInterface {
 }
 export default function useSetAuthenticatedUser({ setLoading, navigateFromCell }: AuthenticatedUserInterface) {
 
-    const { auth: { auth } } = useSelector((state: RootState) => state);
+    const { auth } = useSelector((state: RootState) => state.auth);
     const dispatch = useDispatch();
 
     useEffect(() => {

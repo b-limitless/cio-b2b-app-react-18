@@ -34,7 +34,14 @@ export default function ListOrder({ }: Props) {
   useQuery(
     {
       queryKey: [queryKeys.fetchOrderDetails, showModel], // Include showModel in the query key
-      queryFn: () => fetchOrderDetails(showModel)
+      queryFn: () => {
+        if(showModel) {
+          return fetchOrderDetails(showModel);
+        } else {
+          return null;
+        } 
+        
+      }
     }
   );
 
