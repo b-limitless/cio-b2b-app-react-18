@@ -230,8 +230,8 @@ export default function Customize({ showModel }: Props) {
                         </div>
                     </div>
                 </div>
-            </div>}
-            {isFethingOrderDetails && <OrderDetailSkeleton />}
+            </div>} 
+            {isFethingOrderDetails === 1 && <OrderDetailSkeleton />}
         </>
 
 
