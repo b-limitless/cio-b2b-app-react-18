@@ -6,7 +6,8 @@ import Shipping from './TabContents/Shipping';
 import Assignment from './TabContents/assignment';
 import Customize from './TabContents/customize';
 import Measurement from './TabContents/measurement';
-import { useQueryClient } from '@tanstack/react-query';
+import { useIsFetching, useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from '../../../config/queryKeys';
 
 interface IOrderTabs {
   showModel: null | string;
@@ -15,22 +16,9 @@ interface IOrderTabs {
 export default function OrderTabs({showModel}: IOrderTabs) {
   const queryClient = useQueryClient();
 
-   // Get the query cache
-  //  const queryCache = queryClient.getQueryCache();
+  const orderDetails = queryClient.getQueryData([queryKeys.fetchOrderDetails, showModel]);
 
-  //  // Get all cached queries
-  //  const cachedQueries = queryCache.getAll();
- 
-  //  // Iterate over all keys in the query cache
-  //  Object.keys(cachedQueries).forEach((queryKey) => {
-  //    const queryData = queryCache.get(queryKey);
-  //    console.log('Query key:', queryKey);
-  //    console.log('Query data:', queryData);
-  //  });
-
-  const orderDetails = queryClient.getQueryData(['fetchOrderDetails', showModel]);
-
-  // console.log('orderDetails from child', orderDetails);
+  const isFethingOrderDetails = useIsFetching({ queryKey: [queryKeys.fetchOrderDetails] })
 
   const [value, setValue] = React.useState(0);
 
@@ -61,7 +49,7 @@ export default function OrderTabs({showModel}: IOrderTabs) {
 
       <TabPanel value={value} index={0}>
        
-        <Customize/>
+        <Customize showModel={showModel}/>
         
       </TabPanel>
       

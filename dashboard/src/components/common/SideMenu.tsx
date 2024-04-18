@@ -60,10 +60,6 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
 
   const { mutate, error, status: updatingNotification } = useMutation({mutationFn: updateNotification});
   
-
-  console.log('updatingNotification', updatingNotification);
-  //const {data, isLoading, error} = useQuery({ queryKey: ['fetchOrders'], queryFn: () => fetchOrders(queryParams) })
-  
   const { data: getNotifications, isLoading: fetchingNotifications } = useQuery({queryKey: [queryKeys.fetchNotification], queryFn: fetchNotification});
 
   const navigate = useNavigate();

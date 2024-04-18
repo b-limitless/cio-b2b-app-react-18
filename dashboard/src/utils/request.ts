@@ -30,7 +30,7 @@ export const request = async ({ url, method, body, unauthrizedRedirect = true, .
     return response.data;
   } catch (err: any) {
     if (unauthrizedRedirect && err.response?.status === 401) {
-      // window.location.href = `/auth/signin`;
+      window.location.href = `/auth/signin`;
     }
     return Promise.reject(err);
   }

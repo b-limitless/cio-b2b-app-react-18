@@ -12,6 +12,7 @@ import { filterOrders } from "../../../../reducers/orderSlice";
 import { QueryCache, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchOrders } from "../../../../apis-requests/order";
 import { fetchOrderDetails } from "../../../../apis-requests/order/orderDetails";
+import { queryKeys } from "../../../../config/queryKeys";
 
 type Props = {}
 
@@ -28,52 +29,17 @@ export default function ListOrder({ }: Props) {
     filters: JSON.stringify(filters),
     page
   };
-
-
-  // const queryCache = new QueryCache({
-  //   onError: (error) => {
-  //     console.log(error)
-  //   },
-  //   onSuccess: (data) => {
-  //     console.log(data)
-  //   },
-  //   onSettled: (data, error) => {
-  //     console.log(data, error)
-  //   },
-  // })
-
-  // const queryClient = useQueryClient();
-
-  // useEffect(() => {
-  //   // Get the query cache
-  //   const queryCache = queryClient.getQueryCache();
   
-  //   // Get all cached queries
-  //   const cachedQueries = queryCache.getAll();
+  const {data, isLoading, error} = useQuery({ queryKey: [queryKeys.fetchOrders], queryFn: () => fetchOrders(queryParams) })
 
-  
-  //   // Iterate over all keys in the query cache
-  //   Object.keys(cachedQueries).forEach((queryKey) => {
-  //     const queryData = queryCache.get(queryKey);
-  //     console.log('Query key:', queryKey);
-  //     console.log('Query data:', queryData);
-  //   });
-  // }, [queryClient, showModel]); // Empty dependency array ensures this effect runs only once, after component mount
-  const queryClient = useQueryClient()
-  const queryCache = queryClient.getQueryCache();
-  const query = queryCache.find({ queryKey: ['posts'] });
+  useQuery(
+    {
+      queryKey: [queryKeys.fetchOrderDetails, showModel], // Include showModel in the query key
+      queryFn: () => fetchOrderDetails(showModel)
+    }
+  );
 
 
-  // const { data, isLoading, error } = useQuery(['fetchOrders', queryParams], () => fetchOrders(queryParams));
-  
-  // const {data, isLoading, error} = useQuery({ queryKey: ['fetchOrders'], queryFn: () => fetchOrders(queryParams) })
-
-  // const { data: orderDetails, isLoading: orderDetailsLoading } = useQuery(
-  //   ['fetchOrderDetails', showModel], // Pass showModel as a dependency
-  //   () => fetchOrderDetails(showModel)
-  // );
-  
-  
   const filterData = [
     {
       label: "Order Status",
@@ -86,12 +52,7 @@ export default function ListOrder({ }: Props) {
       id: "paymentStatus"
     },
   ];
-  // const count = 8;
   
-
- 
-  
-  // const [filters, setFilters] = React.useState<any>({ orderStatus: [], paymentStatus: [] });
 
   const dispatch = useDispatch();
  
@@ -118,9 +79,9 @@ export default function ListOrder({ }: Props) {
   };
 
 
-  // const count = useMemo(() => {
-  //   return Math.ceil(data?.affectedRows / data?.limit) ?? 0;
-  // }, [data])
+  const count = useMemo(() => {
+    return Math.ceil(data?.affectedRows / data?.limit) ?? 0;
+  }, [data])
 
 
   return (
@@ -130,7 +91,7 @@ export default function ListOrder({ }: Props) {
         showModel={showModel}
         setShowModel={setShowModel}
       /> 
-      {/* {error && <div className="error">{error.toString()}</div>}
+      {error && <div className="error">{error.toString()}</div>}
       <div className={styles.dataTableContainer}>
         
         <DataTable
@@ -151,9 +112,9 @@ export default function ListOrder({ }: Props) {
           count={count}
           loading={isLoading}
           handleFiltersOnChange={handleChange}
-          primaryKey={'cartId'}
+          primaryKey={'_id'}
         />
-      </div> */}
+      </div>
      
     </>
 
