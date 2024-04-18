@@ -1,9 +1,8 @@
 import Skeleton from '@mui/material/Skeleton';
-import React, { useEffect, useMemo } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { INotification, addNotifications, updateSeenNotification } from '../../reducers/notficiationSlice';
+import { useNavigate } from 'react-router-dom';
 import { fetchNotification } from '../../apis-requests/notification';
 import { updateNotification } from '../../apis-requests/notification/update';
 import avatar from '../../assets/img/avatar.png';
@@ -16,13 +15,14 @@ import Setting from '../../assets/svg/settings.svg';
 import { APIS } from '../../config/apis';
 import { menuEnum, sideNavConfig } from '../../config/navMenu';
 import { queryKeys } from '../../config/queryKeys';
+import { EMenu, updateMenuSettings } from '../../reducers/menuSlices';
+import { INotification, addNotifications, updateSeenNotification } from '../../reducers/notficiationSlice';
 import { RootState } from '../../store';
 import { EEvents } from '../../types&Enums/events';
 import { request } from '../../utils/request';
 import NotificationRow from '../notification/NotificationRow';
 import { NotificationsRowSkeleton } from '../skleton/NotificationSkleton';
 import NavList from './NavList';
-import { EMenu, updateMenuSettings } from '../../reducers/menuSlices';
 
 interface SideMenuInterface {
   setSelectedMenu: Function

@@ -36,6 +36,17 @@ const measurement: any = {
     neck: 12
 };
 
+enum EMeasurementType {
+    shirtMeasurement='shirtMeasurement', 
+    pantMeasurement='pantMeasurement'
+}
+
+enum EModelType {
+    shirt='shirt', 
+    pant='pant', 
+    suit='suit'
+}
+
 export default function Customize({ showModel }: Props) {
     const [shouldFetchMeasurement, setShouldFetchMeasurement] = useState(false);
     const [shouldFetchShipping, setShouldFetchShippng] = useState(false);
@@ -47,14 +58,14 @@ export default function Customize({ showModel }: Props) {
     const isFethingOrderDetails = useIsFetching({ queryKey: [queryKeys.fetchOrderDetails] });
 
     // Scale your model type base on this
-    const keyToFetch = orderDetails?.modelType === 'shirt' ? 'shirtMeasurement' : '';
+    const keyToFetch = orderDetails?.modelType === EModelType.shirt ? EMeasurementType.shirtMeasurement : '';
 
     const { data: userMeasurement, isLoading: isLoadingMeasurement, error: measurementError } = useQuery(
         {
             queryKey: [queryKeys.fetchMeasurement, shouldFetchMeasurement],
             queryFn: () => {
                 if (shouldFetchMeasurement) {
-                    return fetchRestOrderDetails('shirtMeasurement', orderDetails.cartId);
+                    return fetchRestOrderDetails(EMeasurementType.shirtMeasurement, orderDetails.cartId);
 
                 }
                 if (!shouldFetchMeasurement) {

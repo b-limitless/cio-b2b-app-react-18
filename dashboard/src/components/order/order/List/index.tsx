@@ -1,18 +1,18 @@
-import { DataTable, camelCaseToNormal } from "@pasal/cio-component-library";
-import React, { useEffect, useMemo, useState } from "react";
-import orderMockData from "../../../../mock/order.json";
-import { OrderStatus } from "./status.type";
+import React from 'react';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { paymentStatus } from "../../../../types&Enums/payment.status.type";
-import OrderSideModel from "../../SideModel";
-import styles from "./list.module.scss";
+import { DataTable, camelCaseToNormal } from "@pasal/cio-component-library";
+import { useQuery } from "@tanstack/react-query";
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../../store";
-import { filterOrders, paginateFebric } from "../../../../reducers/orderSlice";
-import { QueryCache, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchOrders } from "../../../../apis-requests/order";
 import { fetchOrderDetails } from "../../../../apis-requests/order/orderDetails";
 import { queryKeys } from "../../../../config/queryKeys";
+import { filterOrders, paginateFebric } from "../../../../reducers/orderSlice";
+import { RootState } from "../../../../store";
+import { paymentStatus } from "../../../../types&Enums/payment.status.type";
+import OrderSideModel from "../../SideModel";
+import styles from "./list.module.scss";
+import { OrderStatus } from "./status.type";
 
 type Props = {}
 

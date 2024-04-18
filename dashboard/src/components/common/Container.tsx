@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import ArrowRight from "../../assets/svg/arrow-right.svg";
-import { menuEnum, menuIds } from "../../config/navMenu";
+import {menuIds } from "../../config/navMenu";
 import SideMenu from "./SideMenu";
-// import './loader.scss';
-
-import { useDispatch, useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 import useSetAuthenticatedUser from "../../hooks/useSetAuthenticatedUser";
 import { RootState } from "../../store";
 
@@ -17,7 +15,7 @@ interface ContainerInterface {
     [x: string]: any;
 
 }
-//
+
 export default function Container({ navigateFromCell, setSelectedMenu, children }: ContainerInterface) {
 
     const [loading, setLoading] = useState(false);
