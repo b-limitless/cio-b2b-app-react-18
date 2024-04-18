@@ -176,24 +176,6 @@ export default function Customize({ showModel }: Props) {
                     </h3>
                 </div>
 
-                {/* <div className={orderStyles.product__section}>
-                    <input className={orderStyles.tab__checkbox} type="checkbox" name="" id="customer" hidden />
-                    <h3 className={orderStyles.undersqure}>
-                        <label className={orderDetails.label} htmlFor='customer' onClick={() => setShouldFetchMeasurement(true)}>
-                            <span>
-                                Measurement
-                            </span>
-                            <span className={orderStyles.tab__icon}>
-                                <ArrowDown />
-                            </span>
-                        </label>
-                    </h3>
-                    <div className={orderStyles.tab__slidedown}>
-                        <div className={orderStyles.content}>
-                            {getMeasurement()}
-                        </div>
-                    </div>
-                </div> */}
 
                 <div className={orderStyles.product__section}>
                 <input className={orderStyles.tab__checkbox} type="checkbox" name="" id="customer" hidden />
