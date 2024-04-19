@@ -1,4 +1,4 @@
-import { Button, Input, camelCaseToNormal } from "@pasal/cio-component-library";
+import { Button, Input, InputAdornments, camelCaseToNormal } from "@pasal/cio-component-library";
 import React, { useEffect, useReducer } from "react";
 import { onChangeHandler } from "../../common/onChangeHandler";
 import { onSubmitHandler } from "../../common/onSubmitHandler";
@@ -6,7 +6,7 @@ import Template from "../common/Template";
 import { APIS } from "../config/apis";
 import { SigninForm } from "../interfaces/user/inde";
 import { signInModel } from "../model/user";
-import { request } from "../utils/request"; 
+import { request } from "../utils/request";
 import FormErrorMessage from "../common/FormErrorMessage";
 
 
@@ -31,13 +31,13 @@ const signinInitialState: SigninProcess = {
   formHasError: false,
   formError: {
     email: '',
-    password: '', 
-    message:''
+    password: '',
+    message: ''
   },
   submissionError: null,
   success: false,
   submitting: false,
-  formSubmitted:false
+  formSubmitted: false
 }
 
 function signInProcessReducer(state: SigninProcess, action: any) {
@@ -91,8 +91,8 @@ function signInProcessReducer(state: SigninProcess, action: any) {
 }
 
 interface SignInInterface {
-  actions:any;
-  globalDispatch:any;
+  actions: any;
+  globalDispatch: any;
 }
 
 
@@ -100,9 +100,9 @@ interface ISignin {
   setAuth: Function;
 }
 
-export default function Signin({setAuth}: ISignin) {
-  
-  const [{form, formError, formHasError, formSubmitted}, dispatch] = useReducer(signInProcessReducer, signinInitialState);  
+export default function Signin({ setAuth }: ISignin) {
+
+  const [{ form, formError, formHasError, formSubmitted, submitting }, dispatch] = useReducer(signInProcessReducer, signinInitialState);
 
   const onMouseLeaveEventHandler = (name: keyof SigninForm, value: string) => {
     if (!signInModel[name]?.test(value)) {
@@ -112,23 +112,24 @@ export default function Signin({setAuth}: ISignin) {
     }
   }
 
-   const onSubmitHandlerLocal = () => {
+  const onSubmitHandlerLocal = () => {
     onSubmitHandler(form, signInModel, dispatch, 'signin')
-   }
+  }
 
-  
-   
-   useEffect(() => {
+
+
+  useEffect(() => {
     const submitFormToServer = async () => {
+      dispatch({ type: 'SUBMITTING', payload: true });
       try {
-         const response = await request({
+        const response = await request({
           url: APIS.auth.signin,
           method: 'post',
           body: form
         });
-      
+
         setAuth(response);
-        
+
       } catch (err: any) {
         const { response: { data: { errors } } } = err;
         errors.forEach((error: any, i: number) => {
@@ -141,35 +142,18 @@ export default function Signin({setAuth}: ISignin) {
 
 
     }
-    if(formSubmitted && !formHasError) {
+    if (formSubmitted && !formHasError) {
       submitFormToServer();
     }
-   }, [formHasError, formSubmitted]);
+  }, [formHasError, formSubmitted]);
 
-
-   
-
-  //  If user is already logged in then redirect them to dashboard
-  
 
   return (
     <Template>
       <div className="right col">
         <div className="group-nav">
           <div className="row navigate">
-
-            {/* <span className="ico-back">
-              <span className="icon">
-                <BackLeftIcon />
-              </span>
-              <div className="back">Back</div>
-            </span>
-            <span className="steps-info">
-              <span className="step">STEP 01/03</span>
-              <span className="info">Personal Info.</span>
-            </span> */}
           </div>
-
         </div>
         <div className="group-elements">
           <div className="row registration">
@@ -178,9 +162,9 @@ export default function Signin({setAuth}: ISignin) {
               Sigin
             </div>
             <div className="purpose">For the purpose of industry regulation, your details are required.</div>
-            
-            <FormErrorMessage message={formError.message ?? ''}/>
-            
+
+            <FormErrorMessage message={formError.message ?? ''} />
+
             <div className="form">
 
               <Input
@@ -191,21 +175,23 @@ export default function Signin({setAuth}: ISignin) {
                 type="email"
                 error={!!formError.email}
                 helperText={formError.email ? formError.email : ''}
-                onChange={(e:any) => onChangeHandler(e, dispatch)}
+                onChange={(e: any) => onChangeHandler(e, dispatch)}
                 onBlur={() => onMouseLeaveEventHandler('email', form.email)}
               />
-              <Input
+
+              <InputAdornments
                 label="Password"
                 id="password"
                 name="password"
                 value={form.password}
-                type="text"
+                type="password"
                 error={!!formError.password}
                 helperText={formError.password ? formError.password : ''}
-                onChange={(e:any) => onChangeHandler(e, dispatch)}
+                onChange={(e: any) => onChangeHandler(e, dispatch)}
                 onBlur={() => onMouseLeaveEventHandler('password', form.password)}
               />
-              <Button variant="primary" text="Signin" onClick={() => onSubmitHandlerLocal()}></Button>
+
+              <Button variant="primary" text={submitting ? 'Please wait...' : 'Signin'} onClick={() => { submitting ? null : onSubmitHandlerLocal() }}></Button>
             </div>
           </div>
         </div>

@@ -20,7 +20,7 @@ export interface OrderInterface {
   limit: number;
   update: string | null;
   affectedRows: number;
-  filters: any; //{[x:string]:string[]};
+  filters: any; 
 }
 
 export const initialState: OrderInterface = {
@@ -38,27 +38,16 @@ export const OrderSlice = createSlice({
   name: "Order",
   initialState,
   reducers: {
-
     fetchOrdersAction: (
       state: OrderInterface,
       action: PayloadAction<OrderInterface>
     ) => {
-      // return {
-      //   ...state,
-      //   orders: action.payload,
-      // };
-      console.log('payload', action.payload)
-
       return {
         ...state,
-        ...action.payload
-        // ...action.payload,
+        ...action.payload,
       };
     },
-    fetchingOrders: (
-      state: OrderInterface,
-      action: PayloadAction<boolean>
-    ) => {
+    fetchingOrders: (state: OrderInterface, action: PayloadAction<boolean>) => {
       return {
         ...state,
         loading: action.payload,
@@ -73,16 +62,13 @@ export const OrderSlice = createSlice({
         error: action.payload,
       };
     },
-    paginateFebric: (
-      state: OrderInterface,
-      action: PayloadAction<number>
-    ) => {
+    paginateFebric: (state: OrderInterface, action: PayloadAction<number>) => {
       return {
         ...state,
         page: action.payload,
       };
     },
-    
+
     updateOrder: (
       state: OrderInterface,
       action: PayloadAction<string | null>

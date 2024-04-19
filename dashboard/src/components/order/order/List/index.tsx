@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { DataTable, camelCaseToNormal } from "@pasal/cio-component-library";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrders } from "../../../../apis-requests/order";
@@ -90,10 +90,8 @@ export default function ListOrder({ }: Props) {
     return Math.ceil(data?.affectedRows / data?.limit) ?? 0;
   }, [data]);
 
-  // Once data is fetch just update we do not need to fetch again
   useEffect(() => {
     if(data && !isLoading && !error) {
-      // const copyData = JSON.parse(JSON.stringify(data));
       dispatch(fetchOrdersAction(data));
       dispatch(fetchDataAction({key: EModel.Order, value: false}));
       
