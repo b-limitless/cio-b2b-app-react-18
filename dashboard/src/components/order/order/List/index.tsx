@@ -13,7 +13,7 @@ import { paymentStatus } from "../../../../types&Enums/payment.status.type";
 import OrderSideModel from "../../SideModel";
 import styles from "./list.module.scss";
 import { OrderStatus } from "./status.type";
-import { fetchDataAction, shouldFetchDataSlice } from '../../../../reducers/shoudFetchSlice';
+import { EModel, fetchDataAction, shouldFetchDataSlice } from '../../../../reducers/shoudFetchSlice';
 
 type Props = {}
 
@@ -81,7 +81,8 @@ export default function ListOrder({ }: Props) {
     const newFiltersState = { ...filters, [name]: typeof value === 'string' ? value.split(',') : value };
 
     dispatch(filterOrders(newFiltersState));
-
+    dispatch(fetchDataAction({key: EModel.Order, value: true}));
+    // dispatch(fetchDataAction({key: 'order', value: false}));
   };
 
   const count = useMemo(() => {
@@ -91,7 +92,7 @@ export default function ListOrder({ }: Props) {
   // Once data is fetch just update we do not need to fetch again
   useEffect(() => {
     if(data && !isLoading && !error) {
-      dispatch(fetchDataAction({key: 'order', value: false}));
+      dispatch(fetchDataAction({key: EModel.Order, value: false}));
       console.log('it will not fetch data now');
     }
   }, [data, isLoading, error]) 
