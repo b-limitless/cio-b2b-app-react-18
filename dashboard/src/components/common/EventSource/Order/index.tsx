@@ -2,10 +2,11 @@
 */
 import { useEffect } from 'react';
 import { SSEEventAPIs } from '../../../../config/eventAPIs';
-import { INotification, addNotification } from '../../../../../reducers/notficiationSlice';
+import { INotification, addNotification } from '../../../../reducers/notficiationSlice';
 import { EEvents } from '../../../../types&Enums/events';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../store';
+import { fetchDataAction } from '../../../../reducers/shoudFetchSlice';
 
 export default function useOrderReceiveNotification() {
   const {auth} = useSelector((state:RootState) => state.auth);
@@ -20,12 +21,10 @@ export default function useOrderReceiveNotification() {
       function getRealtimeData(data: INotification) {
         dispatch(addNotification(data));
         if (data.type === EEvents.newOrderReceived) {
-          // Lets dispatch the message
-
-          console.log('Data for the order', data);
+          console.log('fetching data again');
+          dispatch(fetchDataAction({key: 'order', value: true}));
         }
         if (data.type === EEvents.newCallReceived) {
-          console.log('Data for call', data);
         }
 
       }

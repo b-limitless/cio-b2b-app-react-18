@@ -4,7 +4,7 @@ export const verifyResponse = {
   permissions: [{}],
   verified: true,
   firstName: 'Bharat',
-  lastName: 'Shah',
+  lastName: 'Shah', 
   country: 'AU',
   spokenLanguage: [
     'Hindi',

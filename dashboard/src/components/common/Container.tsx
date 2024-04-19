@@ -5,6 +5,7 @@ import SideMenu from "./SideMenu";
 import {useSelector } from "react-redux";
 import useSetAuthenticatedUser from "../../hooks/useSetAuthenticatedUser";
 import { RootState } from "../../store";
+import useOrderReceiveNotification from "./EventSource/Order";
 
 interface ContainerInterface {
     setSelectedMenu: Function,
@@ -22,6 +23,7 @@ export default function Container({ navigateFromCell, setSelectedMenu, children 
     const { auth } = useSelector((state: RootState) => state.auth) || {auth: null};
 
     useSetAuthenticatedUser({ setLoading, navigateFromCell });
+    useOrderReceiveNotification();
 
     if (loading) {
         return <div className="loading">

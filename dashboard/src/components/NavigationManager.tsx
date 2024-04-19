@@ -47,10 +47,11 @@ export function NavigationManager({navigateFromCell, children }: NavigationManag
     );
   }, [location]);
 
-  const queryClint = new QueryClient();
+  const queryClient = new QueryClient({});
 
+  
   return <Provider store={Store}>
-    <QueryClientProvider client={queryClint}>
+    <QueryClientProvider client={queryClient}>
       <Container
         setShowSettingModel={setShowSettingModel}
         setShowProfileSideModel={setShowProfileSideModel}

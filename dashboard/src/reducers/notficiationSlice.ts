@@ -1,15 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { EEvents } from "../src/types&Enums/events";
 
-const notificationModel = {
-  timestsamp: new Date(),
-  text: "Something have to say", // Server will publish this notification
-  media: "string",
-  seen: false, // update the state once it is clicked
-  action: () => {}, // When they click to that notification you might need to perform some action
-  type: "newOrderReceived", // Perhaps you need to classified what kind of notification is that
-};
-
 export interface INotification {
   id: string;
   timestsamp: Date;
