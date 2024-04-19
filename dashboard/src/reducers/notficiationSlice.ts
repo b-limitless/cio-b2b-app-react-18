@@ -21,13 +21,13 @@ const notificationSlice = createSlice({
       state: INotification[],
       action: PayloadAction<INotification[]>
     ) => {
-      return [...state, ...action.payload];
+      return [...action.payload, ...state];
     },
     addNotification: (
       state: INotification[],
       action: PayloadAction<INotification>
     ) => {
-      return [...state, action.payload];
+      return [action.payload, ...state];
     },
     updateNotification: (
       state: INotification[],

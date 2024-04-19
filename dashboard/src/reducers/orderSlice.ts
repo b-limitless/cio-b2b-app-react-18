@@ -38,13 +38,21 @@ export const OrderSlice = createSlice({
   name: "Order",
   initialState,
   reducers: {
-    fetchOrders: (
+
+    fetchOrdersAction: (
       state: OrderInterface,
-      action: PayloadAction<TOrder[]>
+      action: PayloadAction<OrderInterface>
     ) => {
+      // return {
+      //   ...state,
+      //   orders: action.payload,
+      // };
+      console.log('payload', action.payload)
+
       return {
         ...state,
-        orders: action.payload,
+        ...action.payload
+        // ...action.payload,
       };
     },
     fetchingOrders: (
@@ -106,7 +114,7 @@ export const OrderSlice = createSlice({
 });
 
 export const {
-  fetchOrders,
+  fetchOrdersAction,
   fetchingOrders,
   fetchedError,
   paginateFebric,

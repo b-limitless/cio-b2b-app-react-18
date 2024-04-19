@@ -6,7 +6,7 @@ import { INotification, addNotification } from '../../../../reducers/notficiatio
 import { EEvents } from '../../../../types&Enums/events';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../store';
-import { fetchDataAction } from '../../../../reducers/shoudFetchSlice';
+import { EModel, fetchDataAction } from '../../../../reducers/shoudFetchSlice';
 
 export default function useOrderReceiveNotification() {
   const {auth} = useSelector((state:RootState) => state.auth);
@@ -21,12 +21,10 @@ export default function useOrderReceiveNotification() {
       function getRealtimeData(data: INotification) {
         dispatch(addNotification(data));
         if (data.type === EEvents.newOrderReceived) {
-          console.log('fetching data again');
-          dispatch(fetchDataAction({key: 'order', value: true}));
+          dispatch(fetchDataAction({key: EModel.Order, value: true}));
         }
         if (data.type === EEvents.newCallReceived) {
         }
-
       }
 
       sse.onopen = () => {

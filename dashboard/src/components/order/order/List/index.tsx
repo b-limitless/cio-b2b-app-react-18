@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { DataTable, camelCaseToNormal } from "@pasal/cio-component-library";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrders } from "../../../../apis-requests/order";
 import { fetchOrderDetails } from "../../../../apis-requests/order/orderDetails";
 import { queryKeys } from "../../../../config/queryKeys";
-import { filterOrders, paginateFebric } from "../../../../reducers/orderSlice";
+import { fetchOrdersAction, filterOrders, paginateFebric } from "../../../../reducers/orderSlice";
 import { RootState } from "../../../../store";
 import { paymentStatus } from "../../../../types&Enums/payment.status.type";
 import OrderSideModel from "../../SideModel";
@@ -24,6 +24,7 @@ export default function ListOrder({ }: Props) {
   const [showModel, setShowModel] = useState<string | null>(null);
   const [cartId, setCartId] = useState<null | string>(null);
   const {order} = useSelector((state:RootState) => state.shouldFetch);
+  const {orders} = useSelector((state:RootState) => state.orders);
 
   const { filters, page } = useSelector((state: RootState) => state.orders);
 
@@ -92,10 +93,12 @@ export default function ListOrder({ }: Props) {
   // Once data is fetch just update we do not need to fetch again
   useEffect(() => {
     if(data && !isLoading && !error) {
+      // const copyData = JSON.parse(JSON.stringify(data));
+      dispatch(fetchOrdersAction(data));
       dispatch(fetchDataAction({key: EModel.Order, value: false}));
-      console.log('it will not fetch data now');
+      
     }
-  }, [data, isLoading, error]) 
+  }, [data, isLoading, error]);
 
 
   return (
@@ -110,7 +113,7 @@ export default function ListOrder({ }: Props) {
         <DataTable
           setShowModel={setShowModel}
           tableHeader={tableHeader}
-          tableData={data?.orders ?? []}
+          tableData={orders ?? []}
           showFebricModels={false}
           detailsComponents={null}
           showDetailReactNode={"Edit"}
