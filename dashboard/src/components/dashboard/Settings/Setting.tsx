@@ -189,7 +189,6 @@ export default function Seetings() {
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>, key: keyof ISettings) => {
     // We are updating data props
     const { name, value } = e.target;
-    console.log(name, value)
 
     const payload = { key, name, value };
 

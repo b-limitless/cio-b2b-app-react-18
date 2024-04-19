@@ -1,12 +1,9 @@
 import React from 'react';
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import PositiveGrowth from "../../../assets/svg/positive-growth.svg";
 import PriceSVG from "../../../assets/svg/price.svg";
 import { frontStoreLink } from "../../../config/apis";
 import { RootState } from "../../../store";
-import Profile from "../Profile";
-import Seetings from "../Settings/Setting";
 import AnalyticCard from "../common/AnalyticCard";
 import './dashboard.scss';
 
@@ -52,9 +49,6 @@ export default function Dashboard() {
 
   return (
     <>
-      <Seetings />
-      <Profile />
-
       <div className="ci--dashboard">
         <div className="ci--dashboard__title">
           Welcome Back, Hello World

@@ -62,12 +62,11 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
   
   const { data: getNotifications, isLoading: fetchingNotifications, error:noticationError } = useQuery({queryKey: [queryKeys.fetchNotification], queryFn: fetchNotification});
 
-  console.log('data: getNotifications, isLoading: fetchingNotifications', getNotifications, fetchingNotifications, noticationError)
   const navigate = useNavigate();
   
   const sideModelToggleHandler = (e:React.MouseEvent<HTMLButtonElement>, type: sidebarNavClicktype) => {
     e.stopPropagation();
-
+    
     if (type == sidebarNavClick.profile) {
       dispatch(updateMenuSettings({key: EMenu.showSettingModel, value: false}));
       dispatch(updateMenuSettings({key: EMenu.showProfileModel, value: true}));
@@ -199,28 +198,7 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
                   </div>}
                 </div>
               </div>}
-
-
-
             </div> 
-
-            {/* <div className='row item'>
-              <input type='radio'
-                name='bottom-checkbox'
-                id='faq-checkbox'
-                className='bottom-checkbox' />
-              <label htmlFor='faq-checkbox'>
-                <div className='icon'>
-                  <FaqIcon />
-                  { }
-                </div>
-              </label>
-              <div className='text settings'>FAQ</div>
-            </div> */}
-
-           
-
-
           </div>
           <div className='bottom--bottom' onClick={(e:any) => sideModelToggleHandler(e, sidebarNavClick.profile)}>
             <input type='checkbox' id='avatar-profile-info' className='avatar-profile-info' />
