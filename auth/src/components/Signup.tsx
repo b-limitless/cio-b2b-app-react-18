@@ -162,19 +162,9 @@ export default function Signup() {
       <div className='right col'>
         <div className='group-nav'>
           <div className='row navigate'>
-            {/* <span className='ico-back'>
-              <span className='icon'>
-                <BackLeftIcon />
-              </span>
-              <div className='back'>Back</div>
-            </span>
-            <span className='steps-info'>
-              <span className='step'>STEP 01/03</span>
-              <span className='info'>Personal Info.</span>
-            </span> */}
+            
           </div>
         </div>
-        
         {!success && <SignupFeature
           onChangeHandler={onChangeHandler}
           onMouseLeaveEventHandler={onMouseLeaveEventHandler}
@@ -183,7 +173,6 @@ export default function Signup() {
           onSubmitHandler={onSubmitHandlerLocal}
           submitting={submitting}
         />}
-        {/* <Link to='/signin'>Signin</Link> */}
       </div>
     </Template>
   );

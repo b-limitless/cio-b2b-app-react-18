@@ -22,7 +22,6 @@ type Props = {}
 export default function ListOrder({ }: Props) {
   const dispatch = useDispatch();
   const [showModel, setShowModel] = useState<string | null>(null);
-  const [cartId, setCartId] = useState<null | string>(null);
   const {order} = useSelector((state:RootState) => state.shouldFetch);
   const {orders} = useSelector((state:RootState) => state.orders);
 

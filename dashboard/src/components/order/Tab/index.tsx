@@ -24,7 +24,7 @@ export default function OrderTabs({showModel}: IOrderTabs) {
           
           <TabICO  label="customize" {...a11yProps(0)} />
           
-          <TabICO  label="Assignment" {...a11yProps(1)} />
+          {/* <TabICO  label="Assignment" {...a11yProps(1)} /> */}
         </Tabs>
       </Box>
 
@@ -34,9 +34,9 @@ export default function OrderTabs({showModel}: IOrderTabs) {
         
       </TabPanel>
       
-      <TabPanel value={value} index={1}>
+      {/* <TabPanel value={value} index={1}>
         <Assignment/>
-      </TabPanel>
+      </TabPanel> */}
     
     </Box>
   );

@@ -16,18 +16,18 @@ export default function Measurement({ }: Props) {
     { "title": "shirt", "value": 29.5 },
     { "title": "inseam", "value": 32.0 }
   ]
-  
-  const data: any = {};
-  
-  
-  measurementDataStructure.forEach((item: any) => data[item.title] = item.value);
-  
 
-  
+  const data: any = {};
+
+
+  measurementDataStructure.forEach((item: any) => data[item.title] = item.value);
+
+
+
   return (
     <div className={styles.container}>
       <RectangelData data={{ "": data }} />
-     
+
     </div>
   )
 }
