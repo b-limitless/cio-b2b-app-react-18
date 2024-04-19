@@ -8,43 +8,20 @@ import { queryKeys } from '../../../../../config/queryKeys';
 import OrderDetailSkeleton from './OrderDetailsSkleton';
 import styles from "./customize.module.scss";
 import orderStyles from './order-details.module.scss';
+
 type Props = {
     showModel: string | null;
 }
 
-const measurement: any = {
-    verified: false,
-    firstName: 'Bharat',
-    lastName: 'Sure',
-    height: 170,
-    inch: 1,
-    weight: 75,
-    age: 35,
-    unite: 'feet',
-    email: 'bharatrose11@gmail.com',
-    createdAt: '2024-04-10T15:09:51.887Z',
-    updatedAt: '2024-04-10T15:09:51.887Z',
-    id: '65cb626b1129f065cc5e8d17',
-    sleevLength: 12,
-    shoulderWidth: 12,
-    chestAround: 12,
-    stomach: 12,
-    bicepAround: 12,
-    torsoLength: 12,
-    hips: 1233,
-    wrist: 12,
-    neck: 12
-};
-
 enum EMeasurementType {
-    shirtMeasurement='shirtMeasurement', 
-    pantMeasurement='pantMeasurement'
+    shirtMeasurement = 'shirtMeasurement',
+    pantMeasurement = 'pantMeasurement'
 }
 
 enum EModelType {
-    shirt='shirt', 
-    pant='pant', 
-    suit='suit'
+    shirt = 'shirt',
+    pant = 'pant',
+    suit = 'suit'
 }
 
 export default function Customize({ showModel }: Props) {
@@ -57,7 +34,6 @@ export default function Customize({ showModel }: Props) {
 
     const isFethingOrderDetails = useIsFetching({ queryKey: [queryKeys.fetchOrderDetails] });
 
-    // Scale your model type base on this
     const keyToFetch = orderDetails?.modelType === EModelType.shirt ? EMeasurementType.shirtMeasurement : '';
 
     const { data: userMeasurement, isLoading: isLoadingMeasurement, error: measurementError } = useQuery(
@@ -73,8 +49,6 @@ export default function Customize({ showModel }: Props) {
                 }
             }
         });
-
-
 
 
     const { data: userShipping, isLoading: isLoadingShipping, error: shippingError } = useQuery(
@@ -118,7 +92,7 @@ export default function Customize({ showModel }: Props) {
     const getMeasurement = () => {
 
         if (measurementError) {
-            return measurement.toString();
+            return measurementError.toString();
         }
         if (isLoadingMeasurement) {
             return 'Please wait...'
@@ -131,7 +105,7 @@ export default function Customize({ showModel }: Props) {
 
             return keys.map((key: string, i: number) => <div key={`measurement-${i}`} className={orderStyles.row}>
                 <label>{camelCaseToNormal(key)}</label>
-                <span>{measurement[key]}</span>
+                <span>{userMeasurement?.[keyToFetch]?.[key]}</span>
             </div>)
         }
 
@@ -143,7 +117,6 @@ export default function Customize({ showModel }: Props) {
     const showMeTexture = (url: string) => {
         window.open(url, '_blank', 'noopener norefereer')
     }
-
 
     return (
         <>
@@ -189,7 +162,7 @@ export default function Customize({ showModel }: Props) {
 
 
                 <div className={orderStyles.product__section}>
-                <input className={orderStyles.tab__checkbox} type="checkbox" name="" id="customer" hidden />
+                    <input className={orderStyles.tab__checkbox} type="checkbox" name="" id="customer" hidden />
                     <h3 className={orderStyles.undersqure}>
                         <label className={orderStyles.label} htmlFor='customer' onClick={() => setShouldFetchMeasurement(true)}>
                             <span>
@@ -201,7 +174,7 @@ export default function Customize({ showModel }: Props) {
                         </label>
                     </h3>
                     <div className={orderStyles.tab__slidedown}>
-                    <div className={orderStyles.content}>
+                        <div className={orderStyles.content}>
                             {getMeasurement()}
                         </div>
                     </div>
