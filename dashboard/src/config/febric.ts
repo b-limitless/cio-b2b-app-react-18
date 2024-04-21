@@ -255,7 +255,7 @@ export const tones = [
 
 
 export const stretchy = [
-  { code: "non-stretchy", name: "Non-Stretchy", description: "Fabric does not stretch." },
+  { code: "non-stretchy", name: "Non Stretchy", description: "Fabric does not stretch." },
   { code: "stretchy", name: "Stretchy", description: "Fabric has moderate stretch." },
   { code: "very-stretchy", name: "Very Stretchy", description: "Fabric has high elasticity." }
 ];

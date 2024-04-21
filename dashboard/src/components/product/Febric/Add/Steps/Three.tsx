@@ -61,7 +61,7 @@ export default function StepThree({ onChangeHandler, febric, errors }: commonFeb
 
 <Select options={stretchy}
                     label={"stretchy"}
-                    value={febric.stretchy ?? ""}
+                    value={febric?.stretchy}
                     name="stretchy"
                     onChange={onChangeHandler}
                     error={errors.stretchy ? true : false}
