@@ -45,23 +45,23 @@ export default function Febric() {
     cursor: 'pointer'
   }
   
-  const { filters, page } = useSelector((state: RootState) => state.febrics);
   const {febrics: shouldFetchFebric} = useSelector((state:RootState) => state.shouldFetch);
-
+  const {febrics, filters, page } = useSelector((state:RootState) => state.febrics);
   const queryParams = {
     filters: JSON.stringify(filters),
     page
   };
 
+  
 
-  const tableHeader = ['title', 'type', 'price', 'febricSeasons', 'action'];
+  const tableHeader = ['title', 'price', 'modelType', 'material', 'action'];
 
   // const { febrics: { loading, febrics, affectedRows, filters } } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
-  const {febrics} = useSelector((state:RootState) => state.febrics);
+  
 
   const { data, isLoading, error } = useQuery(
-    { queryKey: ['fetchFebrics'], 
+    { queryKey: ['fetchFebrics', queryParams], 
     queryFn: () => fetchFebric(queryParams), 
     enabled: shouldFetchFebric
   }
@@ -111,20 +111,16 @@ export default function Febric() {
 
   const handleChange = (event: SelectChangeEvent<typeof filters>, name: string) => {
 
-    // if (!setFilters) return;
-
-    const {
+   
+   const {
       target: { value },
     } = event;
 
     const newFiltersState = { ...filters, [name]: typeof value === 'string' ? value.split(',') : value };
 
     dispatch(filterFebric(newFiltersState));
+    dispatch(fetchDataAction({key: EModel.Febrics, value: true}));
 
-    // setFilters(
-    //   { ...filters, [name]: typeof value === 'string' ? value.split(',') : value }
-
-    // );
   };
 
   const setPage = () => {
@@ -188,7 +184,7 @@ export default function Febric() {
 
         setShowModel={setShowModel}
         tableHeader={tableHeader}
-        tableData={data?.febrics ?? []}
+        tableData={febrics ?? []}
         showFebricModels={false}
         detailsComponents={null}
         showDetailReactNode={"Edit"}

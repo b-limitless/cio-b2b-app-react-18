@@ -161,7 +161,7 @@ const steps: { [key in forStepType]: any } = {
 
 export default function AddFebric({ }: Props) {
     // Check in store in there is febric is to update
-    const  {product: {febrics, update}} = useSelector((state: RootState) => state);
+    const  {febrics: {febrics, update}} = useSelector((state: RootState) => state);
 
     // If update is not null then filter the febric from the store and get it
     const updateFebric = febrics.filter((febric) => febric?.id === update);
