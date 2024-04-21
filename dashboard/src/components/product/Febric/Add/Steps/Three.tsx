@@ -20,7 +20,7 @@ export default function StepThree({ onChangeHandler, febric, errors }: commonFeb
                 />
                 <Select options={opacity}
                     label={"Opacity"}
-                    value={febric.opacity ?? ""}
+                    value={febric?.opacity}
                     name="opacity"
                     onChange={onChangeHandler}
                     error={errors.opacity ? true : false}

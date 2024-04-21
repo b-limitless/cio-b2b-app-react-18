@@ -168,7 +168,7 @@ export default function AddFebric({ }: Props) {
 
   
 
-    const [step, setStep] = useState<formStepType>(formStepEnum.one);
+    const [step, setStep] = useState<formStepType>(formStepEnum.three);
     const [errors, setErrors] = useState<any>({ compositions: null });
     const [febric, setFebric] = useState<any>(updateFebric.length > 0 ? updateFebric[0] :febricInitalState);
     const [moveToNextStep, setMoveToNextStep] = useState(false);
@@ -268,6 +268,7 @@ export default function AddFebric({ }: Props) {
     };
 
 
+    console.log('febric', febric);
 
     const compositionNextStepHandler = useCallback(() => {
         setErrors({});
