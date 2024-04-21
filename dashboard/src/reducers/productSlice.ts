@@ -67,33 +67,6 @@ export const productSlice = createSlice({
         ...action.payload
       };
     },
-    // fetchFebrics: (
-    //   state: ProductInterface,
-    //   action: PayloadAction<febricType[]>
-    // ) => {
-    //   return {
-    //     ...state,
-    //     febrics: action.payload,
-    //   };
-    // },
-    // fetchingFebrics: (
-    //   state: ProductInterface,
-    //   action: PayloadAction<boolean>
-    // ) => {
-    //   return {
-    //     ...state,
-    //     loading: action.payload,
-    //   };
-    // },
-    // fetchedError: (
-    //   state: ProductInterface,
-    //   action: PayloadAction<string | null>
-    // ) => {
-    //   return {
-    //     ...state,
-    //     error: action.payload,
-    //   };
-    // },
     paginateFebric: (
       state: ProductInterface,
       action: PayloadAction<number>

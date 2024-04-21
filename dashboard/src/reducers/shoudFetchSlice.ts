@@ -1,7 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export enum EModel {
-  Order='order',
+  Orders='orders',
+  Febrics='febrics'
 }
 export interface IShouldFetchData {
   [x: string]: boolean;
@@ -13,6 +14,7 @@ export interface IPayload {
 }
 const initialState: IShouldFetchData = {
   order: true,
+  febrics: true
 };
 
 export const shouldFetchDataSlice = createSlice({

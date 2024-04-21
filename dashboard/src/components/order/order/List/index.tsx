@@ -22,7 +22,7 @@ type Props = {}
 export default function ListOrder({ }: Props) {
   const dispatch = useDispatch();
   const [showModel, setShowModel] = useState<string | null>(null);
-  const {order} = useSelector((state:RootState) => state.shouldFetch);
+  const {orders:shouldFetchOrders} = useSelector((state:RootState) => state.shouldFetch);
   const {orders} = useSelector((state:RootState) => state.orders);
 
   const { filters, page } = useSelector((state: RootState) => state.orders);
@@ -35,7 +35,7 @@ export default function ListOrder({ }: Props) {
   const { data, isLoading, error } = useQuery({
     queryKey: [queryKeys.fetchOrders, queryParams],
     queryFn: () => fetchOrders(queryParams),
-    enabled: order
+    enabled: shouldFetchOrders
   });
 
   useQuery(
@@ -81,8 +81,7 @@ export default function ListOrder({ }: Props) {
     const newFiltersState = { ...filters, [name]: typeof value === 'string' ? value.split(',') : value };
 
     dispatch(filterOrders(newFiltersState));
-    dispatch(fetchDataAction({key: EModel.Order, value: true}));
-    // dispatch(fetchDataAction({key: 'order', value: false}));
+    dispatch(fetchDataAction({key: EModel.Orders, value: true}));
   };
 
   const count = useMemo(() => {
@@ -92,7 +91,7 @@ export default function ListOrder({ }: Props) {
   useEffect(() => {
     if(data && !isLoading && !error) {
       dispatch(fetchOrdersAction(data));
-      dispatch(fetchDataAction({key: EModel.Order, value: false}));
+      dispatch(fetchDataAction({key: EModel.Orders, value: false}));
       
     }
   }, [data, isLoading, error]);

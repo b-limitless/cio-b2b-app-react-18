@@ -15,6 +15,7 @@ import FebricImageModel from './FebricImageModel';
 import styles from './styles.module.scss';
 import { useQuery } from '@tanstack/react-query';
 import { fetchFebric } from '../../../apis-requests/febric';
+import { EModel, fetchDataAction } from '../../../reducers/shoudFetchSlice';
 
 
 const perPage = 20;
@@ -43,8 +44,9 @@ export default function Febric() {
   const customStyle = {
     cursor: 'pointer'
   }
-  const [shouldFetchFebric, setShouldFetchFebric] = useState(true);
+  
   const { filters, page } = useSelector((state: RootState) => state.febrics);
+  const {febrics: shouldFetchFebric} = useSelector((state:RootState) => state.shouldFetch);
 
   const queryParams = {
     filters: JSON.stringify(filters),
@@ -132,7 +134,7 @@ export default function Febric() {
   useEffect(()=> {
     if(!isLoading && data) {
       dispatch(fetchedFebrics(data));
-      setShouldFetchFebric(false);
+      dispatch(fetchDataAction({key: EModel.Febrics, value: false}));
     }
   }, [data])
 
