@@ -48,14 +48,14 @@ export default function Details({ febric, showFebricImageModel, setShowFebricIma
     const [toogleIconChecked, setToggleIconChecked] = useState(false);
 
     const getComposition = () => {
-        return febric?.compositions.map((composition, i) =>
+        return febric?.compositions.map((composition:any, i:number) =>
             <span key={`composition-${i}`}
                 className={styles.type}>{i !== 0 ? ' -' : ''} {composition.persantage}% {composition.name}
             </span>)
     }
 
     const getCharacters = () => {
-        return febric?.characters.map((character, i) =>
+        return febric?.characters.map((character:any, i:number) =>
             <span key={`character-${i}`} className={styles.item}>{ removeUnderScore(character)}</span>)
     }
 
@@ -73,13 +73,13 @@ export default function Details({ febric, showFebricImageModel, setShowFebricIma
     return (
         <div className={styles.details}>
 
-            <div className={styles.d__row}>
+            {/* <div className={styles.d__row}>
                 <div className={`${styles.col} ${styles.name__cols}`}>
                     <div className={styles.intro__details}>
                         <div className={styles.name__type}>
                             <span className={styles.name}>{febric?.title}</span>
 
-                            {/* {getComposition()} */}
+                    
                         </div>
                         <div className={styles.features}>
                             {getCharacters()}
@@ -93,12 +93,7 @@ export default function Details({ febric, showFebricImageModel, setShowFebricIma
                         {getComposition()}
                     </div>
                 </div>
-                {/* <div className={styles.col}>
-                                <label htmlFor='toggle--checkbox'>
-                                <img className = {styles.toggle__icon}src='/svg/up.svg' width={12} height={18} alt='show' />
-                                </label>
-                                <input className = {styles.toggle__checkbox}type='checkbox' name='' id='toggle--checkbox' />
-                            </div> */}
+        
             </div>
 
             <input checked={toogleIconChecked}
@@ -116,19 +111,6 @@ export default function Details({ febric, showFebricImageModel, setShowFebricIma
                 <div className={styles.d__row}>
                     <div className={styles.attribures}>
                         {getAttributes()}
-                        {/* <div className={styles.item}>
-                            <div className={styles.title__icon}>
-                                <span className={styles.icon}>
-                                    <img src={svgCDNAssets.primiumIcon} width={20} height={20} alt='Primium' />
-                                </span>
-                                <span className={styles.title}>
-                                    PrimiuAm (+$40)
-                                </span>
-                            </div>
-                            <div className={styles.description}>
-                                For the highest quality, we have our premium fabrics. Here you will only find the best of the best.
-                            </div>
-                        </div>
                         <div className={styles.item}>
                             <div className={styles.title__icon}>
                                 <span className={styles.icon}>
@@ -154,10 +136,23 @@ export default function Details({ febric, showFebricImageModel, setShowFebricIma
                             <div className={styles.description}>
                                 For the highest quality, we have our premium fabrics. Here you will only find the best of the best.
                             </div>
-                        </div> */}
+                        </div>
+                        <div className={styles.item}>
+                            <div className={styles.title__icon}>
+                                <span className={styles.icon}>
+                                    <img src={svgCDNAssets.primiumIcon} width={20} height={20} alt='Primium' />
+                                </span>
+                                <span className={styles.title}>
+                                    PrimiuAm (+$40)
+                                </span>
+                            </div>
+                            <div className={styles.description}>
+                                For the highest quality, we have our premium fabrics. Here you will only find the best of the best.
+                            </div>
+                        </div>
                     </div>
                 </div>
-                {/* <div className={styles.features__reviews}>
+                <div className={styles.features__reviews}>
                     <div className={styles.row}>
                         <div className={styles.col}>EXCELLENCE</div>
                         <div className={styles.col}><Star value={2} /></div>
@@ -170,7 +165,7 @@ export default function Details({ febric, showFebricImageModel, setShowFebricIma
                         <div className={styles.col}>EXCELLENCE</div>
                         <div className={styles.col}><Star value={2} /></div>
                     </div>
-                </div> */}
+                </div>
                 <div className={styles.hide__info} onClick={() => setToggleIconChecked(false)}>
                     HIDE INFO
                     
@@ -181,7 +176,7 @@ export default function Details({ febric, showFebricImageModel, setShowFebricIma
                 </div>
 
                 
-            </div>
+            </div> */}
         </div>
 
 

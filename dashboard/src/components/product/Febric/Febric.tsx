@@ -55,13 +55,13 @@ export default function Febric() {
   const [deleteFebric, setDeleteFebric] = useState<null | string>(null);
   const [deletingFebric, setDeletingFebric] = useState<boolean>(false);
 
+  const {auth} = useSelector((state:RootState) => state.auth); 
 
   const showModelHandler = (i: number) => {
     setShowModel(i);
   }
 
   const editFebricHandler = (febric: string) => {
-    console.log('febric', febric);
     dispatch(updateFebric(febric));
   }
 
@@ -70,6 +70,7 @@ export default function Febric() {
   }
 
   // Lets fetch the febrics
+  console.log('auth',auth);
 
   useEffect(() => {
     const fetchFebricsOnComponentMount = async () => {
@@ -95,8 +96,11 @@ export default function Febric() {
       }
       dispatch(fetchingFebrics(false));
     }
-    fetchFebricsOnComponentMount();
-  }, [page, filters]);
+    if(auth) {
+      fetchFebricsOnComponentMount();
+    }
+    
+  }, [page, filters, auth]);
 
   const deleteCancelHandler = () => {
     setDeleteFebric(null);
@@ -159,11 +163,11 @@ export default function Febric() {
         setShowFebricImageModel={setShowFebricImageModel}
         showFebricImageModel={showFebricImageModel}
       />
-      <DataTable
+      {/* <DataTable
         setShowModel={setShowModel}
         tableHeader={tableHeader}
         // tableData={mockFebrics.slice(page * count, count + (page * count))}
-        tableData={febrics}
+        tableData={febrics ?? []}
         // showFebricModels={showModel}
         detailsComponents={null}
         showDetailReactNode={<img src={svgCDNAssets.eye} />}
@@ -180,7 +184,33 @@ export default function Febric() {
         loading={loading}
         rightButton={<Link to={'/products/febric/add'}><Button variant='primary' text={'Add'} /></Link>}
         handleFiltersOnChange={handleChange}
-      />
+        primaryKey={'id'}
+      /> */}
+      <DataTable
+      
+          setShowModel={setShowModel}
+          tableHeader={tableHeader}
+          tableData={febrics ?? []}
+          showFebricModels={false}
+          detailsComponents={null}
+          showDetailReactNode={"Edit"}
+          tableTitle={"Orders"}
+          // There is an issue with this props please check 
+          // enabling one props should show the button but I have to add both of them 
+          showToLeftButton={{ url: '/products/febric/add', label: 'Add Febric' }}
+          rightButton={<Link to={'/products/febric/add'}><Button variant='primary' text={'Add'} /></Link>}
+
+          setShowSelectRowId={() => { }}
+          filterData={filterData}
+          filters={filters}
+          paginate={true}
+          page={page}
+          setPage={setPage}
+          count={1}
+          loading={false}
+          handleFiltersOnChange={handleChange}
+          primaryKey={'id'}
+        />
     </>
 
   )
