@@ -9,7 +9,7 @@ import { FebricModelType } from './types/febrics';
 
 // Exclude the file which do not required to show in the details
 // Because they exists in table and some of them already shown
-const skipFields = ['version','action', 'id', 'price', 'title', 'userId', 'warmth', 'compositions', 'characters', 'waterproof', 'febricType', 'thumbnailImageUrl', 'originalImageUrl']
+const skipFields = ['version', 'action', 'id', 'price', 'title', 'userId', 'warmth', 'compositions', 'characters', 'waterproof', 'febricType', 'thumbnailImageUrl', 'originalImageUrl']
 
 type Details = {
     febric: febricType | null
@@ -24,10 +24,9 @@ const elementStyles = {
 type ItemDetail = {
     title: string;
     value: string | number;
-    // description: string;
 }
 
-export const ItemDetail = ({title, value}: ItemDetail) => {
+export const ItemDetail = ({ title, value }: ItemDetail) => {
     return <div className={styles.item}>
         <div className={styles.title__icon}>
             <span className={styles.icon}>
@@ -48,22 +47,22 @@ export default function Details({ febric, showFebricImageModel, setShowFebricIma
     const [toogleIconChecked, setToggleIconChecked] = useState(false);
 
     const getComposition = () => {
-        return febric?.compositions.map((composition:any, i:number) =>
+        return febric?.compositions.map((composition: any, i: number) =>
             <span key={`composition-${i}`}
                 className={styles.type}>{i !== 0 ? ' -' : ''} {composition.persantage}% {composition.name}
             </span>)
     }
 
     const getCharacters = () => {
-        return febric?.characters.map((character:any, i:number) =>
-            <span key={`character-${i}`} className={styles.item}>{ removeUnderScore(character)}</span>)
+        return febric?.characters.map((character: any, i: number) =>
+            <span key={`character-${i}`} className={styles.item}>{removeUnderScore(character)}</span>)
     }
 
     const getAttributes = () => {
-        return febric && Object.keys(febric).map((key:any) => {
-            if(skipFields.indexOf(key) == -1) {
+        return febric && Object.keys(febric).map((key: any) => {
+            if (skipFields.indexOf(key) == -1) {
                 // @ts-ignore
-                return <ItemDetail title={key} value={febric[key]}/>
+                return <ItemDetail title={key} value={febric[key]} />
             }
 
             return null;
@@ -71,114 +70,60 @@ export default function Details({ febric, showFebricImageModel, setShowFebricIma
 
     }
     return (
-        <div className={styles.details}>
 
-            {/* <div className={styles.d__row}>
-                <div className={`${styles.col} ${styles.name__cols}`}>
-                    <div className={styles.intro__details}>
-                        <div className={styles.name__type}>
-                            <span className={styles.name}>{febric?.title}</span>
+        <div className={styles.container}>
+            <div className={styles.productDetails}>
+                <h2>Product Details</h2>
+                <div className={styles.details}>
+                    <div className={styles.detail}>
+                        <span className={styles.label}>User ID:</span>
+                        <span className={styles.value}>65d3277dd1365d5ecd4882e9</span>
+                    </div>
+                    <div className={styles.detail}>
+                        <span className={styles.label}>Title:</span>
+                        <span className={styles.value}>Mr</span>
+                    </div>
+                    <div className={styles.detail}>
+                        <span className={styles.label}>Price:</span>
+                        <span className={styles.value}>$329.73</span>
+                    </div>
+                    <div className={styles.detail}>
+                        <span className={styles.label}>Delivery Time:</span>
+                        <span className={styles.value}>1-2 business days</span>
+                    </div>
+                    <div className={styles.detail}>
+                        <span className={styles.label}>Excellence:</span>
+                        <span className={styles.value}>Medium</span>
+                    </div>
+                    <div className={styles.detail}>
+                        <span className={styles.label}>Compositions:</span>
+                        <div className={styles.composition}>
+                            <div className={styles.compositionItem}>
+                                <span>Polyester</span>
+                                <span>57%</span>
+                            </div>
+                            <div className={styles.compositionItem}>
+                                <span>Wool</span>
+                                <span>24%</span>
+                            </div>
+                            <div className={styles.compositionItem}>
+                                <span>Wool</span>
+                                <span>2%</span>
+                            </div>
+                            <div className={styles.compositionItem}>
+                                <span>Silk</span>
+                                <span>11%</span>
+                            </div>
+                            <div className={styles.compositionItem}>
+                                <span>Other</span>
+                                <span>17%</span>
+                            </div>
 
-                    
                         </div>
-                        <div className={styles.features}>
-                            {getCharacters()}
-                        </div>
                     </div>
 
-                    <div className={styles.specification}>
-                        {removeUnderScore(febric?.warmth)} - {removeUnderScore(febric?.waterproof)} - {removeUnderScore(febric?.febricTypes)} - {febric?.weight} gr/m2 - Super 50s
-                    </div>
-                    <div className={styles.specification}>
-                        {getComposition()}
-                    </div>
                 </div>
-        
             </div>
-
-            <input checked={toogleIconChecked}
-                className={styles.toggle__checkbox}
-                type='checkbox'
-                name=''
-                id='toggle--checkbox'
-                onChange={(e) => setToggleIconChecked(e.target.checked)}
-            />
-            <label htmlFor='toggle--checkbox' className={styles.toggle__label}>
-                <img className={styles.toggle__icon} src={svgCDNAssets.arrowUpIcon} width={12} height={18} alt='show' />
-            </label>
-
-            <div className={styles.hidden__details}>
-                <div className={styles.d__row}>
-                    <div className={styles.attribures}>
-                        {getAttributes()}
-                        <div className={styles.item}>
-                            <div className={styles.title__icon}>
-                                <span className={styles.icon}>
-                                    <img src={svgCDNAssets.primiumIcon} width={20} height={20} alt='Primium' />
-                                </span>
-                                <span className={styles.title}>
-                                    PrimiuAm (+$40)
-                                </span>
-                            </div>
-                            <div className={styles.description}>
-                                For the highest quality, we have our premium fabrics. Here you will only find the best of the best.
-                            </div>
-                        </div>
-                        <div className={styles.item}>
-                            <div className={styles.title__icon}>
-                                <span className={styles.icon}>
-                                    <img src={svgCDNAssets.primiumIcon} width={20} height={20} alt='Primium' />
-                                </span>
-                                <span className={styles.title}>
-                                    PrimiuAm (+$40)
-                                </span>
-                            </div>
-                            <div className={styles.description}>
-                                For the highest quality, we have our premium fabrics. Here you will only find the best of the best.
-                            </div>
-                        </div>
-                        <div className={styles.item}>
-                            <div className={styles.title__icon}>
-                                <span className={styles.icon}>
-                                    <img src={svgCDNAssets.primiumIcon} width={20} height={20} alt='Primium' />
-                                </span>
-                                <span className={styles.title}>
-                                    PrimiuAm (+$40)
-                                </span>
-                            </div>
-                            <div className={styles.description}>
-                                For the highest quality, we have our premium fabrics. Here you will only find the best of the best.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={styles.features__reviews}>
-                    <div className={styles.row}>
-                        <div className={styles.col}>EXCELLENCE</div>
-                        <div className={styles.col}><Star value={2} /></div>
-                    </div>
-                    <div className={styles.row}>
-                        <div className={styles.col}>EXCELLENCE</div>
-                        <div className={styles.col}><Star value={2} /></div>
-                    </div>
-                    <div className={styles.row}>
-                        <div className={styles.col}>EXCELLENCE</div>
-                        <div className={styles.col}><Star value={2} /></div>
-                    </div>
-                </div>
-                <div className={styles.hide__info} onClick={() => setToggleIconChecked(false)}>
-                    HIDE INFO
-                    
-                </div>
-
-                <div className={styles.hide__info} onClick={() => setShowFebricImageModel(true)}>
-                   View Febric Image
-                </div>
-
-                
-            </div> */}
         </div>
-
-
     )
 }

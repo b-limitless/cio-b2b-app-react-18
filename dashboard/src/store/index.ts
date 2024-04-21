@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import auth from "../reducers/authSlice";
-import product from "../reducers/productSlice";
+import febrics from "../reducers/productSlice";
 import users from "../reducers/userSlice";
 import orders from "../reducers/orderSlice";
 import notifications from "../reducers/notficiationSlice";
@@ -10,7 +10,7 @@ import shouldFetch from "../reducers/shoudFetchSlice";
 export const Store = configureStore({
   reducer: {
     auth,
-    product,
+    febrics,
     users,
     orders,
     notifications,

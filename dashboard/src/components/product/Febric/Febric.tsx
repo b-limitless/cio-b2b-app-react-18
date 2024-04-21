@@ -4,7 +4,7 @@ import { request } from '../../../utils/request';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { affectedRowAction, fetchFebrics, fetchingFebrics, filterFebric, updateFebric } from '../../../reducers/productSlice';
+import { affectedRowAction, fetchedFebrics, filterFebric, updateFebric } from '../../../reducers/productSlice';
 import { APIS } from '../../../config/apis';
 import { brightness, febricSeasons } from '../../../config/febric';
 import { ProductInterface } from '../../../interfaces/febric.interface';
@@ -13,6 +13,8 @@ import ConfirmationDialog from '../../common/Confimation/ConfirmationDialog';
 import FebricDetailsModel from './FebricDetailsModel';
 import FebricImageModel from './FebricImageModel';
 import styles from './styles.module.scss';
+import { useQuery } from '@tanstack/react-query';
+import { fetchFebric } from '../../../apis-requests/febric';
 
 
 const perPage = 20;
@@ -41,21 +43,36 @@ export default function Febric() {
   const customStyle = {
     cursor: 'pointer'
   }
+  const [shouldFetchFebric, setShouldFetchFebric] = useState(true);
+  const { filters, page } = useSelector((state: RootState) => state.febrics);
+
+  const queryParams = {
+    filters: JSON.stringify(filters),
+    page
+  };
+
 
   const tableHeader = ['title', 'type', 'price', 'febricSeasons', 'action'];
 
-  const { product: { loading, febrics, affectedRows, filters } } = useSelector((state: RootState) => state);
+  // const { febrics: { loading, febrics, affectedRows, filters } } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
+  const {febrics} = useSelector((state:RootState) => state.febrics);
 
+  const { data, isLoading, error } = useQuery(
+    { queryKey: ['fetchFebrics'], 
+    queryFn: () => fetchFebric(queryParams), 
+    enabled: shouldFetchFebric
+  }
+    )
 
   const [showModel, setShowModel] = useState<number>(-1);
-  
-  const [page, setPage] = useState<number>(0);
+
+  // const [, setPage] = useState<number>(0);
   const [showFebricImageModel, setShowFebricImageModel] = useState(false);
   const [deleteFebric, setDeleteFebric] = useState<null | string>(null);
   const [deletingFebric, setDeletingFebric] = useState<boolean>(false);
 
-  const {auth} = useSelector((state:RootState) => state.auth); 
+  const { auth } = useSelector((state: RootState) => state.auth);
 
   const showModelHandler = (i: number) => {
     setShowModel(i);
@@ -69,53 +86,21 @@ export default function Febric() {
     setDeleteFebric(id);
   }
 
-  // Lets fetch the febrics
-  console.log('auth',auth);
-
-  useEffect(() => {
-    const fetchFebricsOnComponentMount = async () => {
-      dispatch(fetchingFebrics(true));
-      try {
-        const {febrics, affectedRows} = await request({
-          url: `${APIS.product.new}?page=${page}&filters=${JSON.stringify(filters)}`,
-          method: 'get'
-        });
-        febrics.map((row: any, i: number) => {
-          row.action = <>
-            <a style={customStyle} onClick={() => showModelHandler(i)}>Details</a>{' '}
-            <Link to='/products/febric/add' onClick={() => editFebricHandler(row.id)}>Edit</Link>
-            {' '}
-            <span className={styles.deleteSpan} onClick={() => deleteFebricHandler(row.id)}>Delete</span>
-          </>;
-          return row;
-        });
-        dispatch(fetchFebrics(febrics));
-        dispatch(affectedRowAction(affectedRows));
-      } catch (err) {
-        console.error('Could not fetch febric', err);
-      }
-      dispatch(fetchingFebrics(false));
-    }
-    if(auth) {
-      fetchFebricsOnComponentMount();
-    }
-    
-  }, [page, filters, auth]);
 
   const deleteCancelHandler = () => {
     setDeleteFebric(null);
   }
 
-  const deleteHandler = async() => {
+  const deleteHandler = async () => {
     setDeletingFebric(true)
     try {
       await request({
-        method: 'delete', 
+        method: 'delete',
         url: `${APIS.product.new}/${deleteFebric}`
       });
       dispatch(fetchFebrics(febrics.filter((febric) => febric.id !== deleteFebric)));
       setDeleteFebric(null);
-    } catch(err:any) {
+    } catch (err: any) {
       console.error(err);
       throw new Error(err);
     }
@@ -140,29 +125,40 @@ export default function Febric() {
     // );
   };
 
+  const setPage = () => {
+
+  }
+
+  useEffect(()=> {
+    if(!isLoading && data) {
+      dispatch(fetchedFebrics(data));
+      setShouldFetchFebric(false);
+    }
+  }, [data])
 
   return (
     <>
       {/* <FebricDetails setShowFebricDetailsModel={setShowFebricDetailsModel} showFebricDetailsModel={showFebricDetailsModel} /> */}
       {deleteFebric && <ConfirmationDialog
 
->
-  <Button variant='light' text='Cancel' onClick={deleteCancelHandler} />
-  <Button variant='primary' text={deletingFebric ? 'Please wait...' : 'Confirm'} className={styles.dark__primary} size="small" onClick={deletingFebric ? null : deleteHandler}/>
+      >
+        <Button variant='light' text='Cancel' onClick={deleteCancelHandler} />
+        <Button variant='primary' text={deletingFebric ? 'Please wait...' : 'Confirm'} className={styles.dark__primary} size="small" onClick={deletingFebric ? null : deleteHandler} />
 
-</ConfirmationDialog>}
-      <FebricImageModel
+      </ConfirmationDialog>}
+      {/* {showModel} && <FebricImageModel
         febric={showModel !== -1 ? febrics[showModel] : null}
         showFebricImageModel={showFebricImageModel}
         setShowFebricImageModel={setShowFebricImageModel}
-      />
-      <FebricDetailsModel
+      /> */}
+
+      {showModel && <FebricDetailsModel
         showModel={showModel}
         setShowModel={setShowModel}
-        febric={showModel !== -1 ? febrics[showModel] : null}
+        febric={showModel !== -1 ? data?.febrics?.[showModel] : null}
         setShowFebricImageModel={setShowFebricImageModel}
         showFebricImageModel={showFebricImageModel}
-      />
+      />}
       {/* <DataTable
         setShowModel={setShowModel}
         tableHeader={tableHeader}
@@ -187,30 +183,30 @@ export default function Febric() {
         primaryKey={'id'}
       /> */}
       <DataTable
-      
-          setShowModel={setShowModel}
-          tableHeader={tableHeader}
-          tableData={febrics ?? []}
-          showFebricModels={false}
-          detailsComponents={null}
-          showDetailReactNode={"Edit"}
-          tableTitle={"Orders"}
-          // There is an issue with this props please check 
-          // enabling one props should show the button but I have to add both of them 
-          showToLeftButton={{ url: '/products/febric/add', label: 'Add Febric' }}
-          rightButton={<Link to={'/products/febric/add'}><Button variant='primary' text={'Add'} /></Link>}
 
-          setShowSelectRowId={() => { }}
-          filterData={filterData}
-          filters={filters}
-          paginate={true}
-          page={page}
-          setPage={setPage}
-          count={1}
-          loading={false}
-          handleFiltersOnChange={handleChange}
-          primaryKey={'id'}
-        />
+        setShowModel={setShowModel}
+        tableHeader={tableHeader}
+        tableData={data?.febrics ?? []}
+        showFebricModels={false}
+        detailsComponents={null}
+        showDetailReactNode={"Edit"}
+        tableTitle={"Orders"}
+        // There is an issue with this props please check 
+        // enabling one props should show the button but I have to add both of them 
+        showToLeftButton={{ url: '/products/febric/add', label: 'Add Febric' }}
+        rightButton={<Link to={'/products/febric/add'}><Button variant='primary' text={'Add'} /></Link>}
+
+        setShowSelectRowId={() => { }}
+        filterData={filterData}
+        filters={filters}
+        paginate={true}
+        page={page}
+        setPage={setPage}
+        count={1}
+        loading={isLoading}
+        handleFiltersOnChange={handleChange}
+        primaryKey={'id'}
+      />
     </>
 
   )

@@ -268,7 +268,6 @@ export default function AddFebric({ }: Props) {
     };
 
 
-    console.log('febric', febric);
 
     const compositionNextStepHandler = useCallback(() => {
         setErrors({});
