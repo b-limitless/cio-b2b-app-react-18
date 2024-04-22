@@ -76,10 +76,19 @@ export const productSlice = createSlice({
         page: action.payload,
       };
     },
+  
     addFebric: (state: ProductInterface, action: PayloadAction<febricType>) => {
       return {
         ...state,
         febrics: [...state.febrics, action.payload],
+      };
+    },
+
+    deleteFebricAction: (state: ProductInterface, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        febrics: [...state.febrics].filter((febric) => febric.id !== action.payload),
+        affectedRows: state.affectedRows - 1
       };
     },
     updateFebric: (state: ProductInterface, action: PayloadAction<string | null>) => {
@@ -110,7 +119,8 @@ export const {
   addFebric,
   updateFebric, 
   affectedRowAction, 
-  filterFebric
+  filterFebric, 
+  deleteFebricAction
 } = productSlice.actions;
 
 export const productActions = productSlice.actions;

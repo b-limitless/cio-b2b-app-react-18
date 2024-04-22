@@ -368,8 +368,7 @@ export default function AddFebric({ }: Props) {
         }
     }, [update, data, isLoading, error]);
 
-    console.log('febric', febric);
-
+   
 
     return (
         <FormTemplate

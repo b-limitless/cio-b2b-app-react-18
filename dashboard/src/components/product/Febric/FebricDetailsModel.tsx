@@ -22,7 +22,7 @@ export default function FebricDetailsModel({showModel, setShowModel}: febricMode
     <SideModel showModel={showModel} setShowModel={setShowModel}>
         <Details 
         showModel={showModel}
-  
+        setShowModel={setShowModel}
         />
          <div>
         </div>

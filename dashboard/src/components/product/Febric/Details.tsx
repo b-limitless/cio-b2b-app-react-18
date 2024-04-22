@@ -1,29 +1,20 @@
-import React, { useState } from 'react';
-import { pngCDNAssetsURIs, svgCDNAssets } from '../../../config/assets';
-import Star from '../../common/Rating';
-import styles from './details.module.scss';
-import { febricType } from '../../../../reducers/productSlice';
-import { characters } from '../../../config/febric';
-import { removeUnderScore } from '../../../functions/removeUnderScore';
-import { FebricModelType } from './types/febrics';
-import { useIsFetching, useQueryClient } from '@tanstack/react-query';
-import { queryKeys } from '../../../config/queryKeys';
-import FebricDetailsSkeleton from './FebricDetailsSkleton';
+// Improvement when deleting the febric asking client for confirmation can be 
+// Improvement in user experience because its deleted forever 
+import React, { useEffect, useState } from 'react';
 import { Button, camelCaseToNormal } from '@pasal/cio-component-library';
+import { useIsFetching, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
-import { updateFebric } from '../../../reducers/productSlice';
-import { Router, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { pngCDNAssetsURIs, svgCDNAssets } from '../../../config/assets';
+import { queryKeys } from '../../../config/queryKeys';
+import { removeUnderScore } from '../../../functions/removeUnderScore';
+import { deleteFebricAction, updateFebric } from '../../../reducers/productSlice';
+import FebricDetailsSkeleton from './FebricDetailsSkleton';
+import styles from './details.module.scss';
+import { deleteFebric as deleteFebricAPI } from '../../../apis-requests/febric/delete';
 
-// Exclude the file which do not required to show in the details
-// Because they exists in table and some of them already shown
 const skipFields = ['version', 'userId', 'id', 'characters', 'superShiny', 'compositions', 'thumbnailImageUrl', 'originalImageUrl']
 
-
-const elementStyles = {
-    backgroundImage: `url('${pngCDNAssetsURIs.febric1}')`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover'
-}
 
 type ItemDetail = {
     title: string;
@@ -46,66 +37,21 @@ export const ItemDetail = ({ title, value }: ItemDetail) => {
     </div>;
 }
 
-// const febric = {
-//     "characters": [
-//         "Stretchy_Elastic"
-//     ],
-//     "compositions": [
-//         {
-//             "name": "Cotton",
-//             "code": "cotton",
-//             "persantage": "100"
-//         }, 
-//         {
-//             "name": "Cotton",
-//             "code": "cotton",
-//             "persantage": "100"
-//         }, 
-//         {
-//             "name": "Cotton",
-//             "code": "cotton",
-//             "persantage": "100"
-//         }
-//     ],
-//     "userId": "6625144e6b72786eb40ac4b2",
-//     "deliveryTime": "10",
-//     "excellence": "1",
-//     "warmth": "Thermal_Conductivity",
-//     "weight": "1",
-//     "threadStyle": "twisted",
-//     "brightness": "reflectance",
-//     "superShiny": true,
-//     "tone": "medium",
-//     "opacity": "25",
-//     "waterproof": "not_waterproof",
-//     "stretchyText": "Stretchy fabric",
-//     "stretchy": "non-stretchy",
-//     "type": "shirt",
-//     "febricTypes": "cotton",
-//     "threadTypes": "polyester",
-//     "threadCounts": "400-600",
-//     "thumbnailImageUrl": "https://res.cloudinary.com/dun5p8e5d/image/upload/v1713706346/thumbnails/ABC/emkas9hhscmuutwjtf6m.jpg",
-//     "originalImageUrl": "https://res.cloudinary.com/dun5p8e5d/image/upload/v1713706342/images/ABC/htbuxrlyi2tawmv1i9ee.jpg",
-//     "createdAt": "2024-04-21T13:32:35.060Z",
-//     "updatedAt": "2024-04-21T13:32:35.060Z",
-//     "version": 0,
-//     "id": "662515736b72786eb40ac509"
-// };
-
 interface IDetails {
     showModel: string | null;
+    setShowModel: Function;
 }
-export default function Details({ showModel }: IDetails) {
+export default function Details({ showModel, setShowModel }: IDetails) {
     const queryClient = useQueryClient();
     const febricDetails: any = queryClient.getQueryData([queryKeys.fetchFebricDetails, showModel]);
     const isFebricDetailLoading = useIsFetching({ queryKey: [queryKeys.fetchFebricDetails] });
+    const [deleteFebric, setDeleteFebric] = useState<string | null>(null)
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    console.log('febricDetails', febricDetails);
-
     const GetComposition = () => {
-        return !isFebricDetailLoading &&  febricDetails?.compositions.map((composition: any, i: number) =>
+        return !isFebricDetailLoading && febricDetails?.compositions.map((composition: any, i: number) =>
             <div className={styles.compositionItem}>
                 <span>{composition?.name}</span>
                 <span>{composition?.persantage}%</span>
@@ -132,15 +78,40 @@ export default function Details({ showModel }: IDetails) {
         });
 
     }
-    
-    const deleteFebric =  () => {
 
+    const deleteFebricHandler = () => {
+        setDeleteFebric(febricDetails.id);
     }
 
     const updateFebricHandler = () => {
         dispatch(updateFebric(febricDetails?.id));
         navigate('/products/febric/add');
     }
+
+    
+    const { data, isLoading, error } = useQuery(
+        {
+            queryKey: [queryKeys.fetchFebricDetails, deleteFebric], // Include showModel in the query key
+            queryFn: () => {
+                if (deleteFebric) {
+
+                    return deleteFebricAPI(deleteFebric);
+                } else {
+                    return null;
+                }
+            },
+
+        }
+    );
+
+
+    useEffect(() => {
+        if (data && !isLoading && !error) {
+            dispatch(deleteFebricAction(deleteFebric ?? ''));
+            setDeleteFebric(null);
+            setShowModel(null);
+        }
+    }, [data, isLoading, error])
 
     return (
 
@@ -177,9 +148,9 @@ export default function Details({ showModel }: IDetails) {
                         <div className={styles.detail}>
                             <span className={styles.label}>Compositions:</span>
                             <div className={styles.composition}>
-                                <GetComposition/>
+                                <GetComposition />
 
-                                
+
                                 {/* <div className={styles.compositionItem}>
                                     <span>Polyester</span>
                                     <span>57%</span>
@@ -206,16 +177,14 @@ export default function Details({ showModel }: IDetails) {
 
                     </div>
 
-                     <div className={styles.actions}>
-                        <Button variant = 'primary' text= 'Delete'></Button>
+                    <div className={styles.actions}>
+                        <Button variant='primary' text='Delete' onClick={() => deleteFebricHandler()}></Button>
                         <Button variant='light' text='Update' onClick={() => updateFebricHandler()}></Button>
-                     </div>
+                    </div>
                 </div>
             </div>}
             {!!isFebricDetailLoading && <FebricDetailsSkeleton />}
         </>
-
-
 
     )
 }

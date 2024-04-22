@@ -17,12 +17,12 @@ export const APIS = {
   },
   product: {
     upload: `${productBaseURI}/v1/upload`,
-    new: `${productBaseURI}/v1`,
+    new: `${productBaseURI}/v1`, // This is not right this is base resource, modify it
   },
   febric: {
     details: (id:string) => {
       return `${productBaseURI}/febric/${id}/v1`;
-    }
+    },     
   }, 
   user: {
     checkEmail: `${userBaseURI}/team/check-email`,
