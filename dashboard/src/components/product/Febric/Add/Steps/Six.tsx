@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
-import { Button, Input, Select, Chip as MultipleSelectChip, TextArea, InputAdornments } from '@pasal/cio-component-library';
-import styles from "../add-febric.module.scss";
-import { febricTypes } from '../../../../../config/febric';
+import React from 'react';
 import { SelectChangeEvent } from '@mui/material/Select';
+import { Input, Select } from '@pasal/cio-component-library';
 import { svgCDNAssets } from '../../../../../config/assets';
+import styles from "../add-febric.module.scss";
 import { CompositionInterface } from './steps.interface';
-import FormErrorMessage from '../../../../common/FormErrorMessage';
 type Props = {
     compositions: CompositionInterface[];
     availableComposition: CompositionInterface[];

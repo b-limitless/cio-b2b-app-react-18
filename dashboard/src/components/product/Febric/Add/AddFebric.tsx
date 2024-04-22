@@ -194,7 +194,7 @@ export default function AddFebric({ }: Props) {
 
     const [step, setStep] = useState<formStepType>(formStepEnum.one);
     const [errors, setErrors] = useState<any>({ compositions: null });
-    const [febric, setFebric] = useState<any>({}); //updateFebric.length > 0 ? updateFebric[0] :febricInitalState
+    const [febric, setFebric] = useState<any>({characters:[]}); //updateFebric.length > 0 ? updateFebric[0] :febricInitalState
     const [moveToNextStep, setMoveToNextStep] = useState(false);
    
     const [febricImage, setFebricImage] = useState<File | null>(null);
@@ -202,7 +202,7 @@ export default function AddFebric({ }: Props) {
     const [uploadingFebric, setUploadingFebric] = useState<boolean>(false);
 
     // Will store data for febric composition such as cotton, polyster etc 
-    const [compositions, setComposition] = useState<CompositionInterface[]>(updateFebric.length > 0 ? updateFebric[0].compositions :[]);
+    const [compositions, setComposition] = useState<CompositionInterface[]>([]);
 
     const [availableComposition, setAvailableComposition] = useState<CompositionInterface[]>(febricTypes);
 
