@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@mui/material": "^5.15.15",
-    "@pasal/cio-component-library": "^100.0.0",
+    "@pasal/cio-component-library": "^101.0.0",
     "@pasal/common-functions": "^4.0.0",
     "@pasal/common-style": "^2.0.17",
     "@reduxjs/toolkit": "^2.2.1",

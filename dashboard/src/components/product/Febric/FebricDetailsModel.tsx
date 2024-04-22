@@ -19,7 +19,7 @@ type febricModel = Props  & FebricModelType;
 
 export default function FebricDetailsModel({showModel, setShowModel}: febricModel) {
   return (
-    <SideModel showModel={showModel} setShowModel={setShowModel}>
+    <SideModel showModel={true} setShowModel={setShowModel}>
         <Details 
         showModel={showModel}
         setShowModel={setShowModel}

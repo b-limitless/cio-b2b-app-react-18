@@ -12,6 +12,7 @@ import { deleteFebricAction, updateFebric } from '../../../reducers/productSlice
 import FebricDetailsSkeleton from './FebricDetailsSkleton';
 import styles from './details.module.scss';
 import { deleteFebric as deleteFebricAPI } from '../../../apis-requests/febric/delete';
+import ConfirmationDialog from '../../common/Confimation/ConfirmationDialog';
 
 const skipFields = ['version', 'userId', 'id', 'characters', 'superShiny', 'compositions', 'thumbnailImageUrl', 'originalImageUrl']
 
@@ -114,10 +115,20 @@ export default function Details({ showModel, setShowModel }: IDetails) {
     }, [data, isLoading, error])
 
     return (
-
         <>
             {!isFebricDetailLoading && <div className={styles.container}>
+                
                 <div className={styles.productDetails}>
+                    <div className={styles.confirmation}>
+                        <div className={styles.row}>
+                         Are you sure to delete this item
+                        </div>
+                        <div className={styles.row}>
+                            <span>Cancel</span>
+                            <span>Confirm</span>
+                        </div>
+                    </div>
+                    
                     <h2>Product Details</h2>
                     <div className={styles.details}>
                         {/* <div className={styles.detail}>
