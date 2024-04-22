@@ -42,11 +42,30 @@ interface IDetails {
     showModel: string | null;
     setShowModel: Function;
 }
+
+
+interface IConfimrModel {
+    confirmHandler: Function;
+    cancelHandler: Function;
+    deleting: boolean;
+}
+const SideModelConfirmation = ({confirmHandler, cancelHandler, deleting}: IConfimrModel) => {
+    return <div className={styles.confirmation}>
+        <div className={styles.row}>
+            Are you sure to delete this item
+        </div>
+        <div className={styles.row}>
+            <span onClick={() => cancelHandler()}>Cancel</span>
+            <span onClick={() => deleting ? null : confirmHandler()}> {deleting ? 'Please wait..' : 'Confirm'}</span>
+        </div>
+    </div>
+}
 export default function Details({ showModel, setShowModel }: IDetails) {
     const queryClient = useQueryClient();
     const febricDetails: any = queryClient.getQueryData([queryKeys.fetchFebricDetails, showModel]);
     const isFebricDetailLoading = useIsFetching({ queryKey: [queryKeys.fetchFebricDetails] });
-    const [deleteFebric, setDeleteFebric] = useState<string | null>(null)
+    const [deleteFebric, setDeleteFebric] = useState<string | null>(null);
+    const [showDeleteModel, setShowDeleteModel] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -81,7 +100,8 @@ export default function Details({ showModel, setShowModel }: IDetails) {
     }
 
     const deleteFebricHandler = () => {
-        setDeleteFebric(febricDetails.id);
+        setShowDeleteModel(true);
+        // setDeleteFebric(febricDetails.id);
     }
 
     const updateFebricHandler = () => {
@@ -89,7 +109,7 @@ export default function Details({ showModel, setShowModel }: IDetails) {
         navigate('/products/febric/add');
     }
 
-    
+
     const { data, isLoading, error } = useQuery(
         {
             queryKey: [queryKeys.fetchFebricDetails, deleteFebric], // Include showModel in the query key
@@ -111,24 +131,29 @@ export default function Details({ showModel, setShowModel }: IDetails) {
             dispatch(deleteFebricAction(deleteFebric ?? ''));
             setDeleteFebric(null);
             setShowModel(null);
+            setShowDeleteModel(false);
         }
-    }, [data, isLoading, error])
+    }, [data, isLoading, error]);
+
+    const confirmHandler = () => {
+        setDeleteFebric(febricDetails.id);
+    }
+
+    const cancelHandler = () => {
+        setShowDeleteModel(false);
+    }
 
     return (
         <>
             {!isFebricDetailLoading && <div className={styles.container}>
-                
+
                 <div className={styles.productDetails}>
-                    <div className={styles.confirmation}>
-                        <div className={styles.row}>
-                         Are you sure to delete this item
-                        </div>
-                        <div className={styles.row}>
-                            <span>Cancel</span>
-                            <span>Confirm</span>
-                        </div>
-                    </div>
-                    
+                    {showDeleteModel && <SideModelConfirmation
+                    cancelHandler={cancelHandler}
+                    confirmHandler={confirmHandler}
+                    deleting={isLoading}
+                    />}
+
                     <h2>Product Details</h2>
                     <div className={styles.details}>
                         {/* <div className={styles.detail}>
