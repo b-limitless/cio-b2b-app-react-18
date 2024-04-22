@@ -16,6 +16,8 @@ import styles from './styles.module.scss';
 import { useQuery } from '@tanstack/react-query';
 import { fetchFebric } from '../../../apis-requests/febric';
 import { EModel, fetchDataAction } from '../../../reducers/shoudFetchSlice';
+import { queryKeys } from '../../../config/queryKeys';
+import { fetchFebricDetails } from '../../../apis-requests/febric/febricDetails';
 
 
 const perPage = 20;
@@ -44,7 +46,7 @@ export default function Febric() {
   const customStyle = {
     cursor: 'pointer'
   }
-  
+  const [showModel, setShowModel] = useState<null | string>(null);
   const {febrics: shouldFetchFebric} = useSelector((state:RootState) => state.shouldFetch);
   const {febrics, filters, page } = useSelector((state:RootState) => state.febrics);
   const queryParams = {
@@ -56,27 +58,40 @@ export default function Febric() {
 
   const tableHeader = ['title', 'price', 'modelType', 'material', 'action'];
 
-  // const { febrics: { loading, febrics, affectedRows, filters } } = useSelector((state: RootState) => state);
+
   const dispatch = useDispatch();
   
 
   const { data, isLoading, error } = useQuery(
-    { queryKey: ['fetchFebrics', queryParams], 
+    { queryKey: [queryKeys.fetchFebrics, queryParams], 
     queryFn: () => fetchFebric(queryParams), 
     enabled: shouldFetchFebric
   }
-    )
+    );
 
-  const [showModel, setShowModel] = useState<number>(-1);
+    const {data: febricDetails} = useQuery(
+      {
+        queryKey: [queryKeys.fetchOrderDetails, showModel], // Include showModel in the query key
+        queryFn: () => {
+          if (showModel) {
+            return fetchFebricDetails(showModel);
+          } else {
+            return null;
+          }
+  
+        }
+      }
+    );
+  
 
   // const [, setPage] = useState<number>(0);
   const [showFebricImageModel, setShowFebricImageModel] = useState(false);
   const [deleteFebric, setDeleteFebric] = useState<null | string>(null);
   const [deletingFebric, setDeletingFebric] = useState<boolean>(false);
 
-  const { auth } = useSelector((state: RootState) => state.auth);
 
-  const showModelHandler = (i: number) => {
+
+  const showModelHandler = (i: null | string) => {
     setShowModel(i);
   }
 
@@ -153,7 +168,6 @@ export default function Febric() {
       {showModel && <FebricDetailsModel
         showModel={showModel}
         setShowModel={setShowModel}
-        febric={showModel !== -1 ? data?.febrics?.[showModel] : null}
         setShowFebricImageModel={setShowFebricImageModel}
         showFebricImageModel={showFebricImageModel}
       />}
@@ -209,3 +223,4 @@ export default function Febric() {
 
   )
 }
+

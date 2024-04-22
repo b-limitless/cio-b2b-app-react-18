@@ -3,5 +3,7 @@ export enum queryKeys {
     fetchOrderDetails='fetchOrderDetails', 
     fetchOrders='fetchOrders', 
     fetchMeasurement='fetchMeasurement', 
-    fetchShipping='fetchShipping'
+    fetchShipping='fetchShipping', 
+    fetchFebrics='fetchFebrics', 
+    fetchFebricDetails='fetchFebricDetails'
 }

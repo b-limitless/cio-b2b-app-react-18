@@ -6,7 +6,7 @@ import CloseSVG from '../../../assets/svg/close.svg'
 
 interface SideModeInterface {
   children: React.ReactNode;
-  showModel: boolean | number;
+  showModel: null | string ;
   setShowModel: Function;
   style?:object;
 
@@ -16,7 +16,7 @@ interface SideModeInterface {
 export default function SideModel({ children, showModel, setShowModel, style }: SideModeInterface) {
  
   return (
-    <div style={style} className={`${styles.model} ${[-1, false].indexOf(showModel) === -1 ? styles.show : styles.hide}`}>
+    <div style={style} className={`${styles.model} ${!!showModel ? styles.show : styles.hide}`}>
       <div className={styles.model__side}>
         <div className={styles.close}>
           <CloseSVG onClick={() => setShowModel()}/>

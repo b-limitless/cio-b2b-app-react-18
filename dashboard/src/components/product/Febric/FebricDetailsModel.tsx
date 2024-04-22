@@ -8,18 +8,18 @@ import { FebricModelType } from './types/febrics';
 
 
 type Props = {
-    showModel: number;
+    showModel: null | string;
     setShowModel: Function;
     
 };
 
-type febricModel = Props & {febric: febricType | null} & FebricModelType;
+type febricModel = Props  & FebricModelType;
 
 
-export default function FebricDetailsModel({showModel, setShowModel, febric, showFebricImageModel, setShowFebricImageModel}: febricModel) {
+export default function FebricDetailsModel({showModel, setShowModel, showFebricImageModel, setShowFebricImageModel}: febricModel) {
   return (
     <SideModel showModel={showModel} setShowModel={setShowModel}>
-        <Details febric={febric}
+        <Details 
         showFebricImageModel={showFebricImageModel}
         setShowFebricImageModel={setShowFebricImageModel}
         />

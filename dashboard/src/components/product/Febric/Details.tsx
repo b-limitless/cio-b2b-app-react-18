@@ -12,7 +12,6 @@ import { FebricModelType } from './types/febrics';
 const skipFields = ['version', 'action', 'id', 'price', 'title', 'userId', 'warmth', 'compositions', 'characters', 'waterproof', 'febricType', 'thumbnailImageUrl', 'originalImageUrl']
 
 type Details = {
-    febric: febricType | null
 } & FebricModelType
 
 const elementStyles = {
@@ -42,7 +41,7 @@ export const ItemDetail = ({ title, value }: ItemDetail) => {
     </div>;
 }
 
-export default function Details({ febric, showFebricImageModel, setShowFebricImageModel }: Details) {
+export default function Details({showFebricImageModel, setShowFebricImageModel }: Details) {
 
     const [toogleIconChecked, setToggleIconChecked] = useState(false);
 

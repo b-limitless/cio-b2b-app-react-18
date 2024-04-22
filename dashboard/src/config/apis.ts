@@ -8,7 +8,8 @@ export const paypal = `${REQUEST_BASE_URI}/paypal`;
 export const notfication = `${REQUEST_BASE_URI}/notification`;
 export const orderURI = `${REQUEST_BASE_URI}/order`;
 export const cartURI = `${REQUEST_BASE_URI}/cart`;
-export const FebricURI = `${productBaseURI}/v1/upload`;
+export const FebricURI = `${productBaseURI}/febric`;
+
 export const APIS = {
   auth: {
     signout: `${REQUEST_BASE_URI }/users/signout`,
@@ -18,6 +19,11 @@ export const APIS = {
     upload: `${productBaseURI}/v1/upload`,
     new: `${productBaseURI}/v1`,
   },
+  febric: {
+    details: (id:string) => {
+      return `${productBaseURI}/febric/${id}/v1`;
+    }
+  }, 
   user: {
     checkEmail: `${userBaseURI}/team/check-email`,
     teams: `${userBaseURI}/team/v1`,
