@@ -14,24 +14,34 @@
 .productDetails {
   flex: 1;
   margin-right: 20px;
-  padding: 0 0 0 1rem;
+  position: relative;
+  
 
   h2 {
       margin-bottom: 20px;
+      padding: 0 0 0 1rem;
   }
 
   .details {
-      
+    padding: 0 0 0 1rem;
       padding: 1rem;
+      height: calc(100vh - 200px);
+      overflow: auto;
 
       .detail {
           margin-bottom: 10px;
           display: flex;
           column-gap: 1rem;
+          a {
+            color: #000;
+            text-decoration: underline; 
+          }
 
           .label {
               font-weight: bold;
               width: 140px;
+              text-transform: capitalize;
+              
           }
       }
 
@@ -55,4 +65,16 @@
 .productImage img {
   max-width: 100%;
   height: auto;
+}
+.actions {
+    position: fixed;    
+    bottom: 0;
+    display: flex;
+    width: 562px;
+    margin-right: -20px;
+
+    * {
+        flex-basis: 50%;
+    }
+
 }

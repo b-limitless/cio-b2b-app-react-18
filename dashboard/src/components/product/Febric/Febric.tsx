@@ -69,9 +69,9 @@ export default function Febric() {
   }
     );
 
-    const {data: febricDetails} = useQuery(
+    useQuery(
       {
-        queryKey: [queryKeys.fetchOrderDetails, showModel], // Include showModel in the query key
+        queryKey: [queryKeys.fetchFebricDetails, showModel], // Include showModel in the query key
         queryFn: () => {
           if (showModel) {
             return fetchFebricDetails(showModel);
@@ -165,35 +165,13 @@ export default function Febric() {
         setShowFebricImageModel={setShowFebricImageModel}
       /> */}
 
-      {showModel && <FebricDetailsModel
+       <FebricDetailsModel
         showModel={showModel}
         setShowModel={setShowModel}
         setShowFebricImageModel={setShowFebricImageModel}
         showFebricImageModel={showFebricImageModel}
-      />}
-      {/* <DataTable
-        setShowModel={setShowModel}
-        tableHeader={tableHeader}
-        // tableData={mockFebrics.slice(page * count, count + (page * count))}
-        tableData={febrics ?? []}
-        // showFebricModels={showModel}
-        detailsComponents={null}
-        showDetailReactNode={<img src={svgCDNAssets.eye} />}
-        tableTitle={'Febrics'}
-        showToLeftButton={{ url: '/products/febric/add', label: 'Add Febric' }}
-        setShowSelectRowId={undefined}
-        filterData={filterData}
-        filters={filters}
-        // setFilters={setFilters}
-        paginate={true}
-        page={page}
-        setPage={setPage}
-        count={Math.ceil(affectedRows/perPage)}
-        loading={loading}
-        rightButton={<Link to={'/products/febric/add'}><Button variant='primary' text={'Add'} /></Link>}
-        handleFiltersOnChange={handleChange}
-        primaryKey={'id'}
-      /> */}
+      />
+     
       <DataTable
 
         setShowModel={setShowModel}

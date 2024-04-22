@@ -28,6 +28,9 @@ import StepSix from './Steps/Six';
 import StepThree from './Steps/Three';
 import StepTwo from './Steps/Two';
 import { CompositionInterface } from './Steps/steps.interface';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from '../../../../config/queryKeys';
+import { fetchFebricDetails } from '../../../../apis-requests/febric/febricDetails';
 
 
 type Props = {}
@@ -160,8 +163,29 @@ const steps: { [key in forStepType]: any } = {
 
 
 export default function AddFebric({ }: Props) {
+    const queryClient = useQueryClient();
     // Check in store in there is febric is to update
     const  {febrics: {febrics, update}} = useSelector((state: RootState) => state);
+
+    // Fetch febric if Id has been set
+    // Should already have the febric details in cache
+    const febricDetails: any = queryClient.getQueryData([queryKeys.fetchFebricDetails]);
+    
+    const {data, isLoading, error} = useQuery(
+        {
+          queryKey: [queryKeys.fetchFebricDetails, update], // Include showModel in the query key
+          queryFn: () => {
+            if (update) {
+              return fetchFebricDetails(update);
+            } else {
+              return null;
+            }
+    
+          }
+        }
+    );
+    
+    console.log('febricDetails', febricDetails)
 
     // If update is not null then filter the febric from the store and get it
     const updateFebric = febrics.filter((febric) => febric?.id === update);
@@ -170,7 +194,7 @@ export default function AddFebric({ }: Props) {
 
     const [step, setStep] = useState<formStepType>(formStepEnum.one);
     const [errors, setErrors] = useState<any>({ compositions: null });
-    const [febric, setFebric] = useState<any>(updateFebric.length > 0 ? updateFebric[0] :febricInitalState);
+    const [febric, setFebric] = useState<any>({}); //updateFebric.length > 0 ? updateFebric[0] :febricInitalState
     const [moveToNextStep, setMoveToNextStep] = useState(false);
    
     const [febricImage, setFebricImage] = useState<File | null>(null);
@@ -335,6 +359,16 @@ export default function AddFebric({ }: Props) {
         setStep(Object.values(formStepEnum)[getTheIndexOfStep - 1]);
         setMoveToNextStep(false);
     }
+
+    useEffect(() => {
+        const febricToUpdate = updateFebric.length > 0 ? updateFebric[0] :febricInitalState;
+        if(!isLoading && !error && data) {
+            setFebric({...febricToUpdate, ...data});
+            setComposition(data?.compositions);
+        }
+    }, [update, data, isLoading, error]);
+
+    console.log('febric', febric);
 
 
     return (

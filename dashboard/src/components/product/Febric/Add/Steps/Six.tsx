@@ -19,7 +19,7 @@ export default function StepSix({ compositions, setComposition, availableComposi
 
     const compositionOnChangeHandler = (event: SelectChangeEvent) => {
         const { value } = event.target;
-        const compositionIsSelected = compositions.filter((composition) => composition.code === value);
+        const compositionIsSelected = compositions?.filter((composition) => composition.code === value);
 
         if (compositionIsSelected.length > 0) {
             return;
@@ -87,7 +87,7 @@ export default function StepSix({ compositions, setComposition, availableComposi
 
             <div className={styles.form__row}>
                 <div className={styles.compositions}>
-                    {compositions.map((composition, i) => <div key={`composition-${i}`} className={styles.item}>
+                    {compositions?.map((composition, i) => <div key={`composition-${i}`} className={styles.item}>
                         <div className={styles.col}>
                             <span className={styles.title}>{composition.name}</span>
                         </div>

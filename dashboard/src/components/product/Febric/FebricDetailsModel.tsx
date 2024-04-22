@@ -4,6 +4,7 @@ import FebricDetails from './FebricDetails';
 import Details from './Details';
 import { febricType } from '../../../../reducers/productSlice';
 import { FebricModelType } from './types/febrics';
+import { Button } from '@pasal/cio-component-library';
 
 
 
@@ -16,13 +17,15 @@ type Props = {
 type febricModel = Props  & FebricModelType;
 
 
-export default function FebricDetailsModel({showModel, setShowModel, showFebricImageModel, setShowFebricImageModel}: febricModel) {
+export default function FebricDetailsModel({showModel, setShowModel}: febricModel) {
   return (
     <SideModel showModel={showModel} setShowModel={setShowModel}>
         <Details 
-        showFebricImageModel={showFebricImageModel}
-        setShowFebricImageModel={setShowFebricImageModel}
+        showModel={showModel}
+  
         />
+         <div>
+        </div>
     </SideModel>
   )
 }
