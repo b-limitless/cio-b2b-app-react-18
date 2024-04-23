@@ -8,6 +8,7 @@ import { SigninForm } from "../interfaces/user/inde";
 import { signInModel } from "../model/user";
 import { request } from "../utils/request";
 import FormErrorMessage from "../common/FormErrorMessage";
+import { Link } from "react-router-dom";
 
 
 
@@ -163,7 +164,7 @@ export default function Signin({ setAuth }: ISignin) {
             <div className="title">
               Sigin
             </div>
-            <div className="purpose">For the purpose of industry regulation, your details are required.</div>
+            <div className="purpose"></div>
 
             <FormErrorMessage message={formError.message ?? ''} />
 
@@ -194,6 +195,13 @@ export default function Signin({ setAuth }: ISignin) {
               />
 
               <Button variant="primary" text={submitting ? 'Please wait...' : 'Signin'} onClick={() => { submitting ? null : onSubmitHandlerLocal() }}></Button>
+            
+              <div className="already">Create an account <span className="signin_span">
+                <Link to='/signup'>
+                Signup
+                </Link>
+                
+                </span></div>
             </div>
           </div>
         </div>
