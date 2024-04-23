@@ -53,7 +53,7 @@ export default function Dashboard() {
         <div className="ci--dashboard__title">
           Welcome Back, Hello World
         </div>
-        <div className="ci--dashboard__staticstic">
+        {/* <div className="ci--dashboard__staticstic">
           {analyticsData.map((item, i) => <AnalyticCard
             key={i}
             title={item.title}
@@ -63,7 +63,7 @@ export default function Dashboard() {
             amount={item.amount}
             weekGrowth={item.weekGrowth}
           />)}
-        </div>
+        </div> */}
         <div className="ci--dashboard__graphs">
           Store Link: {`${frontStoreLink}/${auth?.id}`}
         </div>

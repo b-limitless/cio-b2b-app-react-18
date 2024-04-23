@@ -376,6 +376,7 @@ export default function AddFebric({ }: Props) {
 
     return (
         <FormTemplate
+            title={'Add febric step '}
             step={step}
             setStep={setStep}
             nextStepHandler={step === formStepEnum.four ? nextStepAfterMediaUpload :
@@ -384,8 +385,7 @@ export default function AddFebric({ }: Props) {
                         nextStepHandler
             }
             lastStep={step === formStepEnum.seven}
-            loading={uploadingFebric}
-            // formStepEnum.one, 
+            loading={uploadingFebric} // uploadingFebric
             backButton={[formStepEnum.one, formStepEnum.seven].indexOf(step) == -1}
             backButtonEventHanlder={backStageHandler}
             

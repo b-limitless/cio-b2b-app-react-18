@@ -12,22 +12,23 @@ type Props = {
     backButton?: boolean;
     backButtonEventHanlder?: Function;
     loading?: boolean;
+    title?:string;
 }
 
-export default function FormTemplate({ children, step, nextStepHandler, lastStep, loading, backButton, backButtonEventHanlder }: Props) {
+export default function FormTemplate({title, children, step, nextStepHandler, lastStep, loading, backButton, backButtonEventHanlder }: Props) {
 
     return (
         <div className={styles.addfebric__container}>
             <div className={styles.form__container}>
                 <div className={styles.row}>
-                    <div className={styles.title}>Proudct - Febric - Add {step}</div>
+                    <div className={styles.title}>{title} - {step}</div>
                 </div>
                 <div className={styles.form__section}>
                     {children}
                     <div className={`${styles.row} ${styles.button__row}`}>
                         <div className={styles.actions}>
                             {backButton && <Button variant="light" text="Back" onClick={backButtonEventHanlder} />}
-                            {!lastStep && <Button variant="primary" text={loading? "Please wait..." : "Next"} onClick={() => loading ? null : nextStepHandler(step)} />}
+                            {!lastStep && <Button style={{textWrap: 'nowrap'}} variant="primary" text={loading? "Please wait..." : "Next"} onClick={() => loading ? null : nextStepHandler(step)} />}
                         </div>
                     </div>
                 </div>

@@ -12,8 +12,15 @@ interface TemplateInterface {
 export default function Template({ children }: TemplateInterface) {
   return (
     <div className="cio--template">
-
-      <div className="left col">
+      <div className="header">
+        <span className="icon">
+          <LogoICON />
+        </span>
+        <span className="text">
+          <LogoText />
+        </span>
+      </div>
+      {/* <div className="left col">
         <div className="row logo">
           <span className="icon">
             <LogoICON />
@@ -25,7 +32,7 @@ export default function Template({ children }: TemplateInterface) {
         <div className="row face">
           <img src={facePNG} alt="" />
         </div>
-      </div>
+      </div> */}
       {children}
     </div>
   )

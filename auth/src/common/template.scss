@@ -9,7 +9,19 @@ $header-margin: 3rem;
   flex-direction: column;
 }
 .cio--template {
-  display: flex;
+  // display: flex;
+
+  .header {
+    max-width: 426px;
+    margin: auto;
+    top: 2rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+   
+}
+  
 
   .left {
     @include defaultGap;
@@ -92,7 +104,7 @@ $header-margin: 3rem;
           display: flex;
           flex-direction: column;
           row-gap: 1rem;
-          margin-top: 74px;
+          margin-top: 2rem;
 
           .MuiFormControl-root {
             min-height: 78.91px;
