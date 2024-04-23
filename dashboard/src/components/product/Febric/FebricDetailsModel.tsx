@@ -1,10 +1,7 @@
-import SideModel from '../../dashboard/SideModel';
 import React from 'react';
-import FebricDetails from './FebricDetails';
+import SideModel from '../../dashboard/SideModel';
 import Details from './Details';
-import { febricType } from '../../../../reducers/productSlice';
 import { FebricModelType } from './types/febrics';
-import { Button } from '@pasal/cio-component-library';
 
 
 

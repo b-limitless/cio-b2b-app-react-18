@@ -23,6 +23,8 @@ import NotificationRow from '../notification/NotificationRow';
 import { NotificationsRowSkeleton } from '../skleton/NotificationSkleton';
 import NavList from './NavList';
 import { EMenu, updateMenuSettings } from '../../reducers/menuSlices';
+import { setCurrentUser } from '../../reducers/currentUserSlice';
+import { authenticatedUser } from '../../reducers/authSlice';
 
 interface SideMenuInterface {
   setSelectedMenu: Function
@@ -88,8 +90,10 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
         method: 'post',
 
       });
-
+      dispatch({type: 'auth/logout'});
+      dispatch(authenticatedUser(null));
       navigateFromCell('/auth/signin');
+     
 
     } catch (err) {
       console.error('Could not signout', err);

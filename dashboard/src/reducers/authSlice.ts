@@ -35,7 +35,7 @@ export const authSlice = createSlice({
   reducers: {
     authenticatedUser: (
       state: VerifyReponseInterface,
-      action: PayloadAction<verifyType>
+      action: PayloadAction<verifyType | null>
     ) => {
       return {
         ...state,

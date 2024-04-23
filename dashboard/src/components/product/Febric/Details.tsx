@@ -1,18 +1,22 @@
-// Improvement when deleting the febric asking client for confirmation can be 
-// Improvement in user experience because its deleted forever 
+/**
+ * Improvement when deleting the febric asking client for confirmation can be 
+ * Improvement in user experience because its deleted forever 
+ * For example if i open the febric detail model and go outside of the browser then again its fetch 
+ * the febric details, its should not fetch becaue we already have data on the memory store - Please improvide that part as well
+ * 
+ * **///
 import React, { useEffect, useState } from 'react';
 import { Button, camelCaseToNormal } from '@pasal/cio-component-library';
 import { useIsFetching, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { pngCDNAssetsURIs, svgCDNAssets } from '../../../config/assets';
+import {svgCDNAssets } from '../../../config/assets';
 import { queryKeys } from '../../../config/queryKeys';
 import { removeUnderScore } from '../../../functions/removeUnderScore';
 import { deleteFebricAction, updateFebric } from '../../../reducers/productSlice';
 import FebricDetailsSkeleton from './FebricDetailsSkleton';
 import styles from './details.module.scss';
 import { deleteFebric as deleteFebricAPI } from '../../../apis-requests/febric/delete';
-import ConfirmationDialog from '../../common/Confimation/ConfirmationDialog';
 import TransitionsSnackbar from '../../common/SnackBar';
 
 const skipFields = ['version', 'userId', 'id', 'characters', 'superShiny', 'compositions', 'thumbnailImageUrl', 'originalImageUrl']
