@@ -11,13 +11,13 @@ export enum EMenu {
 export interface IMenu {
     selectedMenu: menuEnum;
     showSettingModel: boolean;
-    showProfileModel: boolean;
+    showProfileModel: string | null;
 }
 
 const initialState:IMenu = {
     selectedMenu: menuEnum.Auth_Signin,
     showSettingModel: false,
-    showProfileModel: false
+    showProfileModel: null
 }
 
 interface payload {

@@ -34,20 +34,20 @@
 
     }
 
+  }
+
     .personal__security {
         margin-top: pxToRem(95);
         .tab__container:nth-child(1) {
             margin-right: pxToRem(21.75);
         }
         .tab__container {
-            // check label color color: #1B365C;
+            
             .tab__option__input:checked + label {
                 border-bottom: 1px solid rgba(0, 0, 0, 0.12);
                 color: #1B365C;
             }
-            // .tab__option__input:checked ~ .tab__contents > .item {
-            //     display: block;
-            // }
+           
             
             input[data-name='personal-info']:checked ~ .tab__contents > div[data-name='personal-info'],
             input[data-name='security']:checked ~ .tab__contents > div[data-name='security'] {
@@ -76,6 +76,8 @@
             .tab__contents {
                 margin-top: pxToRem(40.53);
                 padding: 0 9px;
+                // height: calc(100vh - 500px);
+                // overflow: auto;
                 
 
                  @media only screen and (max-width:$bp-700) {
@@ -112,7 +114,7 @@
             
         }
     }
-}
+
 
 .form__row > div {
     

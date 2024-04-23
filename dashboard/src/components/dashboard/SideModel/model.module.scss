@@ -20,6 +20,7 @@ $model_width: 562px;
     top:0;
     // right: -562px;
     z-index: 1000;
+    box-shadow: -12px 0px 15px -3px rgba(0, 0, 0, 0.1);
 
     @media only screen and (max-width: $bp-700) {
         width: 100%;

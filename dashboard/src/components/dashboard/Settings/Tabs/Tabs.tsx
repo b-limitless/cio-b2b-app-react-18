@@ -35,11 +35,6 @@ export default function TabSettings({paypal, aws, onChangeHandler, onMouseLeaveE
             </Box>
 
             <TabPanel value={value} index={0}>
-
-                {/* <div className={styles.tab__panel}>
-            Please wait...
-        </div> */}
-                {/* Item One */}
                 <Paypal
                 paypal={paypal}
                 onChangeHandler={onChangeHandler}

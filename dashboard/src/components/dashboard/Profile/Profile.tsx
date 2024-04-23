@@ -20,12 +20,6 @@ import { request } from '../../../utils/request';
 import { EMenu, updateMenuSettings } from '../../../reducers/menuSlices';
 
 
-type Props = {
-  showModel: boolean;
-  setShowModel: Function;
-}
-
-
 
 enum tabsEnum {
   peronalInfo = 'peronalInfo',
@@ -398,7 +392,6 @@ export default function Profile() {
 
         <div className={styles.personal__security}>
           <div className={styles.tab__container}>
-
             <input
               checked={activeTab === tabsEnum.peronalInfo ? true : false}
               hidden data-name='personal-info'
@@ -407,7 +400,9 @@ export default function Profile() {
               onChange={(e: any) => setActiveTab(e.target.checked ? tabsEnum.peronalInfo : tabsEnum.security)}
               className={styles.tab__option__input} />
 
-
+            <label htmlFor='personal-info' className={styles.tab__label}>
+              <span className={styles.item}>Personal Info</span>
+            </label>
 
             <input checked={activeTab === tabsEnum.security ? true : false}
               hidden data-name='security'
