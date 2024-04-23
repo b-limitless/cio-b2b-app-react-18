@@ -6,5 +6,6 @@ export enum queryKeys {
     fetchShipping='fetchShipping', 
     fetchFebrics='fetchFebrics', 
     fetchFebricDetails='fetchFebricDetails', 
-    fetchFebricDetailsForAndUpdate= 'fetchFebricDetailsForAndUpdate'
+    fetchFebricDetailsForAndUpdate= 'fetchFebricDetailsForAndUpdate', 
+    deleteFebric='deleteFebric'
 }

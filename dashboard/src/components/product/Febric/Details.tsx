@@ -13,6 +13,7 @@ import FebricDetailsSkeleton from './FebricDetailsSkleton';
 import styles from './details.module.scss';
 import { deleteFebric as deleteFebricAPI } from '../../../apis-requests/febric/delete';
 import ConfirmationDialog from '../../common/Confimation/ConfirmationDialog';
+import TransitionsSnackbar from '../../common/SnackBar';
 
 const skipFields = ['version', 'userId', 'id', 'characters', 'superShiny', 'compositions', 'thumbnailImageUrl', 'originalImageUrl']
 
@@ -66,6 +67,7 @@ export default function Details({ showModel, setShowModel }: IDetails) {
     const isFebricDetailLoading = useIsFetching({ queryKey: [queryKeys.fetchFebricDetails] });
     const [deleteFebric, setDeleteFebric] = useState<string | null>(null);
     const [showDeleteModel, setShowDeleteModel] = useState(false);
+    const [showSnackbar, setShowSnackBar] = useState(false); 
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -101,7 +103,6 @@ export default function Details({ showModel, setShowModel }: IDetails) {
 
     const deleteFebricHandler = () => {
         setShowDeleteModel(true);
-        // setDeleteFebric(febricDetails.id);
     }
 
     const updateFebricHandler = () => {
@@ -112,10 +113,9 @@ export default function Details({ showModel, setShowModel }: IDetails) {
 
     const { data, isLoading, error } = useQuery(
         {
-            queryKey: [queryKeys.fetchFebricDetails, deleteFebric], // Include showModel in the query key
+            queryKey: [queryKeys.deleteFebric, deleteFebric], // Include showModel in the query key
             queryFn: () => {
                 if (deleteFebric) {
-
                     return deleteFebricAPI(deleteFebric);
                 } else {
                     return null;
@@ -132,6 +132,8 @@ export default function Details({ showModel, setShowModel }: IDetails) {
             setDeleteFebric(null);
             setShowModel(null);
             setShowDeleteModel(false);
+            setShowSnackBar(true);
+
         }
     }, [data, isLoading, error]);
 
@@ -143,10 +145,22 @@ export default function Details({ showModel, setShowModel }: IDetails) {
         setShowDeleteModel(false);
     }
 
+    // const  openSnackBar = () => {
+    //     setShowDeleteModel(true); 
+    // }
+
+    const handleCloseAlert = () => {
+        setShowSnackBar(false); 
+    }
     return (
         <>
+        <TransitionsSnackbar
+        open={showSnackbar}
+        handleCloseAlert={handleCloseAlert}
+        severity='success'
+        message={'Deleted successfully'}
+      />
             {!isFebricDetailLoading && <div className={styles.container}>
-
                 <div className={styles.productDetails}>
                     {showDeleteModel && <SideModelConfirmation
                     cancelHandler={cancelHandler}
@@ -156,26 +170,6 @@ export default function Details({ showModel, setShowModel }: IDetails) {
 
                     <h2>Product Details</h2>
                     <div className={styles.details}>
-                        {/* <div className={styles.detail}>
-                            <span className={styles.label}>User ID:</span>
-                            <span className={styles.value}>65d3277dd1365d5ecd4882e9</span>
-                        </div>
-                        <div className={styles.detail}>
-                            <span className={styles.label}>Title:</span>
-                            <span className={styles.value}>Mr</span>
-                        </div>
-                        <div className={styles.detail}>
-                            <span className={styles.label}>Price:</span>
-                            <span className={styles.value}>$329.73</span>
-                        </div>
-                        <div className={styles.detail}>
-                            <span className={styles.label}>Delivery Time:</span>
-                            <span className={styles.value}>1-2 business days</span>
-                        </div>
-                        <div className={styles.detail}>
-                            <span className={styles.label}>Excellence:</span>
-                            <span className={styles.value}>Medium</span>
-                        </div> */}
                         <GetAttributes />
                         <div className={styles.detail}>
                             <span className={styles.label}>Image:</span>
@@ -185,29 +179,6 @@ export default function Details({ showModel, setShowModel }: IDetails) {
                             <span className={styles.label}>Compositions:</span>
                             <div className={styles.composition}>
                                 <GetComposition />
-
-
-                                {/* <div className={styles.compositionItem}>
-                                    <span>Polyester</span>
-                                    <span>57%</span>
-                                </div>
-                                <div className={styles.compositionItem}>
-                                    <span>Wool</span>
-                                    <span>24%</span>
-                                </div>
-                                <div className={styles.compositionItem}>
-                                    <span>Wool</span>
-                                    <span>2%</span>
-                                </div>
-                                <div className={styles.compositionItem}>
-                                    <span>Silk</span>
-                                    <span>11%</span>
-                                </div>
-                                <div className={styles.compositionItem}>
-                                    <span>Other</span>
-                                    <span>17%</span>
-                                </div> */}
-
                             </div>
                         </div>
 

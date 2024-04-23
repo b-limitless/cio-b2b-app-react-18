@@ -11,7 +11,7 @@ import axios from 'axios';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { updateFebric as updateFebricAction } from '../../../../reducers/productSlice';
+import { addFebric, updateFebric as updateFebricAction } from '../../../../reducers/productSlice';
 import { APIS } from '../../../../config/apis';
 import { svgCDNAssets } from '../../../../config/assets';
 import { febricTypes } from '../../../../config/febric';
@@ -31,6 +31,7 @@ import { CompositionInterface } from './Steps/steps.interface';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '../../../../config/queryKeys';
 import { fetchFebricDetails } from '../../../../apis-requests/febric/febricDetails';
+
 
 
 type Props = {}
@@ -163,17 +164,14 @@ const steps: { [key in forStepType]: any } = {
 
 
 export default function AddFebric({ }: Props) {
-    const queryClient = useQueryClient();
+   
     // Check in store in there is febric is to update
     const  {febrics: {febrics, update}} = useSelector((state: RootState) => state);
 
-    // Fetch febric if Id has been set
-    // Should already have the febric details in cache
-    const febricDetails: any = queryClient.getQueryData([queryKeys.fetchFebricDetails]);
     
     const {data, isLoading, error} = useQuery(
         {
-          queryKey: [queryKeys.fetchFebricDetails, update], // Include showModel in the query key
+          queryKey: [queryKeys.fetchFebricDetails, update], 
           queryFn: () => {
             if (update) {
               return fetchFebricDetails(update);
@@ -184,8 +182,7 @@ export default function AddFebric({ }: Props) {
           }
         }
     );
-    
-    console.log('febricDetails', febricDetails)
+
 
     // If update is not null then filter the febric from the store and get it
     const updateFebric = febrics.filter((febric) => febric?.id === update);
@@ -325,10 +322,14 @@ export default function AddFebric({ }: Props) {
         }
     }
 
+    // YOu dont need to refetch because wen you build the febric
+    // It will response will the that febric with data
+    // Simply dispatch data to the redux
+
     const submitFebricToServerHandler = async () => {
         try {
                 const {id} = updateFebric[0] || {};
-                await request({
+                const createFebric = await request({
                     url: updateFebric.length > 0 ? `${APIS.product.new}/${id}` : APIS.product.new,
                     body: { 
                             ...febric, 
@@ -339,6 +340,7 @@ export default function AddFebric({ }: Props) {
                 });    
             setStep(formStepEnum.seven);
             setFebric(febricInitalState);
+            dispatch(addFebric(createFebric));
 
             if(updateFebric.length > 0) {
                 dispatch(updateFebricAction(null));
@@ -367,6 +369,8 @@ export default function AddFebric({ }: Props) {
             setComposition(data?.compositions);
         }
     }, [update, data, isLoading, error]);
+
+    
 
    
 
