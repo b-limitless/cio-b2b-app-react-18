@@ -7,18 +7,6 @@ import notifications from "../reducers/notficiationSlice";
 import menu from "../reducers/menuSlices";
 import shouldFetch from "../reducers/shoudFetchSlice";
 
-// export const Store = configureStore({
-//   reducer: {
-//     auth,
-//     febrics,
-//     users,
-//     orders,
-//     notifications,
-//     menu,
-//     shouldFetch,
-//   },
-// });
-
 const rootReducer = combineReducers({
     auth,
     febrics,
@@ -39,8 +27,6 @@ const resettableReducer = (state:any, action:any) => {
   return rootReducer(state, action);
 };
 
-
-// Create store
 export const Store = configureStore({
   reducer: resettableReducer,
 });
