@@ -189,7 +189,7 @@ export default function AddFebric({ }: Props) {
 
   
 
-    const [step, setStep] = useState<formStepType>(formStepEnum.one);
+    const [step, setStep] = useState<formStepType>(formStepEnum.three);
     const [errors, setErrors] = useState<any>({ compositions: null });
     const [febric, setFebric] = useState<any>({characters:[]}); //updateFebric.length > 0 ? updateFebric[0] :febricInitalState
     const [moveToNextStep, setMoveToNextStep] = useState(false);
@@ -223,8 +223,11 @@ export default function AddFebric({ }: Props) {
     }
 
     const onChangeHandler = (e: any) => {
-        const { name, value } = e.target;
-        setFebric({ ...febric, [name]: value });
+        let { name, value, checked, type } = e.target;
+        
+        const updatedValue = type === 'checkbox' ? checked : value;
+        
+        setFebric({ ...febric, [name]: updatedValue });
     }
 
     useEffect(() => {
@@ -336,7 +339,7 @@ export default function AddFebric({ }: Props) {
                             stretchyText: 'Stretchy fabric',
                             type: 'shirt'
                         },
-                    method: updateFebric.length > 0 ? 'patch' : 'post'
+                    method: updateFebric.length > 0 ? 'put' : 'post'
                 });    
             setStep(formStepEnum.seven);
             setFebric(febricInitalState);
@@ -372,7 +375,7 @@ export default function AddFebric({ }: Props) {
 
     
 
-   
+   console.log('febric', febric);
 
     return (
         <FormTemplate

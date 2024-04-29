@@ -7,13 +7,14 @@
  * **///
 import React, { useEffect, useState } from 'react';
 import { Button, camelCaseToNormal } from '@pasal/cio-component-library';
-import { useIsFetching, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useIsFetching, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {svgCDNAssets } from '../../../config/assets';
 import { queryKeys } from '../../../config/queryKeys';
 import { removeUnderScore } from '../../../functions/removeUnderScore';
 import { deleteFebricAction, updateFebric } from '../../../reducers/productSlice';
+import { updateFebric as updateFebricAPI } from '../../../apis-requests/febric/updateFebric';
 import FebricDetailsSkeleton from './FebricDetailsSkleton';
 import styles from './details.module.scss';
 import { deleteFebric as deleteFebricAPI } from '../../../apis-requests/febric/delete';
@@ -72,6 +73,7 @@ export default function Details({ showModel, setShowModel }: IDetails) {
     const [deleteFebric, setDeleteFebric] = useState<string | null>(null);
     const [showDeleteModel, setShowDeleteModel] = useState(false);
     const [showSnackbar, setShowSnackBar] = useState(false); 
+    const [shouldMakeFebricDefault, setShouldMakeFebricDefault] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -129,6 +131,8 @@ export default function Details({ showModel, setShowModel }: IDetails) {
         }
     );
 
+    const {mutate} = useMutation({mutationFn: () => updateFebricAPI(febricDetails?.id, {isDefault:true})})
+
 
     useEffect(() => {
         if (data && !isLoading && !error) {
@@ -155,6 +159,11 @@ export default function Details({ showModel, setShowModel }: IDetails) {
 
     const handleCloseAlert = () => {
         setShowSnackBar(false); 
+    }
+
+    const makeFebricDefault = () => {
+        console.log('fuck you')
+        mutate();
     }
     return (
         <>
@@ -184,6 +193,9 @@ export default function Details({ showModel, setShowModel }: IDetails) {
                             <div className={styles.composition}>
                                 <GetComposition />
                             </div>
+                        </div>
+                        <div className={styles.defaultMake} onClick={makeFebricDefault}>
+                            Make it default
                         </div>
 
                     </div>

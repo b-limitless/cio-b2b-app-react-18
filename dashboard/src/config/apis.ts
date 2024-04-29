@@ -10,6 +10,8 @@ export const orderURI = `${REQUEST_BASE_URI}/order`;
 export const cartURI = `${REQUEST_BASE_URI}/cart`;
 export const FebricURI = `${productBaseURI}/febric`;
 
+// api/products/febric/default/:id/v1
+
 export const APIS = {
   auth: {
     signout: `${REQUEST_BASE_URI }/users/signout`,
@@ -19,10 +21,15 @@ export const APIS = {
     upload: `${productBaseURI}/v1/upload`,
     new: `${productBaseURI}/v1`, // This is not right this is base resource, modify it
   },
+  ///api/products/v1/:id
   febric: {
     details: (id:string) => {
       return `${productBaseURI}/febric/${id}/v1`;
-    },     
+    },
+    default: (id:string) => {
+      return `${productBaseURI}/febric/default/${id}/v1`;
+    },    
+
   }, 
   user: {
     checkEmail: `${userBaseURI}/team/check-email`,

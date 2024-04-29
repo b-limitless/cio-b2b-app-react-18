@@ -1,4 +1,4 @@
-import { Select } from '@pasal/cio-component-library';
+import { CheckboxWithLabel, Select } from '@pasal/cio-component-library';
 import React from 'react';
 import { opacity, stretchy, threadCounts, threadStyles, tones, waterProof } from '../../../../../config/febric';
 import styles from "../add-febric.module.scss";
@@ -68,8 +68,15 @@ export default function StepThree({ onChangeHandler, febric, errors }: commonFeb
                     helperText={errors.stretchy ? errors.stretchy : null}
 
                 />
+                
+
             </div>
 
+            <div className={styles.form__row}>
+                <CheckboxWithLabel checked = {febric.isDefault ?? false} name={'isDefault'} onChange={onChangeHandler}  label={'Is Default'}/>
+
+            </div>
+            
         </div>
     )
 }
