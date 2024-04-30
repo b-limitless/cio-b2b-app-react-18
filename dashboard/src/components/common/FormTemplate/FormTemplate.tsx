@@ -27,7 +27,7 @@ export default function FormTemplate({title, children, step, nextStepHandler, la
                     {children}
                     <div className={`${styles.row} ${styles.button__row}`}>
                         <div className={styles.actions}>
-                            {backButton && <Button variant="light" text="Back" onClick={backButtonEventHanlder} />}
+                            {backButton && <Button variant="light" text="Back" onClick={!loading ? backButtonEventHanlder : null} />}
                             {!lastStep && <Button style={{textWrap: 'nowrap'}} variant="primary" text={loading? "Please wait..." : "Next"} onClick={() => loading ? null : nextStepHandler(step)} />}
                         </div>
                     </div>
