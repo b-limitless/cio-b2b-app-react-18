@@ -96,9 +96,17 @@ export default function Details({ showModel, setShowModel }: IDetails) {
         return !isFebricDetailLoading && febricDetails && Object.keys(febricDetails).map((key: any) => {
             if (skipFields.indexOf(key) == -1) {
 
+                const getValue = () => {
+                    if(typeof febricDetails[key] === 'boolean') {
+                        return febricDetails[key] ? 'Yes' : 'No';
+                    }
+                    return febricDetails[key];
+                }
+                
+
                 return <div className={styles.detail}>
                     <span className={styles.label}>{camelCaseToNormal(key)}</span>
-                    <span className={styles.value}>{febricDetails[key]}</span>
+                    <span className={styles.value}>{getValue()}</span>
                 </div>
             }
 
@@ -162,7 +170,6 @@ export default function Details({ showModel, setShowModel }: IDetails) {
     }
 
     const makeFebricDefault = () => {
-        console.log('fuck you')
         mutate();
     }
     return (
@@ -194,9 +201,10 @@ export default function Details({ showModel, setShowModel }: IDetails) {
                                 <GetComposition />
                             </div>
                         </div>
-                        <div className={styles.defaultMake} onClick={makeFebricDefault}>
+                        {!febricDetails?.isDefault && <div className={styles.defaultMake} onClick={makeFebricDefault}>
                             Make it default
-                        </div>
+                        </div>}
+                        
 
                     </div>
 

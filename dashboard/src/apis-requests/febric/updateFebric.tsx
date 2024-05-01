@@ -11,7 +11,7 @@ export const updateFebric = async (
 
     try {
         const setDefaultFebric = await request({
-            url: `${APIS.product.new}/${id}`,
+            url: `${APIS.product.new}/shirt/${id}`,
             method: "patch",
             body: febric,
             unauthrizedRedirect: true,
