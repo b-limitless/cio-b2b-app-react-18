@@ -9,12 +9,12 @@ $header-margin: 3rem;
   flex-direction: column;
 }
 .cio--template {
-  // display: flex;
+  
 
   .header {
     max-width: 426px;
     margin: auto;
-    top: 1rem;
+    top: 2rem;
     position: relative;
     display: flex;
     align-items: center;
@@ -81,7 +81,7 @@ $header-margin: 3rem;
     .group-elements {
       display: grid;
       place-items: center;
-      height: calc(100vh - (26.5px + 81px));
+      height: calc(100vh - (128.5px));
       .row.registration {
         .title, .purpose {
           font-family: $default-font-family;

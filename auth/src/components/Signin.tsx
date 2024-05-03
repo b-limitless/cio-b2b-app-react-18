@@ -154,10 +154,7 @@ export default function Signin({ setAuth }: ISignin) {
   return (
     <Template>
       <div className="right col">
-        <div className="group-nav">
-          <div className="row navigate">
-          </div>
-        </div>
+        
         <div className="group-elements">
           <div className="row registration">
 
