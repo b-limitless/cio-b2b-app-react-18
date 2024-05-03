@@ -14,12 +14,20 @@ $header-margin: 3rem;
   .header {
     max-width: 426px;
     margin: auto;
-    top: 11rem;
+    top: 1rem;
     position: relative;
     display: flex;
     align-items: center;
     gap: 4px;
-    justify-content: center
+    justify-content: center;
+
+    .signature {
+      position: relative;
+      width: 250px;
+      height: auto;
+      
+    }
+    
    
 }
   

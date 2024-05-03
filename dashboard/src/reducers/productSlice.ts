@@ -26,6 +26,7 @@ export const febricModel = {
   stretchy: true,
   stretchyText: "Stretchy fabric",
   type: "shirt",
+  isDefault: false
   
  
 };
@@ -108,6 +109,18 @@ export const productSlice = createSlice({
         ...state, 
         filters:action.payload
       }
+    }, 
+    updateFebricIsDefault : (state: ProductInterface, action: PayloadAction<string>) => {
+      return {
+        ...state, 
+        febrics: [...state.febrics].filter((febric) => {
+           if(febric.id === action.payload) {
+            febric.isDefault = true
+           }
+
+           return febric;
+        })
+      }
     }
 
   },
@@ -120,7 +133,8 @@ export const {
   updateFebric, 
   affectedRowAction, 
   filterFebric, 
-  deleteFebricAction
+  deleteFebricAction, 
+  updateFebricIsDefault
 } = productSlice.actions;
 
 export const productActions = productSlice.actions;

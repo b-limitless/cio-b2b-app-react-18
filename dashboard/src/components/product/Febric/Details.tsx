@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import {svgCDNAssets } from '../../../config/assets';
 import { queryKeys } from '../../../config/queryKeys';
 import { removeUnderScore } from '../../../functions/removeUnderScore';
-import { deleteFebricAction, updateFebric } from '../../../reducers/productSlice';
+import { deleteFebricAction, updateFebric, updateFebricIsDefault } from '../../../reducers/productSlice';
 import { updateFebric as updateFebricAPI } from '../../../apis-requests/febric/updateFebric';
 import FebricDetailsSkeleton from './FebricDetailsSkleton';
 import styles from './details.module.scss';
@@ -73,7 +73,7 @@ export default function Details({ showModel, setShowModel }: IDetails) {
     const [deleteFebric, setDeleteFebric] = useState<string | null>(null);
     const [showDeleteModel, setShowDeleteModel] = useState(false);
     const [showSnackbar, setShowSnackBar] = useState(false); 
-    const [shouldMakeFebricDefault, setShouldMakeFebricDefault] = useState(false);
+    const [defaultFebricUpdated, setDefaultFebricUpdated] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -139,19 +139,10 @@ export default function Details({ showModel, setShowModel }: IDetails) {
         }
     );
 
-    const {mutate} = useMutation({mutationFn: () => updateFebricAPI(febricDetails?.id, {isDefault:true})})
+    const {mutate, error:makeDefaultError, data: makeDefaultData} = useMutation({mutationFn: () => updateFebricAPI(febricDetails?.id, {isDefault:true})})
 
 
-    useEffect(() => {
-        if (data && !isLoading && !error) {
-            dispatch(deleteFebricAction(deleteFebric ?? ''));
-            setDeleteFebric(null);
-            setShowModel(null);
-            setShowDeleteModel(false);
-            setShowSnackBar(true);
-
-        }
-    }, [data, isLoading, error]);
+   
 
     const confirmHandler = () => {
         setDeleteFebric(febricDetails.id);
@@ -172,8 +163,41 @@ export default function Details({ showModel, setShowModel }: IDetails) {
     const makeFebricDefault = () => {
         mutate();
     }
+
+    const handleCloseAlertDefaultFebric = () => {
+        setDefaultFebricUpdated(false);
+    }
+
+    useEffect(() => {
+        if (data && !isLoading && !error) {
+            dispatch(deleteFebricAction(deleteFebric ?? ''));
+            setDeleteFebric(null);
+            setShowModel(null);
+            setShowDeleteModel(false);
+            setShowSnackBar(true);
+
+        }
+    }, [data, isLoading, error]);
+
+
+
+    useEffect(() => {
+        if(makeDefaultData && !makeDefaultError) {
+            // dispatch(updateFebricIsDefault(febricDetails.id));
+            setDefaultFebricUpdated(true);
+        }
+    }, [makeDefaultData, makeDefaultError]);
+
+
     return (
         <>
+        <TransitionsSnackbar
+        open={defaultFebricUpdated}
+        handleCloseAlert={handleCloseAlertDefaultFebric}
+        severity='success'
+        message={'Febric has been set to default'}
+      />
+
         <TransitionsSnackbar
         open={showSnackbar}
         handleCloseAlert={handleCloseAlert}

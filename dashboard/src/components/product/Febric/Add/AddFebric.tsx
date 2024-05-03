@@ -329,16 +329,14 @@ export default function AddFebric({ }: Props) {
     // It will response will the that febric with data
     // Simply dispatch data to the redux
 
+    console.log('febric', febric);
+
     const submitFebricToServerHandler = async () => {
         try {
                 const {id} = updateFebric[0] || {};
                 const createFebric = await request({
                     url: updateFebric.length > 0 ? `${APIS.product.new}/${id}` : APIS.product.new,
-                    body: { 
-                            ...febric, 
-                            stretchyText: 'Stretchy fabric',
-                            type: 'shirt'
-                        },
+                    body: febric,
                     method: updateFebric.length > 0 ? 'put' : 'post'
                 });    
             setStep(formStepEnum.seven);
@@ -372,10 +370,6 @@ export default function AddFebric({ }: Props) {
             setComposition(data?.compositions);
         }
     }, [update, data, isLoading, error]);
-
-    
-
-   console.log('febric', febric);
 
     return (
         <FormTemplate

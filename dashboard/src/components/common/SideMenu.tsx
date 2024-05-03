@@ -9,7 +9,7 @@ import { updateNotification } from '../../apis-requests/notification/update';
 import avatar from '../../assets/img/avatar.png';
 import ArrowLeft from '../../assets/svg/arrow-left.svg';
 import LogoIcon from '../../assets/svg/logo-icon.svg';
-import LogoText from '../../assets/svg/logo-text.svg';
+import Logo from '../../assets/svg/logo.svg';
 import LogoutIcon from '../../assets/svg/logout.svg';
 import Notification from '../../assets/svg/notification.svg';
 import Setting from '../../assets/svg/settings.svg';
@@ -136,8 +136,9 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
         <div className='top'>
           <div className='row logo--arrow'>
             <div className='item logo'>
-              <LogoIcon />
-              <LogoText />
+              <img src={'https://res.cloudinary.com/dun5p8e5d/image/upload/v1714745206/ensemble-crafts/assets/svg/logo_jfrby9.svg'}/>
+              {/* <Logo/> */}
+              
             </div>
             <div className='item arrow'>
               <input type='radio' className='left-arrow-checkbox' name='toggle-menu-checkbox' id='left-arrow-checkbox' />
