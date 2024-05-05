@@ -36,7 +36,7 @@ export type menuIds = typeof keys[number];
 
 export const sideNavConfig = [
     {
-        title: "home", icon: menuIcons.dashboard,
+        title: "Home", icon: menuIcons.dashboard,
         children: [],
         component: <div></div>
     },

@@ -135,17 +135,19 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
       <div className='menu-wrapper'>
         <div className='top'>
           <div className='row logo--arrow'>
+          
             <div className='item logo'>
-              <img src={'https://res.cloudinary.com/dun5p8e5d/image/upload/v1714745206/ensemble-crafts/assets/svg/logo_jfrby9.svg'}/>
-              {/* <Logo/> */}
+              {/* <img src={'https://res.cloudinary.com/dun5p8e5d/image/upload/v1714745206/ensemble-crafts/assets/svg/logo_jfrby9.svg'}/> */}
+              <Logo/>
               
             </div>
-            <div className='item arrow'>
+            {/* Try to disply close menu in differnet way there is no enough spaces */}
+            {/* <div className='item arrow'>
               <input type='radio' className='left-arrow-checkbox' name='toggle-menu-checkbox' id='left-arrow-checkbox' />
               <label htmlFor='left-arrow-checkbox'>
                 <ArrowLeft />
               </label>
-            </div>
+            </div> */}
           </div>
           <div className='row navigation'>
             <ul className='navigation--ul'>

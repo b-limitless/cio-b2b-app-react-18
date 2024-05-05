@@ -329,7 +329,6 @@ export default function AddFebric({ }: Props) {
     // It will response will the that febric with data
     // Simply dispatch data to the redux
 
-    console.log('febric', febric);
 
     const submitFebricToServerHandler = async () => {
         try {

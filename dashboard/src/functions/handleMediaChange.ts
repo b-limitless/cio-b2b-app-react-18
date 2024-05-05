@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react";
+import { maxFileUploadSize } from "../config/mis";
 
 interface HandleMediaChange {
     (event: ChangeEvent<HTMLInputElement>, 
@@ -15,7 +16,7 @@ export const handleMediaChange: HandleMediaChange = (
   const file = event.target.files && event.target.files[0];
 
   const allowedTypes = ["image/jpeg", "image/png", , "image/webp"]; // Add more allowed types if needed
-  const maxFileSizeKB = 1024 * 1024 * 3; // Maximum allowed file size in kilobytes (1MB * 3)
+  const maxFileSizeKB = maxFileUploadSize; // Maximum allowed file size in kilobytes (1MB * 3)
 
   if (!file) {
     setError("Please select a file");

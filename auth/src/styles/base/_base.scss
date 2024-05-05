@@ -23,7 +23,7 @@ html {
 
 body {
   font-family: $default-font-family;
-  background-color: $light-gray;
+  background-color: $light-gray !important;
 }
 a {
   text-decoration: none;

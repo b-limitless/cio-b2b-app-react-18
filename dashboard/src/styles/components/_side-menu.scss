@@ -17,21 +17,21 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: pxToRem(72) 1rem 1rem 2rem;
+    padding: 1rem 1rem 1rem 2rem;
     .top {
       .logo--arrow {
         display: flex;
         justify-content: space-between;
         align-items: center;
         .logo {
-          display: flex;
-          align-items: center;
-          column-gap: 8.62px;
-          @media only screen and (max-width: $bp-largest) and (min-width: $bp-medium) {
-            display: none;
-          }
+          width: 100%; 
         }
         .arrow {
+          display: none;
+
+          @media only screen and (max-width: $bp-medium) {
+            display: inherit;
+          }
           .left-arrow-checkbox {
             display: none;
           }

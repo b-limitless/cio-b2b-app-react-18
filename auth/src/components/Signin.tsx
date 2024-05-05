@@ -177,6 +177,7 @@ export default function Signin({ setAuth }: ISignin) {
                 helperText={formError.email ? formError.email : ''}
                 onChange={(e: any) => onChangeHandler(e, dispatch)}
                 onBlur={() => onMouseLeaveEventHandler('email', form.email)}
+                size={'small'}
               />
 
               <InputAdornments
