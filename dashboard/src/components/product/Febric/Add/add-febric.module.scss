@@ -1,6 +1,4 @@
-@import "@pasal/common-style/styles/base/functions.scss";
-@import "@pasal/common-style/styles/abstract/variables.scss";
-
+@import "../../../../styles/abstract/variables";
 
 .row {
   display: flex;
@@ -18,7 +16,7 @@
 
     /* Dark-1 */
 
-    color: #1a1a1c;
+    color: $dark-2;
   }
   .form__row {
     display: flex;
@@ -43,7 +41,7 @@
         display: flex;
         align-items: center;
         column-gap: 8px;
-        background-color: #efbb40;
+        background-color: $yellow;
         padding: 19px;
         font-family: $secondary-font-family;
         font-weight: 700;
