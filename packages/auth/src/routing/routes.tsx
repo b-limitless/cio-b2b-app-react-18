@@ -24,18 +24,12 @@ export const routes =  ({setAuth, navigateFromCell}: IRoute) => {
         </NavigationManager>
       ),
       children: [
-        // {
-        //   index: true,
-        //   element: <Page1 />,
-        // },
         {
-          path: "page-1",
-          element: <Page1 />,
+          index: true,
+          element: <Signin setAuth={setAuth}/>,
         },
-        // {
-        //   path: "page-2",
-        //   element: <Page2 />,
-        // },
+        
+        
         {
           path: "signin",
           element: <Signin setAuth={setAuth}/>,
