@@ -2,6 +2,7 @@ import React from 'react'
 
 type Props = {}
 
+// Component update
 export default function ForgotPasswordSuccess({ }: Props) {
     return (
         <div className="group-elements">
