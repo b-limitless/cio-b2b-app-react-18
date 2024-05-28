@@ -1,0 +1,117 @@
+@import "@pasal/common-style/styles/base/functions.scss";
+@import "@pasal/common-style/styles/abstract/variables.scss";
+
+
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  
+}
+
+.productDetails {
+  flex: 1;
+  margin-right: 20px;
+  position: relative;
+
+
+  
+
+  h2 {
+      margin-bottom: 20px;
+      padding: 0 0 0 1rem;
+  }
+
+  .details {
+    padding: 0 0 0 1rem;
+      padding: 1rem;
+      height: calc(100vh - 200px);
+      overflow: auto;
+
+      .detail {
+          margin-bottom: 10px;
+          display: flex;
+          column-gap: 1rem;
+          a {
+            color: #000;
+            text-decoration: underline; 
+          }
+
+          .label {
+              font-weight: bold;
+              width: 140px;
+              text-transform: capitalize;
+              
+          }
+      }
+
+      .composition {
+          display: flex;
+          flex-direction: column;
+
+          .compositionItem {
+              display: flex;
+              margin-bottom: 5px;
+              column-gap: 1rem;
+
+              > span:first-child {
+                  width: 100px;
+              }
+          }
+      }
+  }
+}
+
+.productImage img {
+  max-width: 100%;
+  height: auto;
+}
+.actions {
+    position: fixed;    
+    bottom: 0;
+    display: flex;
+    width: 562px;
+    margin-right: -20px;
+
+    * {
+        flex-basis: 50%;
+    }
+
+}
+
+.confirmation {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    padding: 1rem;
+
+    .row {
+        display: flex;
+        column-gap: 8px;
+        color: #fff;
+        * {
+            color: #fff;
+            cursor: pointer;
+            padding: 8px 12px;
+            border: 1px solid #fff;
+            border-radius: 2px;
+        }
+    }
+  }
+
+  .defaultMake {
+    padding: 0 0 0 0; 
+    border-bottom: 1px solid #0000;
+    cursor: pointer;
+    margin-bottom: 8px;
+  }
