@@ -31,9 +31,6 @@ export default function useSetAuthenticatedUser({ setLoading, navigateFromCell }
             setLoading(false);
 
         }
-        // if (auth) {
-        //     setLoading(false);
-        // }
         if (!auth) {
             setLoading(true);
             fetchCurrentUser();

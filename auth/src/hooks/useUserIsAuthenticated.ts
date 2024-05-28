@@ -19,7 +19,7 @@ export default function useUserIsAuthenticated({setAuth}:IuseUserIsAuthenticated
         setAuth(true);
         
       } catch (err: any) {
-        throw new Error(err);
+       console.error(err);
       }
     };
     userIsAuthenticated();

@@ -45,7 +45,7 @@ export default function Febric() {
     page
   };
 
-  const tableHeader = ['title', 'price', 'modelType', 'material', 'action'];
+  const tableHeader = ['title', 'price', 'type', 'tone', 'action'];
   const dispatch = useDispatch();
   
 

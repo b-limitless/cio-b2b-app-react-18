@@ -21,10 +21,6 @@ export const routes = ({navigateFromCell}: IRoutes) => {
       ),
       children: [
         {
-          index: true,
-          element: <Page1 />,
-        },
-        {
           path:'home',
           element: <Dashboard />
         }, 

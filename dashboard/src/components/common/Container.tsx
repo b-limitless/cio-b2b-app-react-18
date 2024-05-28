@@ -37,6 +37,10 @@ export default function Container({ navigateFromCell, setSelectedMenu, children 
         return null;
     }
 
+    if(!auth) {
+        return <div>Un Authorized</div>
+    }
+
 
     if (auth && !loading) {
         return (
