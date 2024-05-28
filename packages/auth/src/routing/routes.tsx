@@ -9,7 +9,7 @@ import ForgotPassword from '../components/ForgotPassword';
 import CreateANewPassword from '../components/CreateANewPassword';
 import VerifyRegisteredAccount from '../components/VerifyRegisteredAccount';
 
-
+// Error 
 interface IRoute {
  setAuth: Function;
  navigateFromCell:Function;
