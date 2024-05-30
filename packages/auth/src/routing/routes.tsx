@@ -9,7 +9,7 @@ import ForgotPassword from '../components/ForgotPassword';
 import CreateANewPassword from '../components/CreateANewPassword';
 import VerifyRegisteredAccount from '../components/VerifyRegisteredAccount';
 
-// Location was not provided
+// invalidating everything
 interface IRoute {
  setAuth: Function;
  navigateFromCell:Function;
