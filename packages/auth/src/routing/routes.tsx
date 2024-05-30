@@ -9,7 +9,7 @@ import ForgotPassword from '../components/ForgotPassword';
 import CreateANewPassword from '../components/CreateANewPassword';
 import VerifyRegisteredAccount from '../components/VerifyRegisteredAccount';
 
-// adding back slash
+// testing invalidation
 interface IRoute {
  setAuth: Function;
  navigateFromCell:Function;
