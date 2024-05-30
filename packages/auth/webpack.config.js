@@ -12,7 +12,7 @@ module.exports = (env, argv) => {
   return {
     output: {
       publicPath: isProduction
-        ? 'https://d6d0qtc6fzvuy.cloudfront.com/'
+        ? 'https://d6d0qtc6fzvuy.cloudfront.net/'
         : `http://localhost:${port}/`,
     },
 
