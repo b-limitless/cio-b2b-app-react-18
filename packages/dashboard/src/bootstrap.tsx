@@ -5,6 +5,7 @@ import { createRouter } from "./routing/router-factory";
 import { RoutingStrategy } from "./routing/types";
 import "./index.css";
 
+// Adding demployment file for the dashboard 
 const mount = ({
   mountPoint,
   initialPathname,
