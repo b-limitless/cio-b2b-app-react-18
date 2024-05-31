@@ -1,0 +1,5 @@
+@mixin defaultContentPadding() {
+    @media only screen and (max-width: $small-devices) {
+        padding: $default-container-padding-small!important;
+      }
+}

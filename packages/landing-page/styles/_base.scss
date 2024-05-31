@@ -1,0 +1,16 @@
+@import './function';
+
+$font-normal: 'Poppins', san-sarif;
+$poppins-medium: 'Poppins Medium';
+
+
+$extra-small-device: 575.98px;
+$small-devices: 767.98px;
+$medium-devices: 991.98px;
+$extra-devices: 1199.98px;
+$extra-large-devices: 1200px;
+$extra-large-custom-devices: 1280px;
+
+
+$default-contianer-padding: 19px pxToRem(109) 8.8125rem pxToRem(117);
+$default-container-padding-small: 2rem 1rem;

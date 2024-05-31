@@ -1,0 +1,56 @@
+@mixin RowTemplate($grid-template-columns: null, $gap) {
+  display: grid;
+  //   grid-template-columns: pxToRem(568) 1fr;
+  @if $grid-template-columns != null {
+    grid-template-columns: $grid-template-columns;
+  } @else {
+    grid-template-columns: 1fr 1fr; // default value
+  }
+  padding: pxToRem(100) pxToRem(164);
+  grid-gap: pxToRem($gap);
+
+  
+
+  @media only screen and (max-width: $extra-devices) {
+    padding: 1rem;
+    grid-gap: 1rem;
+  }
+
+  @media only screen and (max-width: $small-devices) {
+    grid-template-columns: 1fr;
+    padding: 2rem 1rem;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+    h2 {
+      color: #1a1a1c;
+      font-family: Poppins;
+      font-size: pxToRem(34);
+      font-style: normal;
+      font-weight: 600;
+      line-height: 130%; /* 44.2px */
+    }
+    p {
+      color: #4d4d4f;
+
+      font-family: Poppins;
+      font-size: pxToRem(18);
+      font-style: normal;
+      font-weight: 400;
+      line-height: pxToRem(32); /* 177.778% */
+    }
+  }
+}
+
+@mixin paragraphStyle() {
+  color: #4d4d4f;
+
+  font-family: Poppins;
+  font-size: pxToRem(18);
+  font-style: normal;
+  font-weight: 400;
+  line-height: pxToRem(32); /* 177.778% */
+}

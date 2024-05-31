@@ -1,0 +1,11 @@
+@import "styles/base";
+@import "styles/function";
+@import "styles/colors";
+@import "styles/animation";
+@import "../mixin.scss";
+
+.section__2 {
+  // transform: translateX(100%);
+  // animation: slide-in-left-to-right 1s forwards;
+  @include RowTemplate(pxToRem(568) 1fr, 122);
+}

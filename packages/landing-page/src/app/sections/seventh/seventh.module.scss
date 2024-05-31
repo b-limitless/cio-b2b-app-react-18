@@ -1,0 +1,39 @@
+@import "styles/base";
+@import "styles/function";
+@import "styles/colors";
+@import "../mixin.scss";
+
+.section__7 {
+    @include RowTemplate(1fr pxToRem(420), 89);
+  
+    .col {
+        .img {
+          
+          position: relative;
+          right: 31px;
+        }
+      }
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        row-gap: 24px;
+       
+        li {
+           @include paragraphStyle();
+
+           
+           display: flex;
+           align-items: flex-start;
+           column-gap: 14px;
+
+           img {
+            position: relative;
+            top: 10px;
+           }
+        }
+        
+      }
+
+}
+

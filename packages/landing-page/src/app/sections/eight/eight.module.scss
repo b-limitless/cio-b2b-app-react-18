@@ -1,0 +1,57 @@
+@import "styles/base";
+@import "styles/function";
+@import "styles/colors";
+@import "../mixin.scss";;
+.section__8 {
+    display: flex;
+    justify-content: center;
+    background-color: $light-1;
+    .options {
+        max-width: 512px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 52px;
+        padding: 56px 0;
+
+        .payments {
+            display: flex;
+
+            @media only screen and (max-width: $extra-small-device) {
+                flex-wrap: wrap;
+            }
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            
+            align-items: center;
+
+            h2 {
+                color: $black-1;
+                text-align: center;
+                font-family: Poppins;
+                font-size: pxToRem(34);
+                font-style: normal;
+                font-weight: 600;
+                line-height: 130%; /* 44.2px */
+            }
+
+            p {
+                color: $gray;
+                text-align: center;
+                font-family: Poppins;
+                font-size: pxToRem(18);
+                font-style: normal;
+                font-weight: 400;
+                line-height: pxToRem(32); /* 177.778% */
+            }
+
+            .payments {
+                display: flex;
+                column-gap: pxToRem(40);
+            }
+        }
+    }
+}

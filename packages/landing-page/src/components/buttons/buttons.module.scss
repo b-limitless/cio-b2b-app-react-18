@@ -1,0 +1,34 @@
+@import "styles/colors";
+@import "styles/base";
+@import "styles/function";
+.btn {
+  box-shadow: 10px 4px 64px 10px rgba(211, 211, 242, 0.8);
+  border-radius: 8px;
+  font-family: $poppins-medium;
+  font-style: normal;
+  font-weight: 500;
+  font-size: pxToRem(18);
+  line-height: 120%;
+  text-align: center;
+  padding: pxToRem(15) pxToRem(42);
+  border: none;
+  cursor: pointer;
+
+  &__primary,
+  &__secondary {
+    color: $white;
+  }
+  &__primary {
+    background: $black-1;
+  }
+
+  &__secondary {
+    background-color: $yellow;
+  }
+
+  &__third {
+    background-color: transparent;
+    border: 1px solid $black-2;
+    color: #252529;
+  }
+}

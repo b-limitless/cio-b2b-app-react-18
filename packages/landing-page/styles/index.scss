@@ -1,0 +1,26 @@
+@import 'colors';
+@import 'base';
+@import 'global.scss';
+@import 'animation';
+
+ul {
+    list-style: none;
+    padding:0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    margin: 0;
+}
+p {
+    margin: 0;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+}

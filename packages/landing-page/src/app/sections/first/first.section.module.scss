@@ -1,0 +1,117 @@
+@import "styles/base";
+@import "styles/function";
+@import "styles/colors";
+
+@import 'styles/mixin';
+
+.main__section {
+  display: grid;
+  grid-template-columns: 434px 1fr;
+  margin-top: pxToRem(30);
+  grid-gap: pxToRem(107);
+
+  @include defaultContentPadding();
+  
+  
+
+  @media (max-width: $small-devices){
+    grid-template-columns: 1fr;
+    
+  }
+
+  .contents {
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+    margin-top: 9px;
+
+    h1.welcome {
+      font-family: "Poppins SemiBold";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 40px;
+      line-height: 140%;
+      /* or 56px */
+
+      color: #1a1a1c;
+      position: relative;
+      top: pxToRem(40);
+    }
+    p.description {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 170%;
+      /* or 27px */
+
+      color: #4d4d4f;
+      position: relative;
+      top: pxToRem(13);
+    }
+
+    .actions {
+      display: flex;
+      column-gap: 1rem;
+      margin-top: 10px;
+
+      @media (max-width: $extra-large-custom-devices) {
+        flex-direction: column;
+        row-gap: 1rem;
+      }
+    }
+  }
+  .banners {
+    // background: $yellow;
+
+    // backdrop-filter: blur(112px);
+    // background-image: url('/svg/banner-background.svg');
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .shirt {
+    }
+    .collars,
+    .cuffs,
+    .contrasted__collar,
+    .contrasted__cuff,
+    .contrasted__colors,
+    .button__wholes {
+      box-shadow: 10px 4px 64px 10px rgba(211, 211, 242, 0.8);
+    }
+    .collars {
+      top: 29px;
+      left: 46px;
+    }
+    .cuffs {
+      top: 211px;
+      left: 38px;
+    }
+    .chestpocket {
+      top: 400px;
+      left: 20px;
+    }
+    .contrasted__collar {
+      top: 30px;
+      right: 51px;
+    }
+    .contrasted__cuff {
+      top: 164px;
+      right: 11px;
+    }
+    .contrasted__colors {
+      top: 293px;
+      right: 86px;
+    }
+    .button__wholes {
+      top: 424px;
+      right: 59px;
+    }
+    .abs {
+      position: absolute;
+      border-radius: 8px;
+    }
+  }
+}

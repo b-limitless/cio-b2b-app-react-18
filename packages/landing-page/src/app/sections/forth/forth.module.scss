@@ -1,0 +1,9 @@
+@import "styles/base";
+@import "styles/function";
+@import "styles/colors";
+@import "../mixin.scss";
+
+.section__4 {
+  @include RowTemplate(pxToRem(510) 1fr, 90);
+
+}
