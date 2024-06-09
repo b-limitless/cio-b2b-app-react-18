@@ -24,9 +24,6 @@ function Home() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [mobileMenuCheckBoxChecked, setMobileMenuCheckBoxChecked] = useState(false);
 
-
-
-
   return (
     <div className={styles.container}>
 
@@ -103,7 +100,7 @@ function Home() {
       <Sixth />
       <Seventh />
 
-      <Eight /> 
+      <Eight />
       <Footer />
 
     </div>
