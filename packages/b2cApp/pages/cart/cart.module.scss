@@ -1,0 +1,335 @@
+@import 'styles/functions';
+@import 'styles/variables';
+@import 'styles/minxin/scroolbar';
+
+// Additional this is added
+// 186.5px + 191.5px
+$content-height: calc(100vh - (56px + 32px + 1rem + 25px + 80px + 186.5px + 191.5px));
+
+.cart__container {
+  margin-top: 32px;
+  padding: 1rem;
+
+  .title {
+    color: $dark;
+    font-family: $default-font;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    a {
+      color: $Dark-Blue-1;
+      font-size: 16px;
+    }
+  }
+  .cart__details {
+    display: flex;
+    column-gap: pxToRem(16);
+    justify-content: space-between;
+    margin-top: 25px;
+    align-items: flex-start;
+
+    @media only screen and (width < $bp-small) {
+      flex-direction: column-reverse;
+      row-gap: 1rem;
+    }
+
+    .items {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      row-gap: 8px;
+
+      .cart_items {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        // height: $content-height;
+        overflow: auto;
+        row-gap: 8px;
+
+        @include scroolbar();
+      }
+      
+      .row {
+        padding: 32px 25px;
+        display: flex;
+        column-gap: 19px;
+        border-radius: 6px;
+        background-color: $light;
+
+        .description {
+          margin-right: auto;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          .group {
+            display: flex;
+            flex-direction: column;
+            row-gap: 6px;
+
+            .name {
+              color: #000;
+              font-family: $default-font;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+            .type {
+              color: $gray;
+              font-family: $default-font;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+            .modify {
+              color: $Dark-Blue-1;
+              font-family: $default-font;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: normal;
+            }
+            .price {
+              color: #000;
+              font-family: $default-font;
+              font-size: 20px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+            .delivery {
+              color: $gray-medium-4;
+              font-family: $default-font;
+              font-size: 15px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+          }
+        }
+        .actions {
+          position: relative;
+
+          .menu__checkbox:checked + .menu {
+            display: inherit;
+            padding: 15px 5px;
+            height: auto;
+          }
+
+          .menu {
+            height: 0;
+            overflow: hidden;
+            position: absolute;
+            right: 0;
+            background: $light;
+            box-shadow:
+              0px -1px 4px 0px rgba(0, 0, 0, 0.25),
+              0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            width: 122px;
+            transition: all 0.2s ease-out;
+
+            ul {
+              list-style: none;
+              li {
+                display: flex;
+                column-gap: 3px;
+                cursor: pointer;
+                align-items: center;
+                opacity: 0.9;
+                padding: 4px 8px;
+
+                &:hover {
+                  background-color: rgba(0,0,0,.1);
+                }
+
+                &:hover {
+                  opacity: 1;
+                }
+
+                .icon {
+                  img {
+                    width: 12px;
+                    height: 12px;
+                  }
+                }
+
+                .text {
+                  color: $gray-medium-4;
+                  font-family: $default-font;
+                  font-size: 12px;
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: normal;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .summary {
+      max-width: 468px;
+      padding: 2rem 2rem;
+      background-color: $light;
+      border-radius: 6px;
+
+      .summary__details {
+        display: flex;
+        flex-direction: column;
+        row-gap: 3rem;
+
+        .row {
+          .title {
+            font-family: $default-font;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            display: flex;
+            column-gap: 3px;
+            justify-content: center;
+
+            .dark__text {
+              color: $dark;
+            }
+            .green__text {
+              color: $green;
+            }
+          }
+          .gray__text {
+            margin-top: 1rem;
+            color: $gray-medium-4;
+            font-family: $default-font;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            display: flex;
+          }
+
+          .tr {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+
+            a {
+              width: 100%;
+
+              button {
+                width: 100%;
+              }
+            }
+
+            .price {
+              color: $gray-medium-4;
+              font-family: $default-font;
+              font-size: 18px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+
+            .free {
+              color: $green;
+              font-family: $default-font;
+              font-size: 18px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: normal;
+            }
+            .label {
+              color: $dark;
+              font-family: $default-font;
+              font-size: 18px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+            .total {
+              color: $dark;
+              font-family: $default-font;
+              font-size: 24px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+
+            button {
+              font-size: 14px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  .empty__cart {
+    display: grid;
+    place-items: center;
+    height: $content-height;
+    font-family: $default-font;
+    font-size: pxToRem(24);
+  }
+}
+
+.shipping,
+.payment {
+  display: flex;
+  flex-direction: column;
+  background-color: $light;
+  row-gap: 0px;
+
+  .row {
+    padding: 1.5rem 1rem 1rem 1.5rem !important;
+    display: flex;
+    flex-direction: column;
+    font-family: $default-font;
+
+    .address,
+    .title {
+      font-size: pxToRem(18);
+      font-weight: 500;
+    }
+    .sub_row {
+      display: flex;
+      column-gap: 1rem;
+      color: $dark;
+
+      &:last-child {
+        justify-content: space-between;
+      }
+
+      .col {
+      .change {
+          cursor: pointer;
+          font-size: pxToRem(14);
+          text-decoration: underline;
+        }
+        font-size: 14px;
+        .shpping_address {
+          color: $gray;
+          overflow-wrap: break-word;
+          word-wrap: break-word; /* For compatibility with some older browsers */
+          max-width: 50ch; /* Set the maximum width to 100 characters */
+          font-size: 14px;
+        }
+
+        .phone_number {
+          color: $dark !important;
+          font-size: 14px;
+        }
+        
+      }
+    }
+  }
+}
+
+.total__cost {
+  font-family: $default-font;
+}

@@ -1,0 +1,17 @@
+@mixin form_row {
+  
+  max-width: 595x;
+  width: 100%;
+  display: flex;
+  column-gap: 8px;
+  justify-content: space-between;
+
+  @media only screen and (width < $bp-small) {
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+
+  .options {
+    display: flex;
+  }
+}

@@ -1,0 +1,1 @@
+export type TCartUsedFrom = 'cart' | 'review';

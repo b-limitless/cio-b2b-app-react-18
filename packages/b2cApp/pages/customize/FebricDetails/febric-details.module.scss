@@ -1,0 +1,43 @@
+@import "styles/variables";
+@import "styles/functions";
+
+
+.fedInModel {
+    animation: fadeModelIn .2s ease-in;
+}
+
+.fadeOutModel {
+    animation: fadeModelOut .2s ease-out;
+}
+
+.model__container {
+  position: fixed;
+  width: calc(100vw); // Left grid pluse grid gap
+  height: 100vh;
+  top: 0;
+  z-index: 1;
+  backdrop-filter: blur(1px);
+}
+
+
+@keyframes fadeModelIn {
+    from {
+        opacity: 0;
+        visibility:hidden;
+    }
+    to {
+        opacity: 1;
+        visibility:visible;
+    }
+}
+
+@keyframes fadeModelOut {
+    from {
+        opacity: 1;
+        visibility:visible;
+    }
+    to {
+        opacity: 0;
+        visibility:hidden;
+    }
+}

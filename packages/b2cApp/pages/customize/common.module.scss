@@ -1,0 +1,79 @@
+@import 'styles/functions';
+@import 'styles/variables';
+@import 'styles/minxin/scroolbar.scss';
+
+.febrics {
+  margin-top: 21px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  height: calc(100vh - 262.29px);
+
+  overflow: auto;
+  @include scroolbar;
+
+  @media screen and (width <= $bp-small) {
+    :nth-child(n + 3) {
+      margin-top: 24px;
+    }
+  }
+
+  .febric {
+    display: flex;
+    flex-direction: column;
+
+    .img {
+      .feature {
+        display: none;
+      }
+      .search__icon {
+        display: none;
+      }
+    }
+    .short__description {
+      display: flex;
+      justify-content: space-between;
+      .col {
+        display: flex;
+        flex-direction: column;
+        row-gap: 4px;
+
+        .name {
+          color: $dark-medium-1;
+          font-family: $default-font;
+          font-size: 13px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+        .price {
+          color: $gray;
+          font-family: $default-font;
+          font-size: 9px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+        .type {
+          display: flex;
+          .fade {
+            color: $gray;
+            font-family: $default-font;
+            font-size: 9px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+          }
+          .bold {
+            color: $gray-medium-4;
+            font-family: $default-font;
+            font-size: 9px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+          }
+        }
+      }
+    }
+  }
+}

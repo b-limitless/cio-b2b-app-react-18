@@ -1,0 +1,33 @@
+@import 'styles/functions';
+@import 'styles/variables';
+@import 'styles/minxin/scroolbar.scss';
+
+@import '../../common.module.scss';
+
+.action {
+  display: flex;
+  align-items: center;
+  column-gap: 9px;
+  margin-top: 29.39px;
+  .text {
+    display: flex;
+    column-gap: 4px;
+  }
+  .febric,
+  .count {
+    font-style: normal;
+    line-height: normal;
+    font-family: $default-font;
+  }
+  .febric {
+    color: $gray-medium-4;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .count {
+    color: $gray;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: normal;
+  }
+}

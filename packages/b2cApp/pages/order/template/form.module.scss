@@ -1,0 +1,13 @@
+@import "styles/functions";
+@import "styles/variables";
+@import "styles/minxin/scroolbar.scss";
+
+
+.container {
+    max-width: 651px;
+    margin: auto;
+    padding: 2rem;
+    background-color: $light;
+    border-radius: 6px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}

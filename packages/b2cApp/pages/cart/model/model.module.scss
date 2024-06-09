@@ -1,0 +1,129 @@
+@import 'styles/functions';
+@import 'styles/variables';
+@import 'styles/minxin/scroolbar';
+
+.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.hide {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    
+}
+.model__container {
+  display: grid;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  width: 100vw;
+  height: 100vh;
+  place-items: center;
+  z-index: 2;
+  transition: opacity .5s ease-in-out;
+  
+
+  .model {
+    max-width: pxToRem(940);
+    width: 100%;
+    background-color: $light;
+    padding: pxToRem(32);
+
+    .contents {
+      display: flex;
+      column-gap: pxToRem(24);
+      .details {
+        .head {
+          display: flex;
+          justify-content: space-between;
+          .heading {
+            color: $blue;
+            font-family: $default-font;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+          }
+        }
+        width: 100%;
+      }
+      .col {
+        .heading {
+          justify-content: space-between;
+        }
+        .row {
+          display: flex;
+
+          .details {
+            margin-top: pxToRem(24);
+            color: $blue;
+            font-family: $default-font;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+
+          .main__img {
+            max-width: pxToRem(330);
+            height: auto;
+            width: 100%;
+          }
+
+          .list__details {
+            margin-top: pxToRem(18);
+            display: flex;
+            flex-direction: column;
+            row-gap: 2rem;
+            
+            max-width: pxToRem(435);
+            width: 100%;
+            height: pxToRem(216);
+            flex-direction: column;
+            
+            overflow: auto;
+            padding-right: 5px;
+
+            @include scroolbar();
+
+            .group {
+              display: flex;
+              flex-direction: column;
+              row-gap: 1rem;
+            }
+
+            .childrens {
+              display: flex;
+              flex-direction: column;
+              row-gap: pxToRem(14);
+              .item {
+                
+                display: flex;
+                justify-content: space-between;
+  
+                .title,
+                .value {
+                  color: $blue;
+                  font-family: $default-font;
+                  font-size: 14px;
+                  font-style: normal;
+                  line-height: normal;
+                }
+  
+                .title {
+                  font-weight: 600;
+                }
+                .value {
+                  font-style: normal;
+                }
+              }
+            }
+
+            
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+Pros
+=======
+1. In out next app we do not have a lots of component which can be used from component library
+2. Copy required component and use inside next app
+3. We we need client interaction then we can copy and pest in next app use them like any other normal app
+4. If client interaction need to be integrated in any other js app than it can be used as I have tested in react 18 with node 18 version its working file and it will work with static sites as well by importing the build file.
+5. In next case we can manually use them in codebase
+
+
+Cons
+====
+1. In the term of client interaction need to be updated two places - Perhaps would be okay
+
+
+Next Process
+=====================
+In the same way as you have integrated the different type of collar 
+Use same process for the cuff as well
+
+Way to achive the process 
+=======================
+- In blender simply create only collor from the provided model
+- Load shirt model in addition to that load cuff model as well. Eg loading collar model
+- Follow the same process to customize the cuff such as inner, outer & default 
+- Letter on when you have the model you can simply replace the model and update the mesh name 
+- Communicate properly with the modler about the case so that they can make in same way as you describe
