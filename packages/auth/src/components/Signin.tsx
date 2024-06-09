@@ -159,7 +159,7 @@ export default function Signin({ setAuth }: ISignin) {
           <div className="row registration">
 
             <div className="title">
-              Sigin to your account
+              Sigin
             </div>
             <div className="purpose"></div>
 
