@@ -14,7 +14,7 @@ import RouterHomeComponent from './home/RouterHomeComponent';
 import { storeID } from 'config/user';
 import useDispatchStoreId from 'hooks/useDispatchStoreId';
 
-// Well this servi
+// B2c app was not working 
 function Home() {
     useDispatchStoreId();
     return <RouterHomeComponent userId={''}/>
