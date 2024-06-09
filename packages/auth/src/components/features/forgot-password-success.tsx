@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {}
 
-// Added all secrets
+// Updating forgot password
 export default function ForgotPasswordSuccess({ }: Props) {
     return (
         <div className="group-elements">
