@@ -14,7 +14,7 @@ import RouterHomeComponent from './home/RouterHomeComponent';
 import { storeID } from 'config/user';
 import useDispatchStoreId from 'hooks/useDispatchStoreId';
 
-
+// Yml file was not updated
 function Home() {
     useDispatchStoreId();
     return <RouterHomeComponent userId={''}/>
