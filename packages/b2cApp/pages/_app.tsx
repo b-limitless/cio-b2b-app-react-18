@@ -8,7 +8,7 @@ import { Store } from 'store';
 import '/styles/index.scss';
 import {QueryClientProvider, QueryClient} from '@tanstack/react-query';
 
-
+// Deploy b2c page
 const poppins = Poppins({
   weight: ['400', '500', '600', '700', '800'],
   style: ['normal', 'italic'],
