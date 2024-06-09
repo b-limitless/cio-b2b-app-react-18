@@ -1,25 +1,23 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
 import Button from '@/components/buttons';
 import { EButtonVariant } from '@/components/buttons/Button';
-import styles from './header.module.scss';
-import First from './sections/first/First';
-import { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import { useState } from 'react';
 import MobileMenu from './MobileMenu';
-import Second from './sections/second/second';
+import styles from './header.module.scss';
+import Eight from './sections/eight/eight';
 import Fifth from './sections/fifth/fifth';
+import First from './sections/first/First';
 import Footer from './sections/footer/footer';
 import Forth from './sections/forth/forth';
+import Second from './sections/second/second';
 import Seventh from './sections/seventh/seventh';
 import Sixth from './sections/sixth/sixth';
 import Third from './sections/third/third';
-import Eight from './sections/eight/eight';
-import Cookie from './sections/cookie/cookie';
 
-
+// 
 function Home() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [mobileMenuCheckBoxChecked, setMobileMenuCheckBoxChecked] = useState(false);
