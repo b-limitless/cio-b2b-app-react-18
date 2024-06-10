@@ -99,7 +99,7 @@ module.exports = (env, argv) => {
       }),
       new HtmlWebPackPlugin({
         template: './src/index.html',
-      }),
+      })
     ],
   };
 };

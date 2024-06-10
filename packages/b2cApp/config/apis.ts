@@ -1,4 +1,6 @@
-export const BASE_URI = 'http://localhost:8000';
+import { isDev } from "env";
+
+export const BASE_URI =  isDev() ? 'http://localhost:8000' : 'https://api.ensemblecrafts.com';
 export const API_PRIFIX = 'api';
 export const REQUEST_BASE_URI = `${BASE_URI}/${API_PRIFIX}`;
 export const productBaseURI = `${REQUEST_BASE_URI}/products`;
