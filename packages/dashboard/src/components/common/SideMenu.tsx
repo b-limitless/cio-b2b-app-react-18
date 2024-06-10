@@ -90,9 +90,13 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
         method: 'post',
 
       });
-      dispatch({type: 'auth/logout'});
-      dispatch(authenticatedUser(null));
-      navigateFromCell('/auth/signin');
+
+      if(dispatch && navigateFromCell) {
+        dispatch({type: 'auth/logout'});
+        dispatch(authenticatedUser(null));
+        navigateFromCell('/auth/signin');
+      }
+      
      
 
     } catch (err) {
