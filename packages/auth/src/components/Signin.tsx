@@ -9,6 +9,8 @@ import { signInModel } from "../model/user";
 import { request } from "../utils/request";
 import FormErrorMessage from "../common/FormErrorMessage";
 import { Link } from "react-router-dom";
+import { isDev } from "../env";
+import { redirectToDashboard } from "../functions/reDirectTo";
 
 
 
@@ -129,7 +131,13 @@ export default function Signin({ setAuth }: ISignin) {
           body: form
         });
 
-        setAuth(response);
+        if(setAuth) {
+          setAuth(response);
+        }
+
+        if(!isDev()) {
+          redirectToDashboard();
+        }
 
       } catch (err: any) {
         const { response: { data: { errors } } } = err;

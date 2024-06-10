@@ -1,7 +1,9 @@
-
 import { isDev } from "../../env";
 
-export const BASE_URI =  isDev() ? 'http://localhost:8000' : 'https://api.ensemblecrafts.com';
+
+export const BASE_URI = isDev()
+  ? "http://localhost:8000"
+  : "https://api.ensemblecrafts.com";
 
 export const API_PRIFIX = "api";
 export const REQUEST_BASE_URI = `${BASE_URI}/${API_PRIFIX}`;
@@ -18,7 +20,7 @@ export const FebricURI = `${productBaseURI}/febric`;
 
 export const APIS = {
   auth: {
-    signout: `${REQUEST_BASE_URI }/users/signout`,
+    signout: `${REQUEST_BASE_URI}/users/signout`,
     currentUser: `${REQUEST_BASE_URI}/users/currentuser`,
   },
   product: {
@@ -27,14 +29,13 @@ export const APIS = {
   },
   ///api/products/v1/:id
   febric: {
-    details: (id:string) => {
+    details: (id: string) => {
       return `${productBaseURI}/febric/${id}/v1`;
     },
-    default: (id:string) => {
+    default: (id: string) => {
       return `${productBaseURI}/febric/default/${id}/v1`;
-    },    
-
-  }, 
+    },
+  },
   user: {
     checkEmail: `${userBaseURI}/team/check-email`,
     teams: `${userBaseURI}/team/v1`,
@@ -46,3 +47,8 @@ export const APIS = {
 
 export const frontStoreLink = "http://localhost:3000";
 
+export const productionBaseDomain = (subdomain:string) => `https://${subdomain}.ensemblecrafts.com`;
+export const productionDomains = {
+  dashboard: productionBaseDomain('dashboard'),
+  auth: productionBaseDomain('auth'),
+};
