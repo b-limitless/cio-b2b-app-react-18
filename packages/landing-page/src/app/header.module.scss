@@ -32,12 +32,19 @@
     justify-content: space-between;
     @include defaultContentPadding();
 
+    .actions {
+      a {
+        color: #1A1A1C !important;
+      }
+    }
+
     @media only screen and (max-width: $extra-devices) {
       padding: 1rem;
       
 
       nav,
       .actions {
+        
         display: none !important;
       }
    }

@@ -16,6 +16,7 @@ import Second from './sections/second/second';
 import Seventh from './sections/seventh/seventh';
 import Sixth from './sections/sixth/sixth';
 import Third from './sections/third/third';
+import { authDomain, productionBaseDomain } from '@/config/urls';
 
 // 
 function Home() {
@@ -34,7 +35,10 @@ function Home() {
         <div className={styles.wrapper}>
           <header>
             <div className={styles.logo}>
+              <a href='/'>
               <Image src='/svg/logo.svg' width={'250'} height={'74'} alt='Ensemble Craft' />
+              </a>
+              
               <div className={styles.humburger__menu}>
                 <input
 
@@ -80,8 +84,11 @@ function Home() {
               </ul>
             </nav>
             <div className={styles.actions}>
-              <span>Sign up</span>
-              <Button variant={EButtonVariant.Secondary} text='Sign In' />
+              <span><a href={authDomain.signup} target='_blank'>Sign up</a></span>
+              <a href={authDomain.signin} target='_blank'>
+                <Button variant={EButtonVariant.Secondary} text='Sign In' />
+              </a>
+
             </div>
           </header>
           <First />
