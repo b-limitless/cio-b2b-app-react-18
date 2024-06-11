@@ -99,7 +99,7 @@ export default function SideMenu({ navigateFromCell, setSelectedMenu }: SideMenu
         navigateFromCell('/auth/signin');
       }
 
-      if (!isDev) {
+      if (!isDev()) {
         redirectToSignin();
       }
 
