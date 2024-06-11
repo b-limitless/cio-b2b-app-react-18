@@ -33,7 +33,6 @@ export default function useSetAuthenticatedUser({ setLoading, navigateFromCell }
                     navigateFromCell();
                 }
 
-                
                 if(!isDev()) {
                     redirectToSignin();
                 }
