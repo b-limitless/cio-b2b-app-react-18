@@ -25,10 +25,12 @@ import NavList from './NavList';
 import { EMenu, updateMenuSettings } from '../../reducers/menuSlices';
 import { setCurrentUser } from '../../reducers/currentUserSlice';
 import { authenticatedUser } from '../../reducers/authSlice';
+import { isDev } from '../../env';
+import { redirectToSignin } from '../../functions/reDirectTo';
 
 interface SideMenuInterface {
   setSelectedMenu: Function
-  navigateFromCell:Function;
+  navigateFromCell: Function;
 }
 
 enum sidebarNavClick {
@@ -40,7 +42,7 @@ type sidebarNavClicktype = `${sidebarNavClick}`;
 
 interface INotificationRow {
   notification: INotification;
-  seenHandler: (id: string, type:EEvents) => void;
+  seenHandler: (id: string, type: EEvents) => void;
   loading: boolean;
   type: EEvents;
 }
@@ -54,36 +56,36 @@ interface INotificationRow {
 */
 
 
-export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuInterface) {
+export default function SideMenu({ navigateFromCell, setSelectedMenu }: SideMenuInterface) {
 
   const { auth } = useSelector((state: RootState) => state.auth);
   const notifications = useSelector((state: RootState) => state.notifications);
   const dispatch = useDispatch();
 
-  const { mutate, error, status: updatingNotification } = useMutation({mutationFn: updateNotification});
-  
-  const { data: getNotifications, isLoading: fetchingNotifications, error:noticationError } = useQuery({queryKey: [queryKeys.fetchNotification], queryFn: fetchNotification});
+  const { mutate, error, status: updatingNotification } = useMutation({ mutationFn: updateNotification });
+
+  const { data: getNotifications, isLoading: fetchingNotifications, error: noticationError } = useQuery({ queryKey: [queryKeys.fetchNotification], queryFn: fetchNotification });
 
   const navigate = useNavigate();
-  
-  const sideModelToggleHandler = (e:React.MouseEvent<HTMLButtonElement>, type: sidebarNavClicktype) => {
+
+  const sideModelToggleHandler = (e: React.MouseEvent<HTMLButtonElement>, type: sidebarNavClicktype) => {
     e.stopPropagation();
-    
+
     if (type == sidebarNavClick.profile) {
-      dispatch(updateMenuSettings({key: EMenu.showSettingModel, value: false}));
-      dispatch(updateMenuSettings({key: EMenu.showProfileModel, value: true}));
+      dispatch(updateMenuSettings({ key: EMenu.showSettingModel, value: false }));
+      dispatch(updateMenuSettings({ key: EMenu.showProfileModel, value: true }));
       return;
     }
 
     if (type === sidebarNavClick.settings) {
-      dispatch(updateMenuSettings({key: EMenu.showProfileModel, value: false}));
-      dispatch(updateMenuSettings({key: EMenu.showSettingModel, value: true}));
+      dispatch(updateMenuSettings({ key: EMenu.showProfileModel, value: false }));
+      dispatch(updateMenuSettings({ key: EMenu.showSettingModel, value: true }));
       return;
     }
   }
 
   const singOutHandler = async () => {
-    
+
     try {
       await request({
         url: APIS.auth.signout,
@@ -91,13 +93,17 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
 
       });
 
-      if(dispatch && navigateFromCell) {
-        dispatch({type: 'auth/logout'});
+      if (dispatch && navigateFromCell) {
+        dispatch({ type: 'auth/logout' });
         dispatch(authenticatedUser(null));
         navigateFromCell('/auth/signin');
       }
-      
-     
+
+      if (!isDev) {
+        redirectToSignin();
+      }
+
+
 
     } catch (err) {
       console.error('Could not signout', err);
@@ -110,20 +116,20 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
     return unSeenNotificationLength.length;
   }, [notifications]);
 
-  const seenHandler = (id: string, type:EEvents) => {
+  const seenHandler = (id: string, type: EEvents) => {
     dispatch(updateSeenNotification({ id, seen: true }));
     // send request to update the notification based on id
     mutate(id);
 
     // Check the type and based on that event perform different event
-    if(type === EEvents.newOrderReceived) {
+    if (type === EEvents.newOrderReceived) {
       // Updatae the selected menu
       setSelectedMenu(menuEnum.Orders);
       // Push to order route
       navigate('/Orders');
     }
 
-    if(type === EEvents.newCallReceived) {
+    if (type === EEvents.newCallReceived) {
       console.log(`Update the call received event`)
     }
   }
@@ -139,11 +145,11 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
       <div className='menu-wrapper'>
         <div className='top'>
           <div className='row logo--arrow'>
-          
+
             <div className='item logo'>
               {/* <img src={'https://res.cloudinary.com/dun5p8e5d/image/upload/v1714745206/ensemble-crafts/assets/svg/logo_jfrby9.svg'}/> */}
-              <Logo/>
-              
+              <Logo />
+
             </div>
             {/* Try to disply close menu in differnet way there is no enough spaces */}
             {/* <div className='item arrow'>
@@ -161,8 +167,8 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
         </div>
         <div className='bottom'>
           <div className='bottom--top'>
-          
-            <div className='row item' onClick={(e:any) => sideModelToggleHandler(e, sidebarNavClick.settings)}>
+
+            <div className='row item' onClick={(e: any) => sideModelToggleHandler(e, sidebarNavClick.settings)}>
               <input type='radio'
                 name='bottom-checkbox'
                 id='settings'
@@ -204,14 +210,14 @@ export default function SideMenu({navigateFromCell, setSelectedMenu }: SideMenuI
 
 
                   {notifications.length > 3 && <div className='item'>
-                    {updatingNotification === 'pending'  && <Skeleton variant="rectangular" width={210} />}
+                    {updatingNotification === 'pending' && <Skeleton variant="rectangular" width={210} />}
                     {updatingNotification !== 'pending' && <span className='more'>Show more</span>}
                   </div>}
                 </div>
               </div>}
-            </div> 
+            </div>
           </div>
-          <div className='bottom--bottom' onClick={(e:any) => sideModelToggleHandler(e, sidebarNavClick.profile)}>
+          <div className='bottom--bottom' onClick={(e: any) => sideModelToggleHandler(e, sidebarNavClick.profile)}>
             <input type='checkbox' id='avatar-profile-info' className='avatar-profile-info' />
             <label htmlFor='avatar-profile-info' >
               <div className='col avatar'>
