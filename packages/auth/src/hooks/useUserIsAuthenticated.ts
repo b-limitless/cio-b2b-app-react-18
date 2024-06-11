@@ -23,7 +23,7 @@ export default function useUserIsAuthenticated({setAuth}:IuseUserIsAuthenticated
           setAuth(true);
         } 
 
-        if(!isDev) {
+        if(!isDev()) {
           redirectToDashboard();
         } 
         
