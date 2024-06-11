@@ -21,7 +21,7 @@ export default function useOrderReceiveNotification() {
       function getRealtimeData(data: INotification) {
         dispatch(addNotification(data));
         if (data.type === EEvents.newOrderReceived) {
-          dispatch(fetchDataAction({key: EModel.Order, value: true}));
+          dispatch(fetchDataAction({key: EModel.Orders, value: true}));
         }
         if (data.type === EEvents.newCallReceived) {
         }
