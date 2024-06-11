@@ -12,6 +12,8 @@ export const paypal = `${REQUEST_BASE_URI}/paypal`;
 export const style = `${REQUEST_BASE_URI}/style`;
 export const accent = `${REQUEST_BASE_URI}/accent`;
 
+console.log('isDev', isDev());
+
 
 export const APIS = {
   upload: `${productBaseURI}/v1/upload`,
