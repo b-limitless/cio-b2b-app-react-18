@@ -16,16 +16,12 @@ import useDispatchStoreId from 'hooks/useDispatchStoreId';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-// Yml file was not updated
-function Home() {
 
+function Home() {
     const router = useRouter();
     const { userId } = router.query;
-    // console.log('userid', userId)
-    
-    
     useDispatchStoreId();
-    return <RouterHomeComponent userId={''}/>
+    return <RouterHomeComponent userId={userId ?? storeID}/>
 }
 
 

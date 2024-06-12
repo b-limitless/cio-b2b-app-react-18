@@ -9,15 +9,19 @@
 // redux store
 import Loader from 'components/Loader';
 import { storeID } from 'config/user';
+import { useRouter } from 'next/router';
 import React, { Suspense } from 'react';
 
 const CustomizeMain = React.lazy(() => import('./CustomizeMain'));
 
 export default function CustomizeRouteBaseUserId() {
+    const router = useRouter();
+    const { userId } = router.query;
+    
     // get the id from the store and use that id
     return (
         <Suspense fallback={<Loader message='Loading app...'/>}>
-             <CustomizeMain userId={storeID} />
+             <CustomizeMain userId={userId ?? storeID} />
         </Suspense>
        
     )

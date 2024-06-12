@@ -213,9 +213,14 @@ export default function CustomizeMain({ userId }: ICustomizeMain) {
 
     useEffect(() => {
         if (takeScreenShot === tSnapShotUploadingStates.Uploaded) {
-            router.push(`${ERoute.cart}/${userId}`);
+
+            let uriProps = '';
+            if(userId) {
+                uriProps = `?userId=${userId ?? storeId}`;
+            }
+            router.push(`${ERoute.cart}${uriProps}`);
         }
-    }, [takeScreenShot, router, userId]);
+    }, [takeScreenShot, router, userId, storeId]);
 
     useEffect(() => {
         const container = document.getElementById('febrics-scroll-container');
