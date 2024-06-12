@@ -7,15 +7,16 @@
 import dynamic from 'next/dynamic';
 import RouterHomeComponent from './home/RouterHomeComponent';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 
 function Home() {
     const router = useRouter();
-    const {userId} = router.query;
+    const { userId } = router.query;
 
-    if(!userId) return <div>Not found</div>
-    
-    return <RouterHomeComponent userId={userId}/>
+    if (!userId) return <div>Not found</div>
+
+    return <RouterHomeComponent userId={userId} />
 }
 
 

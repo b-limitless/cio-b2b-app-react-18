@@ -13,9 +13,17 @@ import dynamic from 'next/dynamic';
 import RouterHomeComponent from './home/RouterHomeComponent';
 import { storeID } from 'config/user';
 import useDispatchStoreId from 'hooks/useDispatchStoreId';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 // Yml file was not updated
 function Home() {
+
+    const router = useRouter();
+    const { userId } = router.query;
+    // console.log('userid', userId)
+    
+    
     useDispatchStoreId();
     return <RouterHomeComponent userId={''}/>
 }
