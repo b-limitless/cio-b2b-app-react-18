@@ -3,7 +3,7 @@ name: deploy-b2cApp
 on:
   push:
     branches:
-      - master
+      - nextRouteTest
     paths:
       - "packages/b2cApp/**"
 
