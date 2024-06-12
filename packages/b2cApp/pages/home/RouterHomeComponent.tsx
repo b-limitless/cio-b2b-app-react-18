@@ -37,7 +37,7 @@ function RouterHomeComponent({userId}:IRouterHomeComponent) {
                             <div className={styles.description}>
                                 Shirts that fit you perfectly. Choose a custom dress shirt designed by you. Make a statement with a made to measure shirt perfect for any occasions, whether it {'\\'} s business or casual we will tailor the perfect men s dress shirt for you. Buy the best custom dress shirt online.
                             </div>
-                            <Link href={`/customize/shirt/${userId}`}>
+                            <Link href={`/customize/shirt/`}>
                                 <Button variant='primary' type='round' onClick={actionButtonHandler}>
                                     <span>Design shirt</span>
                                     <span>
