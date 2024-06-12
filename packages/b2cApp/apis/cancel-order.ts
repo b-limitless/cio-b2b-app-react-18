@@ -2,7 +2,7 @@ import { APIS } from 'config/apis';
 import { request } from 'utils/request';
 
 type TId = string | string[];
-
+// Update
 export async function cancelOrder(id: TId, cancelOrderHandler:Function) {
   try {
     await request({
