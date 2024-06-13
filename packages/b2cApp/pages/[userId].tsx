@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 import RouterHomeComponent from './home/RouterHomeComponent';
 import { useRouter } from 'next/router';
 
-
+// Working with route
 function Home() {
     const router = useRouter();
     const {userId} = router.query;
