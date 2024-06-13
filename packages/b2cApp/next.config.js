@@ -9,7 +9,7 @@ const nextConfig = {
     unoptimized: true
   }, 
   reactStrictMode:false, 
-  // trailingSlash: true,
+  trailingSlash: true,
 }
 
 module.exports = nextConfig
