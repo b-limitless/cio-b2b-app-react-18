@@ -13,6 +13,8 @@ function Home() {
     const router = useRouter();
     const {userId} = router.query;
 
+    console.log('This is your userid', userId);
+
     if(!userId) return <div>Not found</div>
     
     return <RouterHomeComponent userId={userId}/>
