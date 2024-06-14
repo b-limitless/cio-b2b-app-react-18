@@ -16,6 +16,7 @@ function Home() {
     const {id} = router.query;
 
     console.log('This is your id', id);
+    // Testing the id
 
     useEffect(() => {
         if(id) {
