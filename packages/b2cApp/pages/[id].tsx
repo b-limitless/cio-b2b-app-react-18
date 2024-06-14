@@ -9,6 +9,7 @@ import RouterHomeComponent from './home/RouterHomeComponent';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { EStorage } from 'config/keys';
+import { storeID } from 'config/user';
 
 // Working with route
 function Home() {
@@ -24,11 +25,11 @@ function Home() {
         }
     }, [id]);
 
-    if(!id) return <div>Not found</div>
+    // if(!id) return <div>Not found</div>
 
     
     
-    return <RouterHomeComponent userId={id}/>
+    return <RouterHomeComponent userId={id ?? storeID}/>
 }
 
 
