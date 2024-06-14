@@ -21,7 +21,7 @@ function Home() {
     const router = useRouter();
     const {userId} = router.query;
 
-    console.log('This is your userid, testing', userId);
+    console.log('This is your userid', userId);
     
     useDispatchStoreId();
     return <RouterHomeComponent userId={''}/>
