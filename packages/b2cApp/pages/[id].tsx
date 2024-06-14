@@ -7,17 +7,27 @@
 import dynamic from 'next/dynamic';
 import RouterHomeComponent from './home/RouterHomeComponent';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { EStorage } from 'config/keys';
 
 // Working with route
 function Home() {
     const router = useRouter();
-    const {userId} = router.query;
+    const {id} = router.query;
 
-    console.log('This is your userid', userId);
+    console.log('This is your id', id);
 
-    if(!userId) return <div>Not found</div>
+    useEffect(() => {
+        if(id) {
+            localStorage.setItem(EStorage.userId, id.toString()); 
+        }
+    }, [id]);
+
+    if(!id) return <div>Not found</div>
+
     
-    return <RouterHomeComponent userId={userId}/>
+    
+    return <RouterHomeComponent userId={id}/>
 }
 
 
