@@ -1,4 +1,5 @@
 /**
+ * 
  * This application can be integrated
  * 
  * 2. If customer wants this app to be deployed to their machine then we can simply need to use hard coded 
@@ -20,8 +21,6 @@ function Home() {
 
     const router = useRouter();
     const {userId} = router.query;
-
-    console.log('This is your userid', userId);
     
     useDispatchStoreId();
     return <RouterHomeComponent userId={''}/>
