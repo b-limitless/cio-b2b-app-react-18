@@ -27,6 +27,7 @@ import Payment from './review/Payment';
 import Shipping from './review/Shipping';
 import useDispatchStoreId from 'hooks/useDispatchStoreId';
 import { storeID } from 'config/user';
+import useGetStoreId from 'hooks/useGetStoreId';
 
 const stylePayment: any =
   { display: 'flex', alignItems: 'center' }
@@ -45,7 +46,7 @@ export default function Cart({ userId, children, usedFrom, setMeasurementJourney
   const shipping = useSelector((state: RootState) => state.shipping);
   const dispatch = useDispatch();
   const router = useRouter();
-  const {id:storeId} = useSelector((state:RootState) => state.store);
+  const storeId = useGetStoreId();
 
 
   const addOrRemoveHanlder = async (params: IUpdateQuantity) => {

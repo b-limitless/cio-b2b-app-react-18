@@ -56,6 +56,7 @@ import { request } from 'utils/request';
 import Review from './Review';
 import { ERoute } from 'config/route';
 import useDispatchStoreId from 'hooks/useDispatchStoreId';
+import useGetStoreId from 'hooks/useGetStoreId';
 
 interface IOrder {
     userId: string | string[]
@@ -66,7 +67,7 @@ export default function Order({ userId }: IOrder) {
     const shipping = useSelector((state: RootState) => state.shipping);
     const payment = useSelector((state: RootState) => state.payment);
     const { type: selectedPaymentType, error: paymentError } = payment;
-    const {id:storeId} = useSelector((state:RootState) => state.store);
+    const storeId = useGetStoreId();
 
     const { token } = useSelector((state: RootState) => state.currentCustomer);
 

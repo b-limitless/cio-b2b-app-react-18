@@ -1,7 +1,12 @@
 /**
- * This application can be integrated in 2 ways
- * 1. We can pass the store id in parameter and with same domain name we can access differet B2B application
- * by using simply theire id in each url but the domin would remain same
+ * This is default page when id is passed then we set the id to localstorage
+ * For the customer B2B otherwise the id is used from the config file 
+ * In the case of deployment of the app in customer own domain
+ * 
+ * We can recognize the app if the request is not coming from our domain but 
+ * that domain is added to the cors and request is serving then app is running 
+ * on customer own domain name 
+ * 
  * **/
 'use client';
 import dynamic from 'next/dynamic';
@@ -15,19 +20,12 @@ import { storeID } from 'config/user';
 function Home() {
     const router = useRouter();
     const {id} = router.query;
-
-    console.log('This is your id', id);
-    // Testing the id
-
+    
     useEffect(() => {
         if(id) {
             localStorage.setItem(EStorage.userId, id.toString()); 
         }
     }, [id]);
-
-    // if(!id) return <div>Not found</div>
-
-    
     
     return <RouterHomeComponent userId={id ?? storeID}/>
 }

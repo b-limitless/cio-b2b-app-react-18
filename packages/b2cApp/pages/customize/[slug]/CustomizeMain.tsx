@@ -51,6 +51,7 @@ import { EModel, fetchDataAction } from 'slices/shouldFetch';
 import { fetchDefaultFebric } from 'apis/fetch-default-febric';
 import { updateDefaultFebric } from 'slices/defaultFebricSlice';
 import { queryKeys } from 'config/queryKeys';
+import useGetStoreId from 'hooks/useGetStoreId';
 
 const FebricDetails = React.lazy(() => import('../FebricDetails'));
 const Febrics = React.lazy(() => import('../Select/Febrics'));
@@ -83,7 +84,8 @@ export default function CustomizeMain({ userId }: ICustomizeMain) {
     const cart = useSelector((state: RootState) => state.cart);
 
     const {loading: loadingStyles} = model;
-    const {id:storeId} = useSelector((state:RootState) => state.store);
+    
+    const storeId = useGetStoreId();
 
     const {
         buttonColors: { texture: buttonsColorTexture },
@@ -198,8 +200,6 @@ export default function CustomizeMain({ userId }: ICustomizeMain) {
     }, [febric.price, collarAccent.price, cuffAccent.price]);
 
 
-   
-
     const updateFebricFiltersHandler = (key: EFebricFilter, value: string) => {
         const container = document.getElementById('febrics-scroll-container');
         if (container) {
@@ -235,8 +235,6 @@ export default function CustomizeMain({ userId }: ICustomizeMain) {
         }
 
     }, [page, dispatch, affectedRows, limit, loading]);
-
-
 
     const getClass = useMemo(() => {
         return designJourney === selectionProcess.febrics ? styles.febrics :
