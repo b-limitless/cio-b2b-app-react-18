@@ -81,7 +81,7 @@ export default function Header({ userId, showNavigation, navigations, designJour
                 body: {}
             });
             dispatch(setCurrentCustomer(null));
-            router.push(`/${userId?.toString()}`);
+            router.push(`/`);
         } catch(err) {
             throw new Error(`Could not logout customer ${err}`)
         }

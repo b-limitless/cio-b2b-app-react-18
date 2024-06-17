@@ -127,7 +127,7 @@ export default function Cart({ userId, children, usedFrom, setMeasurementJourney
     dispatch(updateAllAccent(accent));
     dispatch(updateFebric(febric));
 
-    router.push(`/customize/shirt/${userId}`);
+    router.push(`/customize/shirt/`);
 
   }
 
@@ -157,7 +157,7 @@ export default function Cart({ userId, children, usedFrom, setMeasurementJourney
       {children}
       <div className={styles.cart__container}>
         <div className={styles.title}>
-          <Link href={`/customize/shirt/${userId}`}>Customize</Link>
+          <Link href={`/customize/shirt`}>Customize</Link>
         </div>
 
         {carts.length > 0 && <div className={styles.cart__details}>

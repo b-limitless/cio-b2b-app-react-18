@@ -229,7 +229,7 @@ export default function Order({ userId }: IOrder) {
 
     // Check that if customer is authenticated
     useIsCustomerAuthenticated({
-        pathname: `${ERoute.signin}/${userId}`,
+        pathname: `${ERoute.signin}`,
         query: { from: ERoute.order },
     });
 

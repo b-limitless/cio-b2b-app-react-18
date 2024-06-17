@@ -213,7 +213,7 @@ export default function CustomizeMain({ userId }: ICustomizeMain) {
 
     useEffect(() => {
         if (takeScreenShot === tSnapShotUploadingStates.Uploaded) {
-            router.push(`${ERoute.cart}/${userId}`);
+            router.push(`${ERoute.cart}`);
         }
     }, [takeScreenShot, router, userId]);
 
@@ -285,7 +285,7 @@ export default function CustomizeMain({ userId }: ICustomizeMain) {
     useFetchDefaultStyle();
 
 
-    useFetchFebrics({ userId: userId ? userId : storeId, filters: JSON.stringify(filters), page });
+    useFetchFebrics({ userId: storeId, filters: JSON.stringify(filters), page });
     useEffect(() => {
         if (showFilterModel) {
             document.body.style.overflow = 'hidden';
@@ -333,7 +333,7 @@ export default function CustomizeMain({ userId }: ICustomizeMain) {
                     designJourney={designJourney}
                     setDesignJourney={setDesignJourney}
                     showNavigation
-                    userId={userId ?? ''}
+                    userId={storeId ?? ''}
                 />
                 <main className={`${styles.main__content} ${getClass}`}>
                     <div className={styles.filter}>
